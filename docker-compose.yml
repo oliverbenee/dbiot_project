@@ -2,7 +2,7 @@ version: '3.8'
 services:
   mysql_db:
     image: mysql:5.7
-    restart: always
+    restart: on-failure
     environment:
       MYSQL_USER: pi
       MYSQL_PASSWORD: foobar
@@ -20,7 +20,7 @@ services:
       - "mysql_db"
   frontend:
       build:
-        context: ./frontend/iot-frontend/
+        context: ./frontend
       restart: on-failure
       ports:
         - "3000:3000"
