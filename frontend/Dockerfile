@@ -1,5 +1,5 @@
 FROM node:14
- WORKDIR /iot-frontend
+ WORKDIR /frontend
  COPY . .
  RUN npm install
  CMD ["npm", "start"]

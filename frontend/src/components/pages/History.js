@@ -9,39 +9,48 @@ import Measurement from "./Measurement";
 export default class History extends Component {
   constructor(props) {
     super(props);
+    this.loadData = this.loadData.bind(this);
     this.state = {
-      data: [
+      measurements: [],
+    };
+  }
+
+  componentDidMount() {
+    this.setState({
+      measurements: [
         { time: "12:03", temperature: 1, humidity: 3, distance: 3 },
         { time: "12:03", temperature: 1, humidity: 3, distance: 3 },
         { time: "12:03", temperature: 1, humidity: 3, distance: 3 },
         { time: "12:03", temperature: 1, humidity: 3, distance: 3 },
       ],
-    };
+    });
+
+    this.updateTimer = setInterval(() => this.loadData(), 30000);
   }
 
-  /** called after a component is mounted */
-  componentDidMount() {
+  loadData() {
     axios
       .get("http://backend:5000/data")
-      .then((response) => {
-        this.setState({ data: response });
+      .then((res) => {
+        console.log("data : " + JSON.stringify(res));
+        this.setState({ measurements: res });
       })
       .catch((error) => {
-        console.error(error);
+        console.log(error);
       });
   }
 
-  /** method to display all public created memes */
   dataList() {
     // mapping each meme in the array memes to currentmemes and make this data usable in the meme component
-    return this.state.data.map((data) => {
+    console.log("data: " + this.state.measurements);
+    return this.state.measurements.map((measurements) => {
       // using custom component
       return (
         <Measurement
-          time={data.time}
-          temperature={data.temperature}
-          humidity={data.humidity}
-          distance={data.distance}
+          time={measurements.time}
+          temperature={measurements.temperature}
+          humidity={measurements.humidity}
+          distance={measurements.distance}
         />
       );
     });

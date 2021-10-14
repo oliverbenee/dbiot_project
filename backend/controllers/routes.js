@@ -6,7 +6,7 @@ const Database = require("../database/db");
 router.route("/data").get((req, res) => {
   Database.getData(function (err, result) {
     if (!err) {
-      res.json(result);
+      res.send(result);
     }
   });
 });
