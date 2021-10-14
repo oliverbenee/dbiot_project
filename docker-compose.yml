@@ -1,0 +1,28 @@
+version: '3.8'
+services:
+  mysql_db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_USER: pi
+      MYSQL_PASSWORD: foobar
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: buildingiot
+    ports:
+      - "3306:3306"
+  backend:
+      build:
+        context: ./backend
+      restart: on-failure
+      ports:
+        - "5000:5000"
+      depends_on:
+      - "mysql_db"
+  frontend:
+      build:
+        context: ./frontend/iot-frontend/
+      restart: on-failure
+      ports:
+        - "3000:3000"
+      depends_on:
+      - "backend"    
