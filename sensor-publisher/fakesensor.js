@@ -7,8 +7,12 @@ const intervalN = setInterval(() => {
 var mqtt = require("mqtt");
 
 var mqttBroker = "mqtt://broker:1883";
+var mqtt_options = {
+  username: "client",
+  password: "secret",
+};
 var mqttBrokerCloud = "mqtt://40.88.197.102:1883";
-var client = mqtt.connect(mqttBroker);
+var client = mqtt.connect(mqttBroker, mqtt_options);
 var clientCloud = mqtt.connect(mqttBrokerCloud);
 
 // succesfull connected
@@ -47,7 +51,7 @@ var topic = "home/sensor/distance";
 
 //publish function
 function publish(topic, msg) {
-  if (client.connected == true && clientCloud.connected == true) {
+  if (client.connected == true && clientCloud.connected == false) {
     console.log("local mqtt status=  " + client.connected);
     console.log("cloud mqtt status=  " + clientCloud.connected);
 

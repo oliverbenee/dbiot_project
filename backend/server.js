@@ -8,7 +8,11 @@ var mqtt = require("mqtt");
 
 // setup mqtt
 var mqttBroker = "mqtt:broker:1883";
-var client = mqtt.connect(mqttBroker);
+var mqtt_options = {
+  username: "client",
+  password: "secret",
+};
+var client = mqtt.connect(mqttBroker, mqtt_options);
 var topic = ["home/sensor/distance", "home/sensor/led"];
 
 // succesfull connected
@@ -50,6 +54,7 @@ exports.publish = (topic, msg) => {
 };
 
 var routes = require("./controllers/routes.js");
+const { options } = require("./controllers/routes.js");
 console.log(`Routes ${routes}`);
 
 app.use(cors());

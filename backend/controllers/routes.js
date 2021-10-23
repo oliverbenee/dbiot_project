@@ -7,6 +7,7 @@ router.route("/data").get((req, res) => {
   Database.getData(function (err, result) {
     if (!err) {
       res.send(result);
+      console.log(result);
     }
   });
 });
