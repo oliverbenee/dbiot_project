@@ -27,10 +27,12 @@ process.on("SIGINT", () => {
 
 exports.printProof = () => {
     console.log("led go BRRRRRRRRR")
-    for (let index = 0; index < 3; index++) {
-        setTimeout(this.toggleLed(), 500);
-        setTimeout(this.toggleLed(), 1000);
-    };
+    setTimeout(this.toggleLed(), 500);
+    setTimeout(this.toggleLed(), 1000);
+    setTimeout(this.toggleLed(), 1500);
+    setTimeout(this.toggleLed(), 2000);
+    setTimeout(this.toggleLed(), 2500);
+    setTimeout(this.toggleLed(), 3000);
 }
 
 
