@@ -48,7 +48,7 @@ try {
   latestDistance = null;
 }
 
-'use strict'
+
 ///// const PigPio = require('pigpio').Gpio;
 
 /*
