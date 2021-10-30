@@ -5,6 +5,8 @@ const led = require('./devices/led_plugin')
 const magsens = require('./devices/magsens_plugin')
 const distsens = require('./devices/distance_plugin')
 
+magsens.printproof();
+
 const intervalN = setInterval(() => {
   this.read();
 }, 3000);

@@ -26,4 +26,18 @@ process.on('SIGINT', () => {
     process.exit()
 });
 
+exports.printproof = function() {
+    console.log("we are running bro")
+    console.log("we are running bro")
+    console.log("we are running bro")
+    console.log("we are running bro")
+    console.log("we are running bro")
+    console.log("we are running bro")
+    console.log("we are running bro")
+    console.log("we are running bro")
+    console.log("we are running bro")
+    console.log("we are running bro")
+    console.log("we are running bro")
+}
+
 module.exports.occupied = occupied;
