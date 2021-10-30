@@ -6,6 +6,9 @@ const Gpio = require('onoff').Gpio;
  * create magnetic sensor and store in variable occupied
  */
 var occupied = 0;
+
+setInterval(() => {occupied += 1})
+
 const magSens = new Gpio(22, 'in', 'both')
 magSens.watch((err, value) => {
     if(err) throw err
