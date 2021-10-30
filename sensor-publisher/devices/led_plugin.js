@@ -9,7 +9,7 @@ var ledOut;
 
 const led = new Gpio("4", "out");
 
-function toggleLed(){
+exports.toggleLed = function(){
     var nv;
     if(led.readSync() == 0){
         led.writeSync(1)
