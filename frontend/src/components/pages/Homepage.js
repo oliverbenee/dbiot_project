@@ -1,46 +1,31 @@
 import React, { Component } from "react";
 import Garage from "./garage.component";
+import "./homepage.css";
 
 /**
  * Main Component to display an overview of all parking garages in aarhus
  */
 
+const API_URL_OPENDATA_PARKING_GARAGES =
+  "https://admin.opendata.dk/api/3/action/datastore_search?resource_id=2a82a145-0195-4081-a13c-b0e587e9b89c";
+
 export default class Homepage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: [],
+      garages: [],
     };
   }
 
   componentDidMount() {
-    fetch(
-      "https://admin.opendata.dk/api/3/action/datastore_search?resource_id=2a82a145-0195-4081-a13c-b0e587e9b89c"
-    )
+    fetch(API_URL_OPENDATA_PARKING_GARAGES)
       .then((response) => response.json())
-      .then((data) => this.convertInArray(data.result.records))
-      .catch(console.error("error fetching data"));
+      .then((data) => this.setState({ garages: data.result.records }))
+      .catch(console.error());
   }
 
-  convertInArray(data) {
-    console.log("converting array");
-    var array = [];
-    data.forEach((element) => {
-      const entry = {
-        garageCode: element.garageCode,
-        totalSpaces: element.totalSpaces,
-        vehicleCount: element.vehicleCount,
-      };
-      console.log(element);
-      array.push(entry);
-    });
-    this.setState({ data: array });
-    return array;
-  }
-
-  dataList() {
-    return this.state.data.map((garage) => {
-      // using custom component
+  garageList() {
+    return this.state.garages.map((garage) => {
       return (
         <Garage
           garageCode={garage.garageCode}
@@ -86,16 +71,15 @@ export default class Homepage extends Component {
       <div class="container">
         <div>
           <header class="jumbotron my-4">
-            <h1 class="display-3">Current Measurements</h1>
+            <h3 class="display-3">Parking Aarhus</h3>
           </header>
           <body>
-            <table class="table table-bordered">
-              <thead class="thead-dark">
-                <th scope="col">GarageID </th>
-                <th scope="col">Total Spaces </th>
-                <th scope="col">vehicle count </th>
+            <table>
+              <thead>
+                <th>Garage </th>
+                <th>Capacity </th>
               </thead>
-              {this.dataList()}
+              {this.garageList()}
             </table>
           </body>
         </div>
