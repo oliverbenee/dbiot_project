@@ -8,8 +8,6 @@ console.log("magsens plugin is running!");
  */
 var occupied = 0;
 
-setInterval(() => {occupied += 1}, 3000)
-
 const magSens = new Gpio(22, 'in', 'both')
 magSens.watch((err, value) => {
     if(err) throw err
