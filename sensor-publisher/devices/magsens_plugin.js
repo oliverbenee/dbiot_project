@@ -17,6 +17,10 @@ magSens.watch((err, value) => {
     console.log("new occupied value: " + occupied)
 })
 
+exports.getOccupied = () => {
+    return occupied;
+}
+
 // Listen to the event triggered on CTRL+C, if it get triggered, Cleanly close the GPIO pin before exiting
 process.on('SIGINT', () => {
     magSens.unexport();
@@ -37,5 +41,3 @@ exports.printproof = function() {
     console.log("we are running bro")
     console.log("we are running bro")
 }
-
-module.exports.occupied = occupied;
