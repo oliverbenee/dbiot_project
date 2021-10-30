@@ -29,5 +29,12 @@ var dist = 0; // store distance value.
 /////     trigger.trigger(10, 1); // Set trigger high for 10 microseconds
 ///// }, 3000);
 
+setInterval(() => {
+  dist += 1.1
+}, 1000)
+
 module.exports.dist = dist;
   
+exports.printproof = function() {
+  console.log("Sensor merger and distance sensor plugin has connection.")
+}

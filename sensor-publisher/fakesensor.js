@@ -5,7 +5,9 @@ const led = require('./devices/led_plugin')
 const magsens = require('./devices/magsens_plugin')
 const distsens = require('./devices/distance_plugin')
 
+// This is printing code used to prove that the magnetic sensor and distance sensor are running in the sensor plugin.
 magsens.printproof();
+distsens.printproof();
 
 const intervalN = setInterval(() => {
   this.read();
