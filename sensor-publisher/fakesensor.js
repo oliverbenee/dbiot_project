@@ -1,5 +1,3 @@
-"use strict";
-
 // Import submodules.
 const led = require('./devices/led_plugin')
 const magsens = require('./devices/magsens_plugin')
