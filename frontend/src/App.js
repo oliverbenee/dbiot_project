@@ -1,8 +1,8 @@
 import "./App.css";
-import Homepage from "./components/pages/Homepage";
+import Homepage from "./components/pages/homepage.component";
 import Header from "./components/layouts/Header";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import History from "./components/pages/History";
+import History from "./components/pages/history.component";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
 function App() {

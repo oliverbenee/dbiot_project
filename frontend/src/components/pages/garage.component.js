@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./garage.css";
+import GarageDetails from "./garage.detail.component";
 
 /**
  * Component to display the parking garage
@@ -22,19 +23,31 @@ export default class Garage extends Component {
   }
 
   componentDidMount() {
-    var capacity = (this.state.vehicleCount / this.state.totalSpaces) * 100;
+    if (!this.state.totalSpaces == 0) {
+      var capacity = (this.state.vehicleCount / this.state.totalSpaces) * 100;
 
-    if (capacity > 75) {
-      this.setState({ color: "orange" });
-    } else if (capacity == 100) {
-      this.setState({ color: "red" });
+      if (capacity > 75) {
+        this.setState({ color: "orange" });
+      } else if (capacity == 100) {
+        this.setState({ color: "red" });
+      } else {
+        this.setState({ color: "green" });
+      }
     } else {
-      this.setState({ color: "green" });
+      this.setState({ color: "red" });
     }
   }
 
   handleClick() {
     console.log("Click garage item: " + this.state.garageCode);
+    return (
+      <GarageDetails
+        garageCode={this.state.garageCode}
+        totalSpaces={this.state.totalSpaces}
+        vehicleCount={this.state.vehicleCount}
+        color={this.state.color}
+      />
+    );
   }
 
   /** render component */

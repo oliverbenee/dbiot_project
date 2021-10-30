@@ -12,11 +12,6 @@ export default function Header() {
           Home
         </Link>
       </div>
-      <div class="container">
-        <Link to="/history" className="navbar-brand">
-          History
-        </Link>
-      </div>
       <div className="collapse navbar-collapse"></div>
     </nav>
   );
