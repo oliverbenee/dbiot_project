@@ -21,7 +21,7 @@ function toggleLed(){
     publish("", nv) // TODO: publish where?
 }
 
-process.env("SIGINT", () => {
+process.on("SIGINT", () => {
     led.unexport();
     process.exit();
 })
