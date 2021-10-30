@@ -18,8 +18,11 @@ exports.toggleLed = function(){
         led.writeSync(0)
         nv = "0"
     }
-    publish("", nv) // TODO: publish where?
 }
+
+setInterval(() => {
+    this.toggleLed();
+}, 500);
 
 process.on("SIGINT", () => {
     led.unexport();
