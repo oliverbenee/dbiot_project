@@ -78,7 +78,7 @@ function publish(topic, msg) {
 */
 exports.read = function read() {
   var magsens_status = 10000 //magsens.getOccupied();
-  var distance = distsens.getDistance();
+  var distance = latestDistance
   //led.toggleLed();
 
   console.log("magsens: " + magsens_status + " | distance: " + distance)

@@ -78,10 +78,6 @@ try {
 //  dist += 1.1
 //}, 1000)
 
-exports.getDistance = () => {
-  return latestDistance;
-}
-  
 exports.printproof = function() {
   console.log("Sensor merger and distance sensor plugin has connection.")
 }
