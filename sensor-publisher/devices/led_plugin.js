@@ -20,13 +20,18 @@ exports.toggleLed = function(){
     }
 }
 
-setInterval(() => {
-    this.toggleLed();
-}, 500);
-
 process.on("SIGINT", () => {
     led.unexport();
     process.exit();
 })
+
+exports.printProof = () => {
+    console.log("led go BRRRRRRRRR")
+    for (let index = 0; index < 3; index++) {
+        setTimeout(this.toggleLed(), 500);
+        setTimeout(this.toggleLed(), 1000);
+    };
+}
+
 
 module.exports.led = led;
