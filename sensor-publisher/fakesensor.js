@@ -78,9 +78,10 @@ exports.read = function read() {
   var magsens_status = magsens.occupied;
   var distance = distsens.dist;
 
+  console.log("Magsens status occupied?: " + magsens_status)
   //publish(topic, JSON.stringify(dhtData));
   //return dhtData;
-  console.log("fakesensor magsens status: " + magsens_status + " and distance: " + distance)
+  //console.log("fakesensor magsens status: " + magsens_status + " and distance: " + distance)
 };
 
 setInterval(() => {this.read()}, 500)
