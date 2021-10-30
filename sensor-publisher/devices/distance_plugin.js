@@ -1,4 +1,3 @@
-import isPi from "detect-rpi";
 import pkg from "pigpio";
 
 const { Gpio, OUTPUT, INPUT } = pkg;
@@ -6,10 +5,6 @@ const { Gpio, OUTPUT, INPUT } = pkg;
 export let latestDistance = null;
 
 try {
-  if (!isPi()) {
-    throw new Error();
-  }
-
   latestDistance = null;
   let latestPoll = null;
   // The number of microseconds it takes sound to travel 1cm at 20 degrees celcius
