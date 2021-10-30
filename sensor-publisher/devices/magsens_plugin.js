@@ -1,7 +1,6 @@
 'use strict'
 
 const Gpio = require('onoff').Gpio;
-console.log("magsens plugin is running!");
 
 /*
  * create magnetic sensor and store in variable occupied

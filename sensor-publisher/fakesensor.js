@@ -78,7 +78,7 @@ function publish(topic, msg) {
 */
 exports.read = function read() {
   var magsens_status = magsens.getOccupied();
-  var distance = distsens.dist;
+  var distance = distsens.getDistance();
 
   console.log("magsens: " + magsens_status + " | distance: " + distance)
   //publish(topic, JSON.stringify(dhtData));

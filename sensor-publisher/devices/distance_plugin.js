@@ -5,7 +5,7 @@
  * Create distance sensor reading and save to variable dist. 
  */
 // The number of microseconds it takes sound to travel 1cm at 20 degrees celcius.
-const MICROSECONDS_PER_CM = 1e6/34321;
+///// const MICROSECONDS_PER_CM = 1e6/34321;
 ///// const trigger = new PigPio(23, {mode: PigPio.OUTPUT});
 ///// const echo = new PigPio(24, {mode: PigPio.INPUT, alert: true});
 ///// trigger.digitalWrite(0); // Make sure trigger is low
@@ -33,7 +33,9 @@ setInterval(() => {
   dist += 1.1
 }, 1000)
 
-module.exports.dist = dist;
+exports.getDistance = () => {
+  return dist;
+}
   
 exports.printproof = function() {
   console.log("Sensor merger and distance sensor plugin has connection.")
