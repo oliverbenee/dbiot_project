@@ -1,5 +1,7 @@
 'use strict'
 
+const Gpio = require('onoff').Gpio;
+
 /*
  * create magnetic sensor and store in variable occupied
  */
