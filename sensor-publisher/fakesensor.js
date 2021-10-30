@@ -1,7 +1,8 @@
 // Import submodules.
-const led = require('./devices/led_plugin')
-const magsens = require('./devices/magsens_plugin')
-const distsens = require('./devices/distance_plugin')
+import { getDistance } from "./devices/led_plugin.js"
+//const led = require('./devices/led_plugin')
+//const magsens = require('./devices/magsens_plugin')
+//const distsens = require('./devices/distance_plugin')
 
 // This is printing code used to prove that the magnetic sensor and distance sensor are running in the sensor plugin.
 magsens.printproof();
@@ -76,9 +77,9 @@ function publish(topic, msg) {
   - distance
 */
 exports.read = function read() {
-  var magsens_status = magsens.getOccupied();
+  var magsens_status = 10000 //magsens.getOccupied();
   var distance = distsens.getDistance();
-  led.toggleLed();
+  //led.toggleLed();
 
   console.log("magsens: " + magsens_status + " | distance: " + distance)
   //publish(topic, JSON.stringify(dhtData));
