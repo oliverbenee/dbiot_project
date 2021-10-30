@@ -29,15 +29,5 @@ process.on('SIGINT', () => {
 });
 
 exports.printproof = function() {
-    console.log("we are running bro")
-    console.log("we are running bro")
-    console.log("we are running bro")
-    console.log("we are running bro")
-    console.log("we are running bro")
-    console.log("we are running bro")
-    console.log("we are running bro")
-    console.log("we are running bro")
-    console.log("we are running bro")
-    console.log("we are running bro")
-    console.log("we are running bro")
+    console.log("Sensor merger and magnetic sensor plugin has connection.")
 }
