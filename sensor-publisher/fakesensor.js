@@ -1,13 +1,13 @@
 // Import submodules.
-import { latestDistance } from "./devices/distance_plugin.js"
-import { setLedState } from "./devices/led_plugin.js"
+import { latestDistance, printDistProof } from "./devices/distance_plugin.js"
+import { setLedState, printLedProof } from "./devices/led_plugin.js"
 const magsens = require('./devices/magsens_plugin')
 //const distsens = require('./devices/distance_plugin')
 
 // This is printing code used to prove that the magnetic sensor and distance sensor are running in the sensor plugin.
-magsens.printproof();
-//distsens.printproof();
-led.printProof();
+magsens.printMagProof() // Prove magSensor is running.
+printLedProof(); // Prove LED is running.
+printDistProof(); // Prove dist sensor is running.
 
 import mqtt from "mqtt";
 
@@ -44,7 +44,7 @@ client.on("error", function (error) {
 client.on("message", function (topic, message, packet) {
   console.log("sensor received topic: " + topic)
   if (topic.substring(0, 15) == "home/sensor/led") {
-    led.toggleLed();
+    //toggleLed TODO: ????
   }
 });
 
