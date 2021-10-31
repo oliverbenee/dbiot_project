@@ -75,7 +75,7 @@ try {
 ///// }, 3000);
 
 setInterval(() => { //TODO: UNCOMMENT THIS FUNCTION FOR DEBUGGING.
-  dist += 1.1
+  latestDistance += 1.1
 }, 1000)
 
 function printProof() {
