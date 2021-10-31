@@ -5,9 +5,9 @@ import { latestDistance } from "./devices/distance_plugin.js"
 //const distsens = require('./devices/distance_plugin')
 
 // This is printing code used to prove that the magnetic sensor and distance sensor are running in the sensor plugin.
-magsens.printproof();
-distsens.printproof();
-led.printProof();
+//magsens.printproof();
+//distsens.printproof();
+//led.printProof();
 
 const intervalN = setInterval(() => {
   this.read();
