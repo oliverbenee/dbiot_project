@@ -1,5 +1,5 @@
 FROM debian:buster 
-ARG DEBIAN_FRONTEND = noninteractive
+ARG DEBIAN_FRONTEND=noninteractive
 WORKDIR /app
 
 ENTRYPOINT []
