@@ -7,7 +7,7 @@ import { Gpio } from 'onoff'
  */
 var occupied = 0;
 
-const magSens = new Gpio(22, 'in', 'both')
+const magSens = new Gpio('22', 'in', 'both')
 magSens.watch((err, value) => {
     if(err) throw err
     console.log("VALUE CHANGE IN MAGSENS")
