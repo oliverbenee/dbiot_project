@@ -1,13 +1,13 @@
 // Import submodules.
 import { latestDistance, printDistProof } from "./devices/distance_plugin.js"
 import { setLedState, printLedProof } from "./devices/led_plugin.js"
-const magsens = require('./devices/magsens_plugin')
+import { getOccupied, magsens } from "./devices/magsens_plugin.js"
 //const distsens = require('./devices/distance_plugin')
 
 // This is printing code used to prove that the magnetic sensor and distance sensor are running in the sensor plugin.
-magsens.printMagProof() // Prove magSensor is running.
+printMagProof() // Prove magSensor is running.
 printLedProof(); // Prove LED is running.
-printDistProof(); // Prove dist sensor is running.
+//printDistProof(); // Prove dist sensor is running.
 
 import mqtt from "mqtt";
 
@@ -73,7 +73,7 @@ function publish(topic, msg) {
   - distance
 */
 function read() {
-  var magsens_status = magsens.getOccupied();
+  var magsens_status = getOccupied();
   var distance = 350 // TODO: FIXXX. 
 
   // Activate LED based on magSens value

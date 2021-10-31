@@ -16,7 +16,7 @@ magSens.watch((err, value) => {
     console.log("new occupied value: " + occupied)
 })
 
-exports.getOccupied = () => {
+export function getOccupied() {
     return occupied;
 }
 
@@ -27,6 +27,6 @@ process.on('SIGINT', () => {
     process.exit()
 });
 
-exports.printMagProof = function() {
+export function printMagProof() {
     console.log("Sensor merger and magnetic sensor plugin has connection.")
 }
