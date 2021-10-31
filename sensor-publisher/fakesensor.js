@@ -9,10 +9,6 @@ import { latestDistance } from "./devices/distance_plugin.js"
 //distsens.printproof();
 //led.printProof();
 
-const intervalN = setInterval(() => {
-  this.read();
-}, 3000);
-
 import mqtt from "mqtt";
 
 var mqttBroker = "mqtt://broker:1883";
