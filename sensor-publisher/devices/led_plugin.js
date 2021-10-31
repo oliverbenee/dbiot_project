@@ -38,6 +38,3 @@ export function printLedProof() {
     setTimeout(() => {this.toggleLed()}, 2500);
     setTimeout(() => {this.toggleLed()}, 3000);
 }
-
-
-module.exports.led = led;
