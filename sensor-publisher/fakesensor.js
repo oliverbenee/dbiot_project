@@ -73,7 +73,7 @@ function publish(topic, msg) {
   - distance
 */
 function read() {
-  var magsens_status = 10000 //magsens.getOccupied();
+  var magsens_status = magsens.getOccupied();
   var distance = latestDistance
   //led.toggleLed();
 
@@ -87,7 +87,7 @@ function read() {
   return data;
 };
 
-setInterval(() => {read()}, 500)
+setInterval(() => {read()}, 3000)
 
 // Listen to the event triggered on CTRL+C, if it get triggered, Cleanly close the GPIO pin before exiting
 process.on("SIGINT", () => {

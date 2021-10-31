@@ -18,12 +18,8 @@ pool.getConnection((err, connection) => {
     });
     connection.query(`CREATE TABLE dhtdata
     ( time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-      temperature FLOAT(4,2) NOT NULL, 
-      humidity FLOAT(4,2) NOT NULL,
       distance FLOAT(4,2) NOT NULL,
-      led_1_status INT(1),
-      led_2_status INT(1),
-      led_3_status INT(1)
+      magsens_status INT(1)
       )`, function (err, result) {
       if (err) throw err;
       console.log("Table created");
@@ -60,8 +56,8 @@ class Dhtdata {
   static insert (tah) {
     pool.getConnection((err, connection) => {
       if (err) throw err
-      const sql = 'INSERT INTO dhtdata(temperature, humidity, distance, led_1_status, led_2_status, led_3_status) VALUES (?, ?, ?, ?, ?, ?)'
-      connection.query(sql, [tah.temperature, tah.humidity, tah.distance, tah.led_1_status, tah.led_2_status, tah.led_3_status], (err, results, fields) => {
+      const sql = 'INSERT INTO dhtdata(distance, magsens_status) VALUES (?, ?)'
+      connection.query(sql, [tah.distance, tah.magsens_status], (err, results, fields) => {
         if (err) throw err
         console.log("Data inserted")
         connection.release()
