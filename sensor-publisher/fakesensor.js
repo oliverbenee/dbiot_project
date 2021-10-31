@@ -1,6 +1,6 @@
 // Import submodules.
 import { latestDistance } from "./devices/distance_plugin.js"
-import { led } from "./devices/led_plugin"
+import { led } from "../devices/led_plugin"
 const magsens = require('./devices/magsens_plugin')
 //const distsens = require('./devices/distance_plugin')
 
