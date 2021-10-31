@@ -13,7 +13,7 @@ const intervalN = setInterval(() => {
   this.read();
 }, 3000);
 
-var mqtt = require("mqtt");
+import mqtt from "mqtt";
 
 var mqttBroker = "mqtt://broker:1883";
 var mqtt_options = {
