@@ -5,9 +5,9 @@ const magsens = require('./devices/magsens_plugin')
 //const distsens = require('./devices/distance_plugin')
 
 // This is printing code used to prove that the magnetic sensor and distance sensor are running in the sensor plugin.
-//magsens.printproof();
+magsens.printproof();
 //distsens.printproof();
-//led.printProof();
+led.printProof();
 
 import mqtt from "mqtt";
 
@@ -75,7 +75,6 @@ function publish(topic, msg) {
 function read() {
   var magsens_status = magsens.getOccupied();
   var distance = 350 // TODO: FIXXX. 
-  led.toggleLed(); //
 
   const data = {
     magsens_status: magsens_status,
