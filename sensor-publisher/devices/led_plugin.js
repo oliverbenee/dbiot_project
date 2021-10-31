@@ -9,7 +9,7 @@ var ledOut;
 
 const led = new Gpio("4", "out");
 
-exports.toggleLed = function(){
+export function toggleLed(){
     var nv;
     if(led.readSync() == 0){
         led.writeSync(1)
@@ -29,7 +29,7 @@ process.on("SIGINT", () => {
     process.exit();
 })
 
-exports.printProof = () => {
+export function printLedProof() {
     console.log("led go BRRRRRRRRR")
     setTimeout(() => {this.toggleLed()}, 500);
     setTimeout(() => {this.toggleLed()}, 1000);

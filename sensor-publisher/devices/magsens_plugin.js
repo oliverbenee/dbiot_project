@@ -27,6 +27,6 @@ process.on('SIGINT', () => {
     process.exit()
 });
 
-exports.printproof = function() {
+exports.printMagProof = function() {
     console.log("Sensor merger and magnetic sensor plugin has connection.")
 }

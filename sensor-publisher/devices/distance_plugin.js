@@ -78,6 +78,6 @@ setInterval(() => { //TODO: UNCOMMENT THIS FUNCTION FOR DEBUGGING.
   latestDistance += 1.1
 }, 1000)
 
-function printProof() {
+export function printDistProof() {
   console.log("Sensor merger and distance sensor plugin has connection.")
 }
