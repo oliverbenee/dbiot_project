@@ -4,7 +4,7 @@
  * LED plugin. Configured to be plugged into GPIO 4.
  */ 
 
-const Gpio = require('onoff').Gpio;
+import { Gpio } from "onoff";
 var ledOut;
 
 const led = new Gpio("4", "out");
