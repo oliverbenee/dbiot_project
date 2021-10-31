@@ -81,13 +81,17 @@ function read() {
   var distance = latestDistance
   //led.toggleLed();
 
+  const data = {
+    magsens_status: magsens_status,
+    distance: distance
+  }
+
   console.log("magsens: " + magsens_status + " | distance: " + distance)
-  //publish(topic, JSON.stringify(dhtData));
-  //return dhtData;
-  //console.log("fakesensor magsens status: " + magsens_status + " and distance: " + distance)
+  publish(topic, JSON.stringify(data));
+  return data;
 };
 
-setInterval(() => {this.read()}, 500)
+setInterval(() => {read()}, 500)
 
 // Listen to the event triggered on CTRL+C, if it get triggered, Cleanly close the GPIO pin before exiting
 process.on("SIGINT", () => {
