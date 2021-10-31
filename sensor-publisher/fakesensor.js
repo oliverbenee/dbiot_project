@@ -1,6 +1,6 @@
 // Import submodules.
 import { latestDistance } from "./devices/distance_plugin.js"
-const led = require('./devices/led_plugin')
+import { setLedState } from "./devices/led_plugin"
 const magsens = require('./devices/magsens_plugin')
 //const distsens = require('./devices/distance_plugin')
 
@@ -75,6 +75,9 @@ function publish(topic, msg) {
 function read() {
   var magsens_status = magsens.getOccupied();
   var distance = 350 // TODO: FIXXX. 
+
+  // Activate LED based on magSens value
+  setLedState(magsens_status)
 
   const data = {
     magsens_status: magsens_status,

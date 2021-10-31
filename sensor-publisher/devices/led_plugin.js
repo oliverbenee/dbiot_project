@@ -20,6 +20,10 @@ exports.toggleLed = function(){
     }
 }
 
+export function setLedState(int state){
+    led.writeSync(state)
+}
+
 process.on("SIGINT", () => {
     led.unexport();
     process.exit();
