@@ -4,12 +4,12 @@ import GarageDetails from "./garage.detail.component";
 
 /**
  * Component to display the parking garage
+ *
  */
 
 export default class Garage extends Component {
   constructor(props) {
     super(props);
-
     this.handleClick = this.handleClick.bind(this);
 
     // use props to set state
@@ -56,7 +56,7 @@ export default class Garage extends Component {
       <tr className={this.state.color} onClick={this.handleClick}>
         <td scope="row">{this.state.garageCode}</td>
         <td scope="row">
-          {this.state.vehicleCount} / {this.state.totalSpaces}{" "}
+          {this.state.vehicleCount} / {this.state.totalSpaces}
         </td>
       </tr>
     );

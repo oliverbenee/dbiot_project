@@ -4,6 +4,7 @@ import Header from "./components/layouts/Header";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import History from "./components/pages/history.component";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import GarageDetails from "./components/pages/garage.detail.component";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={Homepage} />
           <Route exact path="/history" component={History} />
+          <Route exact path="/garage" component={GarageDetails} />
         </Switch>
       </div>
     </BrowserRouter>
