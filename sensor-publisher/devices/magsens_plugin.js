@@ -1,6 +1,6 @@
 'use strict'
 
-const Gpio = require('onoff').Gpio;
+import { Gpio } from 'onoff'
 
 /*
  * create magnetic sensor and store in variable occupied
