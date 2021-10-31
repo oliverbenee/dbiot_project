@@ -20,7 +20,7 @@ exports.toggleLed = function(){
     }
 }
 
-export function setLedState(int state){
+export function setLedState(state){
     led.writeSync(state)
 }
 
