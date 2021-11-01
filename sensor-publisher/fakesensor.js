@@ -77,7 +77,7 @@ function read() {
   var distance = latestDistance // TODO: FIXXX. 
 
   // Activate LED based on magSens value
-  setLedState(magsens_status)
+  // setLedState(magsens_status)
 
   const data = {
     magsens_status: magsens_status,
@@ -85,6 +85,18 @@ function read() {
   }
 
   console.log("magsens: " + magsens_status + " | distance: " + distance)
+
+  // Toggle LED to indicate occupation (just as a sample)
+
+  // TODO: setting LED state if:
+  // - magnetic sensor is triggered,
+  // - and car is 10-20 cm away from the wall
+  if(magsens_status == 1 && distance > 10 && distance < 20) {
+    setLedState(1)
+  } else {
+    setLedState(0)
+  }
+
   publish(topic, JSON.stringify(data));
   return data;
 };

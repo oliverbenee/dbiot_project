@@ -25,7 +25,7 @@ USER root
 # Installing node.js - used for adding npm libraries.
 RUN curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
 RUN sudo apt-get install -y nodejs 
-#RUN sudo apt-get install -y python3
+#RUN sudo apt-get install -y python3 TODO: UNCOMMENT IF PYTHON BREAKS
 
 COPY package*.json ./
 
