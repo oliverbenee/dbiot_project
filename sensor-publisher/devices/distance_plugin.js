@@ -14,24 +14,28 @@ try {
   trigger.digitalWrite(0); // Make sure trigger is low
   function watchHCSR04() {
     let startTick;
-//    echo.on("alert", (level, tick) => {
-//      if (level === 1) {
-//        startTick = tick;
-//      } else {
-//        const endTick = tick;
-//        const diff = (endTick >> 0) - (startTick >> 0); // Unsigned 32 bit arithmetic
-//        const distance = diff / 2 / MICROSECDONDS_PER_CM;
-//        latestDistance = distance;
-//        latestPoll = new Date().getTime();
-//      }
-//    });
+    // START OF PIGPIO TESTING CODE, THIS WAS UNCOMMMENTED.
+    echo.on("alert", (level, tick) => {
+      if (level === 1) {
+        startTick = tick;
+      } else {
+        const endTick = tick;
+        const diff = (endTick >> 0) - (startTick >> 0); // Unsigned 32 bit arithmetic
+        const distance = diff / 2 / MICROSECDONDS_PER_CM;
+        latestDistance = distance;
+        latestPoll = new Date().getTime();
+      }
+    });
+    // END OF PIGPIO TESTING CODE , THIS WAS UNCOMMENTED.
   }
   watchHCSR04();
   // Trigger a distance measurement once per second
-//  setInterval(
-//    () => trigger.trigger(10, 1), // Set trigger high for 10 microseconds
-//    250
-//  );
+  // START OF PIGPIO TESTING CODE, THIS WAS UNCOMMENTED.
+  setInterval(
+    () => trigger.trigger(10, 1), // Set trigger high for 10 microseconds
+    250
+  );
+  // END OF PIGPIO TESTING CODE, THIS WAS UNCOMMENTED.
   // check for errors
 //  setInterval(() => {
 //    if (new Date().getTime() - latestPoll > 1000) {
