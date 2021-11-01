@@ -34,12 +34,21 @@ client.on("message", function (topic, message, packet) {
   console.log("___________________________");
   console.log("server received new message");
   if (topic == "home/sensor/distance") {
-    console.log("message is " + message);
-    Database.insert(JSON.parse(message));
-    console.log("topic is " + topic);
-  } else if (topic == "home/sensor/led") {
-    console.log("message is " + message);
-    console.log("topic is " + topic);
+    console.log("message is " + message + " , and topic is " + topic);
+    var values = JSON.parse(message)
+    console.log("got magsens status: " + values.magsens_status + " and distance: " + values.distance)
+    //TODO: Do what with the magsens status and distance???
+    if(values.magsens_status == 1 && values.distance > 10 && values.distance < 20) {
+      publish("home/sensor/led", "on")
+    } else {
+      publish("home/sensor/led", "off")
+    }
+
+    
+    
+
+
+
   }
   console.log("___________________________");
 });
