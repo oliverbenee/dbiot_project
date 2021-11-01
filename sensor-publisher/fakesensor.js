@@ -88,7 +88,7 @@ function read() {
 
   // Toggle LED to indicate occupation (just as a sample)
 
-  // TODO: setting LED state if:
+  // Setting LED state if:
   // - magnetic sensor is triggered,
   // - and car is 10-20 cm away from the wall
   if(magsens_status == 1 && distance > 10 && distance < 20) {
