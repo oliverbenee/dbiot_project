@@ -39,12 +39,13 @@ client.on("message", function (topic, message, packet) {
     console.log("got magsens status: " + values.magsens_status + " and distance: " + values.distance)
     //TODO: Do what with the magsens status and distance???
     if(values.magsens_status == 1 && values.distance > 10 && values.distance < 20) {
-      publish("home/sensor/led", "on")
-    } else {
-      publish("home/sensor/led", "off")
+      if(client.connected == true){
+        client.publish("home/sensor/led", "on")
+      } else {
+        client.publish("home/sensor/led", "off")
+      }
     }
 
-    
     
 
 
