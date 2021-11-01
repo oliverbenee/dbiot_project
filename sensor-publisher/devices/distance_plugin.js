@@ -4,11 +4,11 @@ const { Gpio, OUTPUT, INPUT } = pkg;
 
 export let latestDistance = -1;
 
-//try {
-//  latestDistance = -2;
-//  let latestPoll = null;
+try {
+  latestDistance = null;
+  let latestPoll = null;
   // The number of microseconds it takes sound to travel 1cm at 20 degrees celcius
-//  const MICROSECDONDS_PER_CM = 1e6 / 34321;
+  const MICROSECDONDS_PER_CM = 1e6 / 34321;
 //  const trigger = new Gpio(23, { mode: OUTPUT });
 //  const echo = new Gpio(24, { mode: INPUT, alert: true });
 //  trigger.digitalWrite(0); // Make sure trigger is low
@@ -38,10 +38,10 @@ export let latestDistance = -1;
 //      latestDistance = null;
 //    }
 //  }, 1000);
-//} catch (error) {
-//  console.log("Error in ultrasonic");
-//  latestDistance = null;
-//}
+} catch (error) {
+  console.log("Error in ultrasonic");
+  latestDistance = null;
+}
 
 
 ///// const PigPio = require('pigpio').Gpio;

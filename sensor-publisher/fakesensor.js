@@ -7,7 +7,7 @@ import { getOccupied, printMagProof } from "./devices/magsens_plugin.js"
 // This is printing code used to prove that the magnetic sensor and distance sensor are running in the sensor plugin.
 printMagProof() // Prove magSensor is running.
 printLedProof(); // Prove LED is running.
-//printDistProof(); // Prove dist sensor is running.
+printDistProof(); // Prove dist sensor is running.
 
 import mqtt from "mqtt";
 
