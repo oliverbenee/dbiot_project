@@ -5,15 +5,15 @@ const { Gpio, OUTPUT, INPUT } = pkg;
 export let latestDistance = -1;
 
 try {
-  latestDistance = null;
+  latestDistance = -1;
   let latestPoll = null;
   // The number of microseconds it takes sound to travel 1cm at 20 degrees celcius
   const MICROSECDONDS_PER_CM = 1e6 / 34321;
   const trigger = new Gpio(23, { mode: OUTPUT });
   const echo = new Gpio(24, { mode: INPUT, alert: true });
-//  trigger.digitalWrite(0); // Make sure trigger is low
-//  function watchHCSR04() {
-//    let startTick;
+  trigger.digitalWrite(0); // Make sure trigger is low
+  function watchHCSR04() {
+    let startTick;
 //    echo.on("alert", (level, tick) => {
 //      if (level === 1) {
 //        startTick = tick;
@@ -25,8 +25,8 @@ try {
 //        latestPoll = new Date().getTime();
 //      }
 //    });
-//  }
-//  watchHCSR04();
+  }
+  watchHCSR04();
   // Trigger a distance measurement once per second
 //  setInterval(
 //    () => trigger.trigger(10, 1), // Set trigger high for 10 microseconds
