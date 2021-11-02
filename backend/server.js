@@ -52,10 +52,10 @@ client.on("message", function (topic, message, packet) {
 });
 
 //publish function
-exports.publish = (topic, msg) => {
+function publish(topic, msg) {
   if (client.connected == true) {
     client.publish(topic, msg, () => {
-      console.log("publishing", msg);
+      console.log("server publishing", msg);
     });
   }
 };
