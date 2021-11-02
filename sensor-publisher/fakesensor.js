@@ -44,8 +44,8 @@ client.on("error", function (error) {
 client.on("message", function (topic, message, packet) {
   console.log("sensor received topic: " + topic)
   if (topic.substring(0, 15) == "home/sensor/led") {
-    if(message="on"){setLedState(1)}
-    if(message="off"){setLedState(0)}
+    if(message == "on"){setLedState(1)}
+    if(message == "off"){setLedState(0)}
     //toggleLed TODO: ????
   }
 });
@@ -94,11 +94,11 @@ function read() {
   // - magnetic sensor is triggered,
   // - and car is 10-20 cm away from the wall.
   // TODO: Should this toggle the LED? No right?
-  if(magsens_status == 1 && distance > 10 && distance < 20) {
-    setLedState(1)
-  } else {
-    setLedState(0)
-  }
+//if(magsens_status == 1 && distance > 10 && distance < 20) {
+//  setLedState(1)
+//} else {
+//  setLedState(0)
+//}
 
   publish(topic, JSON.stringify(data));
   return data;

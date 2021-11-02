@@ -29,6 +29,10 @@ client.on("error", function (error) {
   process.exit(1);
 });
 
+var minDistance = 10;
+var maxDistance = 20;
+var ledState = 0;
+
 // receive messages
 client.on("message", function (topic, message, packet) {
   console.log("___________________________");
@@ -38,10 +42,11 @@ client.on("message", function (topic, message, packet) {
     var values = JSON.parse(message)
     console.log("got magsens status: " + values.magsens_status + " and distance: " + values.distance)
     //TODO: Do what with the magsens status and distance???
-    
-
-
-
+    if(values.magsens_status == 1 && distance > minDistance && distance < maxDistance){
+      publish("home/sensor/led", "on")
+    } else {
+      publish("home/sensor/led", "off")
+    }
   }
   console.log("___________________________");
 });
