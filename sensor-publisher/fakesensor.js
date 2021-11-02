@@ -94,11 +94,11 @@ function read() {
   // - magnetic sensor is triggered,
   // - and car is 10-20 cm away from the wall.
   // TODO: Should this toggle the LED? No right?
-  //if(magsens_status == 1 && distance > 10 && distance < 20) {
-  //  setLedState(1)
-  //} else {
-  //  setLedState(0)
-  //}
+  if(magsens_status == 1 && distance > 10 && distance < 20) {
+    setLedState(1)
+  } else {
+    setLedState(0)
+  }
 
   publish(topic, JSON.stringify(data));
   return data;
