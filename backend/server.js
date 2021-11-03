@@ -3,6 +3,8 @@ const app = express();
 const Database = require("./database/db");
 const cors = require("cors");
 
+/*
+
 // mqtt
 var mqtt = require("mqtt");
 
@@ -52,6 +54,8 @@ exports.publish = (topic, msg) => {
     });
   }
 };
+
+*/
 
 var routes = require("./controllers/routes.js");
 const { options } = require("./controllers/routes.js");
