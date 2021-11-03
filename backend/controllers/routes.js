@@ -12,6 +12,15 @@ router.route("/data").get((req, res) => {
   });
 });
 
+router.route("/parkingzone").get((req, res) => {
+  Database.getDataParkingZone(function (err, result) {
+    if (!err) {
+      res.send(result);
+      console.log(result);
+    }
+  });
+});
+
 // controll led´s
 router.post("/led/:id", function (req, res) {
   var id = req.params.id;
