@@ -1,7 +1,7 @@
-const express = require("express");
+import express from "express";
 const app = express();
-const Database = require("./database/db");
-const cors = require("cors");
+import cors from "cors";
+import { router } from "../backend/controllers/routes.js";
 
 /*
 
@@ -10,7 +10,7 @@ var mqtt = require("mqtt");
 
 // setup mqtt
 var mqttBroker = "mqtt:broker:1883";
-var mqtt_options = {
+var mqtt_options = {f
   username: "client",
   password: "secret",
 };
@@ -57,11 +57,9 @@ exports.publish = (topic, msg) => {
 
 */
 
-var routes = require("./controllers/routes.js");
-const { options } = require("./controllers/routes.js");
-console.log(`Routes ${routes}`);
+console.log(`Routes ${router}`);
 
 app.use(cors());
-app.use("/", routes);
+app.use("/", router);
 
 app.listen(5000, () => console.log("Example app is listening on port 5000."));

@@ -1,4 +1,4 @@
-const mysql = require("mysql");
+import mysql from "mysql";
 
 const pool = mysql.createPool({
   user: "pi",
@@ -77,5 +77,4 @@ class Database {
   }
 }
 
-module.exports = pool;
-module.exports = Database;
+export { pool, Database };
