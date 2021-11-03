@@ -11,7 +11,7 @@ services:
   #   restart: on-failure
   mysql_db:
     build:
-      context:./database
+      context: ./database
     restart: on-failure
     environment:
       MYSQL_USER: pi
