@@ -10,11 +10,11 @@ const pool = mysql.createPool({
 
 class Database {
   // get data
-  static getData(callback) {
+  static getDataParkingSlots(parkingZoneID, callback) {
     pool.getConnection((err, connection) => {
       if (err) throw err;
       connection.query(
-        "SELECT * FROM dhtdata ORDER BY time DESC",
+        "SELECT * FROM parkingSlot WHERE parkingZoneID='" + parkingZoneID + "'",
         (err, results, fields) => {
           console.log("Data fetched");
           callback(err, results);
@@ -36,43 +36,23 @@ class Database {
     });
   }
 
-  // get latest data
-  static getLatestEntry(callback) {
-    pool.getConnection((err, connection) => {
-      if (err) throw err;
-      connection.query(
-        "SELECT * FROM dhtdata ORDER BY time DESC LIMIT 1",
-        (err, result, fields) => {
-          console.log("Data fetched");
-          callback(err, result);
-          connection.release();
-        }
-      );
-    });
-  }
-
-  // insert Data
-  static insert(tah) {
+  // update parking slot
+  static updateParkingSlot(tah) {
     pool.getConnection((err, connection) => {
       if (err) throw err;
       const sql =
-        "INSERT INTO dhtdata(temperature, humidity, distance, led_1_status, led_2_status, led_3_status) VALUES (?, ?, ?, ?, ?, ?)";
-      connection.query(
-        sql,
-        [
-          tah.temperature,
-          tah.humidity,
-          tah.distance,
-          tah.led_1_status,
-          tah.led_2_status,
-          tah.led_3_status,
-        ],
-        (err, results, fields) => {
-          if (err) throw err;
-          console.log("Data inserted");
-          connection.release();
-        }
-      );
+        "UPDATE parkingSlot SET isOccupied =" +
+        false +
+        " WHERE slotID =" +
+        tah.slotID +
+        " AND parkingZoneID='" +
+        tah.parkingZoneID +
+        "'";
+      connection.query(sql, (err, results, fields) => {
+        if (err) throw err;
+        console.log("Data updated");
+        connection.release();
+      });
     });
   }
 }

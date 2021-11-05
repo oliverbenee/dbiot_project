@@ -58,7 +58,8 @@ exports.publish = (topic, msg) => {
 */
 
 console.log(`Routes ${router}`);
-
+// parse json data
+app.use(express.json());
 app.use(cors());
 app.use("/", router);
 
