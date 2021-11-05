@@ -14,6 +14,19 @@ router.route("/parkingzone").get((req, res) => {
 });
 
 // get all parking spots for one parking zone
+router.route("/parkingslots/:parkingZoneID/:day").get((req, res) => {
+  Database.getHistory(
+    req.params.parkingZoneID,
+    req.params.day,
+    function (err, result) {
+      if (!err) {
+        res.send(result);
+      }
+    }
+  );
+});
+
+// get all parking spots for one parking zone
 router.route("/parkingslots/:parkingZoneID").get((req, res) => {
   Database.getDataParkingSlots(
     req.params.parkingZoneID,

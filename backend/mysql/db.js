@@ -24,6 +24,24 @@ class Database {
     });
   }
 
+  // get history opendate.dk for one specific day
+  static getHistory(parkingZone, day, callback) {
+    pool.getConnection((err, connection) => {
+      if (err) throw err;
+      connection.query(
+        "SELECT * FROM historical WHERE parkingZoneID='" +
+          parkingZone +
+          "' AND dayofweek(time) = " +
+          day,
+        (err, results, fields) => {
+          console.log("Data fetched");
+          callback(err, results);
+          connection.release();
+        }
+      );
+    });
+  }
+
   // get data
   static getDataParkingZone(callback) {
     pool.getConnection((err, connection) => {
