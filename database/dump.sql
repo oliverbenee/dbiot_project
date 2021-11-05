@@ -22,6 +22,7 @@ CREATE TABLE parkingSlot
 
 INSERT INTO parkingZone VALUES ("KALKVAERKSVEJ", 56.149456595160515, 10.211865426037953, 210, 44);
 INSERT INTO parkingSlot VALUES (1, true, "KALKVAERKSVEJ");
+INSERT INTO parkingSlot VALUES (2, false, "KALKVAERKSVEJ");
 
 INSERT INTO parkingZone VALUES ("NewBusgadehuset", 56.149456595160515, 10.211865426037953, 210, 44);
 INSERT INTO parkingSlot VALUES (1, true, "NewBusgadehuset");
@@ -56,5 +57,11 @@ INSERT INTO parkingSlot VALUES (1, true, "New Bruuns Galleri");
 INSERT INTO parkingZone VALUES ("DOKK1", 12.12, 34.34, 1234, 5678);
 INSERT INTO parkingSlot VALUES (1, false, "DOKK1");
 
+
+UPDATE parkingSlot SET isOccupied =false WHERE slotID =11 AND parkingZoneID="KALKVAERKSVEJ";
+
 SELECT * FROM parkingZone;
 SELECT * FROM parkingSlot;
+
+SELECT * FROM parkingSlot WHERE parkingZoneID="KALKVAERKSVEJ";
+
