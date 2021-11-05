@@ -20,6 +20,7 @@ CREATE TABLE parkingSlot
       PRIMARY KEY(slotID, parkingZoneID)
 );
 
+# Sample parking spots and zones.
 INSERT INTO parkingZone VALUES ("KALKVAERKSVEJ", 56.149456595160515, 10.211865426037953, 210, 44);
 INSERT INTO parkingSlot VALUES (1, true, "KALKVAERKSVEJ");
 INSERT INTO parkingSlot VALUES (2, false, "KALKVAERKSVEJ");
@@ -57,11 +58,33 @@ INSERT INTO parkingSlot VALUES (1, true, "New Bruuns Galleri");
 INSERT INTO parkingZone VALUES ("DOKK1", 12.12, 34.34, 1234, 5678);
 INSERT INTO parkingSlot VALUES (1, false, "DOKK1");
 
-
+# test for updating a single parking slot with a new occupation.
 UPDATE parkingSlot SET isOccupied =false WHERE slotID =11 AND parkingZoneID="KALKVAERKSVEJ";
 
+# Fetching all data. What happens?
 SELECT * FROM parkingZone;
 SELECT * FROM parkingSlot;
 
+# Fetch all data from a single parking zone. 
 SELECT * FROM parkingSlot WHERE parkingZoneID="KALKVAERKSVEJ";
 
+# Historical data from opendata.dk
+CREATE TABLE historical
+( parkingZoneID VARCHAR(50),
+  time timestamp default current_timestamp,
+  freeSlots INT(4),
+  totalCapacity INT(4)
+);
+
+# Sample historical data. 
+INSERT INTO historical(parkingZoneID, freeSlots, totalCapacity) VALUES ("KALKVAERKSVEJ", 5, 10);
+INSERT INTO historical(parkingZoneID, freeSlots, totalCapacity) VALUES ("KALKVAERKSVEJ", 4, 10);
+INSERT INTO historical(parkingZoneID, freeSlots, totalCapacity) VALUES ("KALKVAERKSVEJ", 3, 10);
+INSERT INTO historical(parkingZoneID, freeSlots, totalCapacity) VALUES ("KALKVAERKSVEJ", 2, 10);
+
+# All historical data. 
+select * from historical;
+
+# dayofweek: 1 for sunday, 2 for monday, 7 for saturday.
+# Fetch all historical data from KALKVAERKSVEJ on ALL fridays. 
+SELECT * FROM historical WHERE parkingZoneID = "KALKVAERKSVEJ" AND dayofweek(time) = 6;
