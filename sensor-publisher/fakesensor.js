@@ -32,8 +32,8 @@ client.on("connect", function () {
   console.log("connected to cloud broker: " + clientCloud.connected);
 
   client.subscribe("home/sensor/led")
-  client.subscribe("home/sensor/led/ " + spotNumber);
-  console.log(" AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA " + "home/sensor/led/ " + spotNumber)
+  client.subscribe("home/sensor/led/" + spotNumber);
+  console.log(" AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA " + "home/sensor/led/" + spotNumber)
   console.log("sensor subscribed.")
 });
 
