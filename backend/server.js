@@ -55,7 +55,7 @@ client.on("message", function (topic, message, packet) {
 function publish(topic, msg) {
   if (client.connected == true) {
     client.publish(topic, msg, () => {
-      console.log("server publishing", msg);
+      console.log("server publishing: " + msg + " to: " + topic);
     });
   }
 };
