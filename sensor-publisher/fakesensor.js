@@ -22,8 +22,7 @@ var clientCloud = mqtt.connect(mqttBrokerCloud);
 
 // TODO: We need to determine which parking spot, we represent!
 var spotNumber = 1;
-stringify(spotNumber);
-
+spotNumber = spotNumber.toString();
 
 
 
