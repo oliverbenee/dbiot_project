@@ -20,14 +20,20 @@ var mqttBrokerCloud = "mqtt://40.88.197.102:1883";
 var client = mqtt.connect(mqttBroker, mqtt_options);
 var clientCloud = mqtt.connect(mqttBrokerCloud);
 
+// TODO: We need to determine which parking spot, we represent!
+
+
+
+
+
+
+
 // succesfull connected
 client.on("connect", function () {
   console.log("connected to local broker: " + client.connected);
   console.log("connected to cloud broker: " + clientCloud.connected);
 
-  client.subscribe("home/sensor/led/1");
-  client.subscribe("home/sensor/led/2");
-  client.subscribe("home/sensor/led/3");
+  client.subscribe("home/sensor/led");
 });
 
 clientCloud.on("error", function (error) {
@@ -59,7 +65,7 @@ function publish(topic, msg) {
     console.log("cloud mqtt status=  " + clientCloud.connected);
 
     client.publish(topic, msg, () => {
-      console.log("publishing", msg);
+      console.log("publishing" + msg + " on channel: " + topic);
     });
 
     clientCloud.publish(topic, msg, () => {
