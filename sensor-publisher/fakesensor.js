@@ -61,8 +61,9 @@ var topic = "home/sensor/distance";
 //publish function
 function publish(topic, msg) {
   if (client.connected == true && clientCloud.connected == false) {
-    console.log("local mqtt status=  " + client.connected);
-    console.log("cloud mqtt status=  " + clientCloud.connected);
+    // TODO: RE-enable for debugging
+    //console.log("local mqtt status=  " + client.connected);
+    //console.log("cloud mqtt status=  " + clientCloud.connected);
 
     client.publish(topic, msg, () => {
       console.log("publishing" + msg + " on channel: " + topic);
