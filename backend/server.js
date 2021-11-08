@@ -52,8 +52,6 @@ client.on("message", function (topic, message, packet) {
       publish("home/sensor/led/" + spotNumber.toString() , "off")
       //publish("home/sensor/led", "off") //TODO: UNCOMMENT THIS LINE FOR DEBUG
     }
-  } else {
-    console.error("FAIL! Topic is: " + topic)
   }
   console.log("___________________________");
 });
