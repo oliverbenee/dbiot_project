@@ -13,7 +13,7 @@ var mqtt_options = {
   password: "secret",
 };
 var client = mqtt.connect(mqttBroker, mqtt_options);
-var topic = ["home/sensor/distance", "home/sensor/led"];
+var topic = ["home/sensor/distance/#", "home/sensor/led"];
 
 // succesfull connected
 client.on("connect", function () {
