@@ -50,6 +50,8 @@ client.on("message", function (topic, message, packet) {
     } else {
       publish("home/sensor/led", "off")
     }
+  } else {
+    console.error("FAIL! Topic is: " + topic)
   }
   console.log("___________________________");
 });
