@@ -29,7 +29,6 @@ client.on("connect", function () {
   console.log("connected to local broker: " + client.connected);
   console.log("connected to cloud broker: " + clientCloud.connected);
 
-  //client.subscribe("home/sensor/led") TODO: UNCOMMENT LINE FOR TESTING
   client.subscribe("home/sensor/led/" + spotNumber);
   console.log("sensor subscribed to: home/sensor/led/" + spotNumber)
 });
@@ -47,8 +46,7 @@ client.on("error", function (error) {
 // receive messages
 client.on("message", function (topic, message, packet) {
   console.log("sensor received a new message on topic: '" + topic + "', and message: '" + message + "'");
-  if (topic == "home/sensor/led/" + spotNumber) { // this is the line causing issues.
-    //console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa")
+  if (topic == "home/sensor/led/" + spotNumber) {
     if(message == "on"){setLedState(1)}
     if(message == "off"){setLedState(0)}
   } else {

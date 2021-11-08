@@ -35,25 +35,22 @@ var ledState = 0;
 
 // receive messages
 client.on("message", function (topic, message, packet) {
-  console.log("___________________________");
-  //console.log("server received new message");
+  //console.log("___________________________"); //UNCOMMENT THIS LINE FOR DEBUG
+  //console.log("server received new message"); //UNCOMMENT THIS LINE FOR DEBUG
   if (topic.substring(0,20) == "home/sensor/distance") {
     var spotNumber = parseInt(topic.substring(21))
-    console.log("got data from sensor no.: " + topic.substring(21));
-
-    //console.log("message is " + message + " , and topic is " + topic);
     var values = JSON.parse(message)
-    //console.log("got magsens status: " + values.magsens_status + " and distance: " + values.distance)
-    //TODO: Do what with the magsens status and distance???
+
+    //console.log("got data from sensor no.: " + topic.substring(21)); //UNCOMMENT THIS LINE FOR DEBUG
+    //console.log("got magsens status: " + values.magsens_status + " and distance: " + values.distance) //UNCOMMENT THIS LINE FOR DEBUG
+    
     if(values.magsens_status == 1 && values.distance > minDistance && values.distance < maxDistance){
       publish("home/sensor/led/" + spotNumber.toString() , "on")
-      //publish("home/sensor/led", "on") //TODO: UNCOMMENT THIS LINE FOR DEBUG
     } else {
       publish("home/sensor/led/" + spotNumber.toString() , "off")
-      //publish("home/sensor/led", "off") //TODO: UNCOMMENT THIS LINE FOR DEBUG
     }
   }
-  console.log("___________________________");
+  //console.log("___________________________"); //UNCOMMENT THIS LINE FOR DEBUG
 });
 
 //publish function
