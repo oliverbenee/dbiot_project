@@ -29,14 +29,14 @@ services:
       - broker
     depends_on:
       - "mysql_db"
-  frontend:
-    build:
-      context: ./frontend
-    restart: on-failure
-    ports:
-      - "3000:3000"
-    depends_on:
-      - "backend"
+#  frontend:
+#    build:
+#      context: ./frontend
+#    restart: on-failure
+#    ports:
+#      - "3000:3000"
+#    depends_on:
+#      - "backend"
   publisher:
     build:
       context: ./sensor-publisher
