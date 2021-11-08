@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const Database = require("./database/db");
+//const Database = require("./database/db");
 const cors = require("cors");
 
 // mqtt
@@ -37,7 +37,9 @@ var ledState = 0;
 client.on("message", function (topic, message, packet) {
   console.log("___________________________");
   console.log("server received new message");
-  if (topic == "home/sensor/distance") {
+  if (topic.substring(0,20) == "home/sensor/distance") {
+    console.log("got data from sensor no.: " + topic.substring(21));
+
     console.log("message is " + message + " , and topic is " + topic);
     var values = JSON.parse(message)
     console.log("got magsens status: " + values.magsens_status + " and distance: " + values.distance)

@@ -1,6 +1,6 @@
 const express = require("express");
 var router = express.Router();
-const Database = require("../database/db");
+//const Database = require("../database/db");
 
 // get all data entries
 router.route("/data").get((req, res) => {
