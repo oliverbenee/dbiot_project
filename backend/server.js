@@ -13,7 +13,7 @@ var mqtt_options = {
   password: "secret",
 };
 var client = mqtt.connect(mqttBroker, mqtt_options);
-var topic = ["home/sensor/distance/#", "home/sensor/led", "home/sensor/led/#"];
+var topic = ["home/sensor/distance/#", "home/sensor/led/#"];
 
 // succesfull connected
 client.on("connect", function () {
@@ -36,7 +36,7 @@ var ledState = 0;
 // receive messages
 client.on("message", function (topic, message, packet) {
   //console.log("___________________________"); //UNCOMMENT THIS LINE FOR DEBUG
-  console.log("server received new message on channel: " + topic); //UNCOMMENT THIS LINE FOR DEBUG
+  console.log("server received new message on topic: " + topic); //UNCOMMENT THIS LINE FOR DEBUG
   if (topic.substring(0,20) == "home/sensor/distance") {
     var spotNumber = parseInt(topic.substring(21))
     var values = JSON.parse(message)
