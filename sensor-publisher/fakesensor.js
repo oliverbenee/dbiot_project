@@ -33,6 +33,7 @@ client.on("connect", function () {
 
   client.subscribe("home/sensor/led")
   client.subscribe("home/sensor/led/ " + spotNumber);
+  console.log("sensor subscribed.")
 });
 
 clientCloud.on("error", function (error) {
