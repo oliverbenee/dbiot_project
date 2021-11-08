@@ -21,7 +21,7 @@ var client = mqtt.connect(mqttBroker, mqtt_options);
 var clientCloud = mqtt.connect(mqttBrokerCloud);
 
 // TODO: We need to determine which parking spot, we represent!
-var spotNumber = 1;
+var spotNumber = "1";
 
 // succesfull connected
 client.on("connect", function () {
