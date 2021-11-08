@@ -46,9 +46,9 @@ client.on("message", function (topic, message, packet) {
     console.log("got magsens status: " + values.magsens_status + " and distance: " + values.distance)
     //TODO: Do what with the magsens status and distance???
     if(values.magsens_status == 1 && values.distance > minDistance && values.distance < maxDistance){
-      publish("home/sensor/led", "on")
+      publish("home/sensor/led/" + spotNumber.toString() , "on")
     } else {
-      publish("home/sensor/led", "off")
+      publish("home/sensor/led/" + spotNumber.toString() , "off")
     }
   } else {
     console.error("FAIL! Topic is: " + topic)
