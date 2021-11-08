@@ -31,6 +31,7 @@ client.on("connect", function () {
   console.log("connected to local broker: " + client.connected);
   console.log("connected to cloud broker: " + clientCloud.connected);
 
+  client.subscribe("home/sensor/led")
   client.subscribe("home/sensor/led/ " + spotNumber);
 });
 
