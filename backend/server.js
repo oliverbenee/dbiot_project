@@ -38,6 +38,7 @@ client.on("message", function (topic, message, packet) {
   console.log("___________________________");
   console.log("server received new message");
   if (topic.substring(0,20) == "home/sensor/distance") {
+    var spotNumber = parseInt(topic.substring(21))
     console.log("got data from sensor no.: " + topic.substring(21));
 
     console.log("message is " + message + " , and topic is " + topic);

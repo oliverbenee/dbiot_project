@@ -21,9 +21,8 @@ var client = mqtt.connect(mqttBroker, mqtt_options);
 var clientCloud = mqtt.connect(mqttBrokerCloud);
 
 // TODO: We need to determine which parking spot, we represent!
-
-
-
+var spotNumber = 1;
+stringify(spotNumber);
 
 
 
@@ -33,7 +32,7 @@ client.on("connect", function () {
   console.log("connected to local broker: " + client.connected);
   console.log("connected to cloud broker: " + clientCloud.connected);
 
-  client.subscribe("home/sensor/led");
+  client.subscribe("home/sensor/led/ " + spotNumber);
 });
 
 clientCloud.on("error", function (error) {
@@ -49,14 +48,14 @@ client.on("error", function (error) {
 // receive messages
 client.on("message", function (topic, message, packet) {
   console.log("sensor received topic: " + topic)
-  if (topic.substring(0, 15) == "home/sensor/led") {
+  if (topic.substring(0, 15) == "home/sensor/led/" + spotNumber) {
     if(message == "on"){setLedState(1)}
     if(message == "off"){setLedState(0)}
     //toggleLed TODO: ????
   }
 });
 
-var topic = "home/sensor/distance";
+var topic = "home/sensor/distance/" + spotNumber;
 
 //publish function
 function publish(topic, msg) {
