@@ -36,14 +36,14 @@ var ledState = 0;
 // receive messages
 client.on("message", function (topic, message, packet) {
   console.log("___________________________");
-  console.log("server received new message");
+  //console.log("server received new message");
   if (topic.substring(0,20) == "home/sensor/distance") {
     var spotNumber = parseInt(topic.substring(21))
     console.log("got data from sensor no.: " + topic.substring(21));
 
-    console.log("message is " + message + " , and topic is " + topic);
+    //console.log("message is " + message + " , and topic is " + topic);
     var values = JSON.parse(message)
-    console.log("got magsens status: " + values.magsens_status + " and distance: " + values.distance)
+    //console.log("got magsens status: " + values.magsens_status + " and distance: " + values.distance)
     //TODO: Do what with the magsens status and distance???
     if(values.magsens_status == 1 && values.distance > minDistance && values.distance < maxDistance){
       publish("home/sensor/led/" + spotNumber.toString() , "on")
@@ -60,7 +60,7 @@ client.on("message", function (topic, message, packet) {
 function publish(topic, msg) {
   if (client.connected == true) {
     client.publish(topic, msg, () => {
-      console.log("server publishing: " + msg + " to: '" + topic + "'");
+      //console.log("server publishing: " + msg + " to: '" + topic + "'");
     });
   }
 };

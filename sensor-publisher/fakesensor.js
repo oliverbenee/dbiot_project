@@ -48,13 +48,15 @@ client.on("error", function (error) {
 
 // receive messages
 client.on("message", function (topic, message, packet) {
-  //console.log("sensor received topic: '" + topic + "'");
-  console.log("message is: '" + message + "'");
+  console.log("sensor received topic: '" + topic + "'");
+  console.log("publisher received message: '" + message + "'");
   if (topic.substring(0, 16) == "home/sensor/led/" + spotNumber) {
     console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa")
     if(message == "on"){setLedState(1)}
     if(message == "off"){setLedState(0)}
     //toggleLed TODO: ????
+  } else {
+    console.log("MESSG: '" + message + "' - TOPC: '" + topic +"'")
   }
 });
 
