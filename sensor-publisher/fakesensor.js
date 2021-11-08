@@ -22,9 +22,6 @@ var clientCloud = mqtt.connect(mqttBrokerCloud);
 
 // TODO: We need to determine which parking spot, we represent!
 var spotNumber = 1;
-spotNumber = spotNumber.toString();
-
-
 
 // succesfull connected
 client.on("connect", function () {
@@ -50,7 +47,7 @@ client.on("error", function (error) {
 client.on("message", function (topic, message, packet) {
   console.log("sensor received topic: '" + topic + "'");
   console.log("publisher received message: '" + message + "'");
-  if (topic.substring(0, 16) == "home/sensor/led/" + spotNumber) {
+  if (topic.substring(0, 16) == "home/sensor/led/" + spotNumber) { // this is the line causing issues.
     console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa")
     if(message == "on"){setLedState(1)}
     if(message == "off"){setLedState(0)}
