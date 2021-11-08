@@ -47,10 +47,10 @@ client.on("message", function (topic, message, packet) {
     //TODO: Do what with the magsens status and distance???
     if(values.magsens_status == 1 && values.distance > minDistance && values.distance < maxDistance){
       publish("home/sensor/led/" + spotNumber.toString() , "on")
-      publish("home/sensor/led", "on") //TODO: UNCOMMENT THIS LINE FOR DEBUG
+      //publish("home/sensor/led", "on") //TODO: UNCOMMENT THIS LINE FOR DEBUG
     } else {
       publish("home/sensor/led/" + spotNumber.toString() , "off")
-      publish("home/sensor/led", "off") //TODO: UNCOMMENT THIS LINE FOR DEBUG
+      //publish("home/sensor/led", "off") //TODO: UNCOMMENT THIS LINE FOR DEBUG
     }
   } else {
     console.error("FAIL! Topic is: " + topic)

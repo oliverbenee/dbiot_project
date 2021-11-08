@@ -31,10 +31,9 @@ client.on("connect", function () {
   console.log("connected to local broker: " + client.connected);
   console.log("connected to cloud broker: " + clientCloud.connected);
 
-  client.subscribe("home/sensor/led")
+  //client.subscribe("home/sensor/led") TODO: UNCOMMENT LINE FOR TESTING
   client.subscribe("home/sensor/led/" + spotNumber);
-  console.log(" AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA " + "home/sensor/led/" + spotNumber)
-  console.log("sensor subscribed.")
+  console.log("sensor subscribed to: home/sensor/led/" + spotNumber)
 });
 
 clientCloud.on("error", function (error) {
