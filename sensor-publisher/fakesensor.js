@@ -47,11 +47,10 @@ client.on("error", function (error) {
 client.on("message", function (topic, message, packet) {
   console.log("sensor received topic: '" + topic + "'");
   console.log("publisher received message: '" + message + "'");
-  if (topic == "home/sensor/led/1") { // this is the line causing issues.
+  if (topic == "home/sensor/led/" + spotNumber) { // this is the line causing issues.
     console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa")
     if(message == "on"){setLedState(1)}
     if(message == "off"){setLedState(0)}
-    //toggleLed TODO: ????
   } else {
     console.log("MESSG: '" + message + "' - TOPC: '" + topic +"'")
   }
