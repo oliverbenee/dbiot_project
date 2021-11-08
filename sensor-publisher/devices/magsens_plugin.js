@@ -10,10 +10,10 @@ var occupied = 0;
 const magSens = new Gpio('22', 'in', 'both')
 magSens.watch((err, value) => {
     if(err) throw err
-    console.log("VALUE CHANGE IN MAGSENS")
-    console.log("old occupied value: " + occupied)
+    //console.log("VALUE CHANGE IN MAGSENS")
+    //console.log("old occupied value: " + occupied)
     occupied = 1 - value;
-    console.log("new occupied value: " + occupied)
+    //console.log("new occupied value: " + occupied)
 })
 
 export function getOccupied() {

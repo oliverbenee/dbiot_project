@@ -36,7 +36,7 @@ var ledState = 0;
 // receive messages
 client.on("message", function (topic, message, packet) {
   //console.log("___________________________"); //UNCOMMENT THIS LINE FOR DEBUG
-  //console.log("server received new message"); //UNCOMMENT THIS LINE FOR DEBUG
+  console.log("server received new message on channel: " + topic); //UNCOMMENT THIS LINE FOR DEBUG
   if (topic.substring(0,20) == "home/sensor/distance") {
     var spotNumber = parseInt(topic.substring(21))
     var values = JSON.parse(message)
