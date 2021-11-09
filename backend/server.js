@@ -46,8 +46,12 @@ client.on("message", function (topic, message, packet) {
     
     if(values.magsens_status == 1 && values.distance > minDistance && values.distance < maxDistance){
       publish("home/sensor/led/" + spotNumber.toString() , "on")
+      console.log("Spot number: " + spotNumber + " is now occupied")
+      //TODO: update database from here.
     } else {
       publish("home/sensor/led/" + spotNumber.toString() , "off")
+      console.log("Spot number: " + spotNumber + " is now not occupied")
+      //TODO: update database from here.
     }
   }
   //console.log("___________________________"); //UNCOMMENT THIS LINE FOR DEBUG
