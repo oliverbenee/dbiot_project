@@ -87,7 +87,7 @@ select * from historical;
 
 # dayofweek: 1 for sunday, 2 for monday, 7 for saturday.
 # Fetch all historical data from KALKVAERKSVEJ on ALL fridays. 
-SELECT * FROM historical WHERE parkingZoneID = "KALKVAERKSVEJ" AND dayofweek(time) = 4;
+SELECT AVG(freeSlots) FROM historical WHERE parkingZoneID = "KALKVAERKSVEJ" AND dayofweek(time) = 4;
 
 # Insert for every day of the week.
 INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-10-30 23:47:19', "KALKVAERKSVEJ", 2, 10);
