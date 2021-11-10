@@ -1,6 +1,8 @@
 DROP TABLE IF EXISTS parkingSlot;
 DROP TABLE IF EXISTS parkingZone;
 
+CREATE DATABASE buildingiot;
+
 # Overview of latest data from all tables. 
 CREATE TABLE parkingZone
     ( parkingZoneID VARCHAR(50),
@@ -97,3 +99,7 @@ INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2
 INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-3 23:47:19', "KALKVAERKSVEJ", 2, 10);
 INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-4 23:47:19', "KALKVAERKSVEJ", 2, 10);
 INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-5 23:47:19', "KALKVAERKSVEJ", 2, 10);
+
+SELECT AVG(Price) AS AveragePrice FROM Products;
+
+SELECT AVG(freeSlots) FROM historical WHERE parkingZoneID = "KALKVAERKSVEJ" AND dayofweek(time) = 4;
