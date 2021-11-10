@@ -76,9 +76,9 @@ client.on("message", function (topic, message, packet) {
   }
   console.log("___________________________"); //UNCOMMENT THIS LINE FOR DEBUG
   console.log("Now testing that the spot is updated.")
-  Database.getDataParkingSlots("KALKVAERKSVEJ", err => {
+  Database.getDataParkingSlots("KALKVAERKSVEJ", err, result => {
     if(err) {throw (err);} else {
-      console.log("BLABLABLABLA")
+      console.log(result)
     }
   })
 });
