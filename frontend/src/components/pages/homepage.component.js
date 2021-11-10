@@ -7,8 +7,7 @@ import * as d3 from "d3";
  * Main Component to display an overview of all parking garages in aarhus
  */
 
-const API_URL_OPENDATA_PARKING_GARAGES =
-  "https://admin.opendata.dk/api/3/action/datastore_search?resource_id=2a82a145-0195-4081-a13c-b0e587e9b89c";
+const API_URL_OPENDATA_PARKING_GARAGES = "http://localhost:5000/opendata";
 
 export default class Homepage extends Component {
   constructor(props) {
