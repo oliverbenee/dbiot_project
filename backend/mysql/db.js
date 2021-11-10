@@ -60,7 +60,7 @@ class Database {
       if (err) throw err;
       const sql =
         "UPDATE parkingSlot SET isOccupied =" +
-        false +
+        tah.isOccupied +
         " WHERE slotID =" +
         tah.slotID +
         " AND parkingZoneID='" +

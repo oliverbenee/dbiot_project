@@ -2,6 +2,7 @@ import express from "express";
 const app = express();
 import cors from "cors";
 import { router } from "./controllers/routes.js";
+const Database = require("./mysql/db").Database
 
 // mqtt
 import mqtt from "mqtt";
@@ -35,7 +36,7 @@ var ledState = 0;
 
 // receive messages
 client.on("message", function (topic, message, packet) {
-  console.log("___________________________"); //UNCOMMENT THIS LINE FOR DEBUG
+  //console.log("___________________________"); //UNCOMMENT THIS LINE FOR DEBUG
   console.log("server received new message on topic: " + topic); //UNCOMMENT THIS LINE FOR DEBUG
   if (topic.substring(0, 20) == "home/sensor/distance") {
     var spotNumber = parseInt(topic.substring(21));
@@ -43,6 +44,9 @@ client.on("message", function (topic, message, packet) {
 
     //console.log("got data from sensor no.: " + topic.substring(21)); //UNCOMMENT THIS LINE FOR DEBUG
     //console.log("got magsens status: " + values.magsens_status + " and distance: " + values.distance) //UNCOMMENT THIS LINE FOR DEBUG
+
+    console.log("___________________________")
+    console.log("Updating database value.")
 
     if (
       values.magsens_status == 1 &&
@@ -52,13 +56,29 @@ client.on("message", function (topic, message, packet) {
       publish("home/sensor/led/" + spotNumber.toString(), "on");
       console.log("Spot number: " + spotNumber + " is now occupied");
       //TODO: update database from here.
+      const newState = {
+        isOccupied: true,
+        slotID: spotNumber,
+        parkingZoneID: "KALKVAERKSVEJ"
+      }
+      Database.updateParkingSlot(newState)
     } else {
       publish("home/sensor/led/" + spotNumber.toString(), "off");
       console.log("Spot number: " + spotNumber + " is now not occupied");
       //TODO: update database from here.
+      const newState = {
+        isOccupied: false,
+        slotID: spotNumber,
+        parkingZoneID: "KALKVAERKSVEJ" 
+      }
+      Database.updateParkingSlot(newState)
     }
   }
-  //console.log("___________________________"); //UNCOMMENT THIS LINE FOR DEBUG
+  console.log("___________________________"); //UNCOMMENT THIS LINE FOR DEBUG
+  console.log("Now testing that the spot is updated.")
+  Database.getDaparkingSlots("KALKVAERKSVEJ", results => {
+    console.log(results)
+  })
 });
 
 //publish function
