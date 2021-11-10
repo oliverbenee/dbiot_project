@@ -12,7 +12,7 @@ const pool = mysql.createPool({
 pool.getConnection((err, connection) => {
   if (err) throw err
   connection.query(
-    `CREATE TABLE parkingZone
+    `CREATE TABLE IF NOT EXISTS parkingZone
     ( parkingZoneID VARCHAR(50),
       PRIMARY KEY (parkingZoneID),
       latitude FLOAT(4,2),
@@ -22,7 +22,7 @@ pool.getConnection((err, connection) => {
         if (err) throw err
     })
   connection.query(
-    `CREATE TABLE parkingSlot
+    `CREATE TABLE IF NOT EXISTS parkingSlot
     ( slotID INT(10),
       isOccupied BOOLEAN,
       parkingZoneID VARCHAR(50),
@@ -31,7 +31,7 @@ pool.getConnection((err, connection) => {
         if(err) throw err;
     })
   connection.query(
-    `CREATE TABLE historical
+    `CREATE TABLE IF NOT EXISTS historical
     ( parkingZoneID VARCHAR(50),
       time timestamp default current_timestamp,
       freeSlots INT(4),
