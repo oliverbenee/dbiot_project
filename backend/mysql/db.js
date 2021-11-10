@@ -2,7 +2,7 @@ import mysql from "mysql";
 
 const pool = mysql.createPool({
   user: "pi",
-  host: "localhost",
+  host: "mysql_db",
   port: "3306",
   password: "foobar",
   database: "buildingiot",
