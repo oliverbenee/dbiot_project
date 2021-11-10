@@ -13,8 +13,8 @@ router.route("/parkingzone").get((req, res) => {
   });
 });
 
-// get all parking spots for one parking zone
-router.route("/parkingslots/:parkingZoneID/:day").get((req, res) => {
+// get average history data for free spots for one specific parking zone at a specific week day
+router.route("/history/:parkingZoneID/:day").get((req, res) => {
   Database.getHistory(
     req.params.parkingZoneID,
     req.params.day,
