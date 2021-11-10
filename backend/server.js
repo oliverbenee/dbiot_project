@@ -2,7 +2,7 @@ import express from "express";
 const app = express();
 import cors from "cors";
 import { router } from "./controllers/routes.js";
-const Database = require("./mysql/db").Database
+import { Database } from "./mysql/db.js";
 
 // mqtt
 import mqtt from "mqtt";
