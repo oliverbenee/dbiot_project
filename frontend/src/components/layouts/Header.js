@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
 /** In the header we make use of the UserContext to be able to display the user name
@@ -10,11 +10,6 @@ export default function Header() {
       <div class="container">
         <Link to="/" className="navbar-brand">
           Home
-        </Link>
-      </div>
-      <div class="container">
-        <Link to="/history" className="navbar-brand">
-          History
         </Link>
       </div>
       <div className="collapse navbar-collapse"></div>

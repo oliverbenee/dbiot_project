@@ -1,14 +1,14 @@
 version: "3.8"
 services:
-  broker:
-    build:
-      context: ./mqtt-broker
-    stdin_open: true
-    tty: true
-    ports:
-      - "1883:1883"
-      - "8883:8883"
-    restart: on-failure
+  # broker:
+  #   build:
+  #     context: ./mqtt-broker
+  #   stdin_open: true
+  #   tty: true
+  #   ports:
+  #     - "1883:1883"
+  #     - "8883:8883"
+  #   restart: on-failure
   mysql_db:
     image: hypriot/rpi-mysql:latest
     restart: on-failure
@@ -25,8 +25,8 @@ services:
     restart: on-failure
     ports:
       - "5000:5000"
-    links:
-      - broker
+    # links:
+    #   - broker
     depends_on:
       - "mysql_db"
 #  frontend:
