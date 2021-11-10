@@ -10,7 +10,7 @@ services:
       - "8883:8883"
     restart: on-failure
   mysql_db:
-    image: hypriot/rpi-mysql:5.7
+    image: hypriot/rpi-mysql:latest
     restart: on-failure
     environment:
       MYSQL_USER: pi
