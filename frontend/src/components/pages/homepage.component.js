@@ -24,7 +24,7 @@ export default class Homepage extends Component {
   componentDidMount() {
     fetch(API_URL_OPENDATA_PARKING_GARAGES)
       .then((response) => response.json())
-      .then((data) => this.setState({ garages: data.result.records }))
+      .then((data) => this.setState({ garages: data}))
       .catch(console.error());
 
     this.drawLineChart();
