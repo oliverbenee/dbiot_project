@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Measurement from "./Measurement";
+import Measurement from "./measurement.component";
 
 /**
  * Main Component to display current measurements and LED interaction

@@ -36,6 +36,9 @@ client.on("message", function (topic, message, packet) {
   console.log("___________________________");
   console.log("server received new message");
   if (topic == "home/sensor/distance") {
+    // receiving message and checking values
+    // publishing via websockets to change color of parking slot
+    // activate or deactivate the led
     console.log("message is " + message);
     Database.insert(JSON.parse(message));
     console.log("topic is " + topic);
