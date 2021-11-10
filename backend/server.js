@@ -1,7 +1,7 @@
 import express from "express";
 const app = express();
 import cors from "cors";
-import { router } from "../backend/controllers/routes.js";
+import { router } from "./controllers/routes.js";
 
 /*
 
