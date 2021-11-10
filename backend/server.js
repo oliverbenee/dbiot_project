@@ -4,7 +4,7 @@ import cors from "cors";
 import { router } from "./controllers/routes.js";
 
 // mqtt
-var mqtt = require("mqtt");
+import mqtt from "mqtt";
 
 // setup mqtt
 var mqttBroker = "mqtt:broker:1883";
