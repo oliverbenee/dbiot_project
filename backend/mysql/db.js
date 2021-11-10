@@ -8,6 +8,40 @@ const pool = mysql.createPool({
   database: "buildingiot",
 });
 
+/* FIXME: Why is it necessary to create the tables here?  */
+pool.getConnection((err, connection) => {
+  if (err) throw err
+  connection.query(
+    `CREATE TABLE parkingZone
+    ( parkingZoneID VARCHAR(50),
+      PRIMARY KEY (parkingZoneID),
+      latitude FLOAT(4,2),
+      longitude FLOAT(4,2),
+      totalCapacity INT(4),
+      freeSlots INT(4))`, (err) => {
+        if (err) throw err
+    })
+  connection.query(
+    `CREATE TABLE parkingSlot
+    ( slotID INT(10),
+      isOccupied BOOLEAN,
+      parkingZoneID VARCHAR(50),
+      FOREIGN KEY (parkingZoneID) REFERENCES parkingZone(parkingZoneID),
+      PRIMARY KEY(slotID, parkingZoneID))`, (err) => {
+        if(err) throw err;
+    })
+  connection.query(
+    `CREATE TABLE historical
+    ( parkingZoneID VARCHAR(50),
+      time timestamp default current_timestamp,
+      freeSlots INT(4),
+      totalCapacity INT(4))`, (err) => {
+        if(err) throw err
+      }
+    )
+  connection.release()
+})
+
 class Database {
   // get data
   static getDataParkingSlots(parkingZoneID, callback) {
