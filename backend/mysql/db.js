@@ -2,7 +2,7 @@ import mysql from "mysql";
 
 const pool = mysql.createPool({
   user: "pi",
-  host: "mysql_db", // FIXME: localhost or mysql_db. "Real is localhost, but only works on mine if mysql_db"
+  host: "localhost", // FIXME: localhost or mysql_db. "Real is localhost, but only works on mine if mysql_db"
   port: "3306",
   password: "foobar",
   database: "buildingiot",
