@@ -10,7 +10,7 @@ services:
       - "8883:8883"
     restart: on-failure
   mysql_db:
-    image: hypriot/rpi-mysql:5.7 # FIXME: crashes on oliver's machine if this is not hypriot/rpi-mysql:latest . hypriot/rpi-mysql:5.7 does not work.
+    image: hypriot/rpi-mysql:latest # FIXME: crashes on oliver's machine if this is not hypriot/rpi-mysql:latest . hypriot/rpi-mysql:5.7 does not work.
     restart: on-failure
     environment:
       MYSQL_USER: pi
