@@ -9,6 +9,7 @@ import ParkingZoneLineChart from "./charts/parkingzone.linechart.component";
  */
 
 const API_URL_OPENDATA_PARKING_GARAGES = "http://localhost:5000/opendata";
+const parkingZones = ["KALKVAERKSVEJ", "NewBusgadehuset", "SALLING"];
 
 export default class Homepage extends Component {
   constructor(props) {
@@ -25,12 +26,15 @@ export default class Homepage extends Component {
   componentDidMount() {
     this.getOpenData();
     this.interval = setInterval(() => this.getOpenData(), 60000);
-    this.getHistory("KALKVAERKSVEJ");
-    this.getHistory("NewBusgadehuset");
-    this.getHistory("SALLING");
+    this.getAllHistoricalData();
   }
   componentWillUnmount() {
     clearInterval(this.interval);
+  }
+
+  // get historical data from opendata.dk for all registered parking garages
+  getAllHistoricalData() {
+    parkingZones.forEach((element) => this.getHistory(element));
   }
 
   getOpenData() {
@@ -41,6 +45,7 @@ export default class Homepage extends Component {
       .catch(console.error());
   }
 
+  // get historical data from opendata.dk for one specific parking garage
   getHistory(zone) {
     Promise.all([
       fetch("http://localhost:5000/history/" + zone + "/1"),
@@ -60,6 +65,15 @@ export default class Homepage extends Component {
       })
       .then((data) => {
         var array = [];
+
+        // sort array by time
+        data.sort((a, b) => {
+          let da = new Date(a.time);
+          let db = new Date(b.time);
+
+          return da - db;
+        });
+
         data.forEach((element) => {
           array.push(element[0].average);
         });
@@ -68,14 +82,17 @@ export default class Homepage extends Component {
       .then((array) => {
         switch (zone) {
           case "KALKVAERKSVEJ":
+            console.log("KALKVAERKSVEJ", array);
             this.setState({ pKALKVAERKSVEJ: array });
             break;
 
           case "NewBusgadehuset":
+            console.log("NewBusgadehuset", array);
             this.setState({ pNewBusgadehuset: array });
             break;
 
           case "SALLING":
+            console.log("SALLING", array);
             this.setState({ pSALLING: array });
             break;
 

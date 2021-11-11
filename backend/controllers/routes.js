@@ -21,6 +21,8 @@ router.route("/history/:parkingZoneID/:day").get((req, res) => {
     function (err, result) {
       if (!err) {
         res.send(result);
+      } else {
+        console.log("error: ", err);
       }
     }
   );

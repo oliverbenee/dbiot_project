@@ -1,5 +1,8 @@
 DROP TABLE IF EXISTS parkingSlot;
 DROP TABLE IF EXISTS parkingZone;
+DROP TABLE IF EXISTS historical;
+
+SET GLOBAL sql_mode = '';
 
 # Overview of latest data from all tables. 
 CREATE TABLE parkingZone
@@ -70,17 +73,17 @@ SELECT * FROM parkingSlot WHERE parkingZoneID="KALKVAERKSVEJ";
 
 # Historical data from opendata.dk
 CREATE TABLE historical
-( parkingZoneID VARCHAR(50),
-  time timestamp default current_timestamp,
+  (time timestamp default current_timestamp,
+  parkingZoneID VARCHAR(50),
   freeSlots INT(4),
   totalCapacity INT(4)
 );
 
-# Sample historical data. 
-INSERT INTO historical(parkingZoneID, freeSlots, totalCapacity) VALUES ("KALKVAERKSVEJ", 5, 10);
-INSERT INTO historical(parkingZoneID, freeSlots, totalCapacity) VALUES ("KALKVAERKSVEJ", 4, 10);
-INSERT INTO historical(parkingZoneID, freeSlots, totalCapacity) VALUES ("KALKVAERKSVEJ", 3, 10);
-INSERT INTO historical(parkingZoneID, freeSlots, totalCapacity) VALUES ("KALKVAERKSVEJ", 2, 10);
+-- # Sample historical data. 
+-- INSERT INTO historical(parkingZoneID, freeSlots, totalCapacity) VALUES ("KALKVAERKSVEJ", 5, 10);
+-- INSERT INTO historical(parkingZoneID, freeSlots, totalCapacity) VALUES ("KALKVAERKSVEJ", 4, 10);
+-- INSERT INTO historical(parkingZoneID, freeSlots, totalCapacity) VALUES ("KALKVAERKSVEJ", 3, 10);
+-- INSERT INTO historical(parkingZoneID, freeSlots, totalCapacity) VALUES ("KALKVAERKSVEJ", 2, 10);
 
 # All historical data. 
 select * from historical;
@@ -108,10 +111,10 @@ INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2
 INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-5 23:47:19', "NewBusgadehuset", 150, 200);
 
 # Insert for every day of the week. SALLING
-INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-10-30 23:47:19', "SALLING", 50, 200);
-INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-10-31 23:47:19', "SALLING", 60, 200);
-INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-1 23:47:19', "SALLING", 40, 200);
-INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-2 23:47:19', "SALLING", 80, 200);
-INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-3 23:47:19', "SALLING", 90, 200);
-INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-4 23:47:19', "SALLING", 110, 200);
-INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-5 23:47:19', "SALLING", 120, 200);
+INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-10-30 23:47:19', "SALLING", 0, 200);
+INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-10-31 23:47:19', "SALLING", 150, 200);
+INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-1 23:47:19', "SALLING", 120, 200);
+INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-2 23:47:19', "SALLING", 30, 200);
+INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-3 23:47:19', "SALLING", 160, 200);
+INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-4 23:47:19', "SALLING", 200, 200);
+INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-5 23:47:19', "SALLING", 200, 200);

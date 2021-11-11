@@ -29,7 +29,7 @@ class Database {
     pool.getConnection((err, connection) => {
       if (err) throw err;
       connection.query(
-        "SELECT AVG(freeSlots) AS average FROM historical WHERE parkingZoneID='" +
+        "SELECT time, AVG(freeSlots) AS average FROM historical WHERE parkingZoneID='" +
           parkingZone +
           "' AND dayofweek(time) = " +
           day,
@@ -66,6 +66,20 @@ class Database {
         " AND parkingZoneID='" +
         tah.parkingZoneID +
         "'";
+      connection.query(sql, (err, results, fields) => {
+        if (err) throw err;
+        console.log("Data updated");
+        connection.release();
+      });
+    });
+  }
+
+  // update parking slot
+  static insertHistoricalData(tah) {
+    pool.getConnection((err, connection) => {
+      if (err) throw err;
+      const sql =
+        "INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES (, , );";
       connection.query(sql, (err, results, fields) => {
         if (err) throw err;
         console.log("Data updated");
