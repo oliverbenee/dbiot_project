@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Garage from "./garage.component";
 import "./homepage.css";
 import * as d3 from "d3";
+import ParkingZoneLineChart from "./charts/parkingzone.linechart.component";
 
 /**
  * Main Component to display an overview of all parking garages in aarhus
@@ -12,91 +13,53 @@ const API_URL_OPENDATA_PARKING_GARAGES = "http://localhost:5000/opendata";
 export default class Homepage extends Component {
   constructor(props) {
     super(props);
+    this.getHistory = this.getHistory.bind(this);
     this.myRef = React.createRef();
     this.state = {
       garages: [],
-      array1: [25, 50, 35, 15, 94, 10, 40],
-      array2: [45, 60, 15, 45, 74, 5, 30],
-      array3: [34, 64, 20, 10, 10, 35, 60],
+      pKALKVAERKSVEJ: [],
     };
   }
 
   componentDidMount() {
     fetch(API_URL_OPENDATA_PARKING_GARAGES)
       .then((response) => response.json())
-      .then((data) => this.setState({ garages: data}))
+      .then((data) => this.setState({ garages: data }))
       .catch(console.error());
-
-    this.drawLineChart();
+    this.getHistory("KALKVAERKSVEJ");
   }
 
-  drawLineChart() {
-    // setting up svg
-    const w = 600;
-    const h = 300;
-    const svg = d3
-      .select(this.myRef.current)
-      .attr("width", w)
-      .attr("height", h)
-      .style("background", "#d3d3d3")
-      .style("margin-left", "100")
-      .style("margin-bottom", "30")
-      .style("overflow", "visible");
-
-    // setting the scaling
-
-    const xScale = d3
-      .scaleLinear()
-      .domain([0, this.state.array1.length - 1])
-      .range([0, w]);
-
-    const yScale = d3.scaleLinear().domain([0, h]).range([h, 0]);
-
-    const generatedScaledLine = d3
-      .line()
-      .x((d, i) => xScale(i))
-      .y(yScale)
-      .curve(d3.curveCardinal);
-
-    const generatedScaledLine1 = d3
-      .line()
-      .x((d, i) => xScale(i))
-      .y(yScale)
-      .curve(d3.curveCardinal);
-    // setting axes
-    const xAxis = d3
-      .axisBottom(xScale)
-      .ticks(this.state.array1.length)
-      .tickFormat((i) => i + 1);
-
-    const yAxis = d3.axisLeft(yScale).ticks(5);
-
-    svg.append("g").call(xAxis).attr("transform", `translate(0, ${h})`);
-    svg.append("g").call(yAxis);
-    //setting up the data
-    svg
-      .selectAll(".line")
-      .data([this.state.array1])
-      .join("path")
-      .attr("d", (d) => generatedScaledLine(d))
-      .attr("fill", "none")
-      .attr("stroke", "blue");
-
-    svg
-      .selectAll(".line")
-      .data([this.state.array2])
-      .join("path")
-      .attr("d", (d) => generatedScaledLine1(d))
-      .attr("fill", "none")
-      .attr("stroke", "red");
-
-    svg
-      .selectAll(".line")
-      .data([this.state.array3])
-      .join("path")
-      .attr("d", (d) => generatedScaledLine1(d))
-      .attr("fill", "none")
-      .attr("stroke", "orange");
+  getHistory(zone) {
+    Promise.all([
+      fetch("http://localhost:5000/history/" + zone + "/1"),
+      fetch("http://localhost:5000/history/" + zone + "/1"),
+      fetch("http://localhost:5000/history/" + zone + "/2"),
+      fetch("http://localhost:5000/history/" + zone + "/3"),
+      fetch("http://localhost:5000/history/" + zone + "/4"),
+      fetch("http://localhost:5000/history/" + zone + "/5"),
+      fetch("http://localhost:5000/history/" + zone + "/6"),
+      fetch("http://localhost:5000/history/" + zone + "/7"),
+    ])
+      .then((responses) => {
+        return Promise.all(
+          responses.map(function (response) {
+            return response.json();
+          })
+        );
+      })
+      .then((data) => {
+        var array = [];
+        data.forEach((element) => {
+          console.log(element[0].average);
+          array.push(element[0].average);
+        });
+        return array;
+      })
+      .then((array) => {
+        console.log(array);
+        this.setState({ pKALKVAERKSVEJ: array });
+      })
+      .then(() => this.renderLineChart());
   }
 
   garageList() {
@@ -109,6 +72,10 @@ export default class Homepage extends Component {
         />
       );
     });
+  }
+
+  renderLineChart() {
+    return <ParkingZoneLineChart pKALKVAERKSVEJ={this.state.pKALKVAERKSVEJ} />;
   }
 
   /** render component */
@@ -127,7 +94,7 @@ export default class Homepage extends Component {
             {this.garageList()}
           </table>
         </body>
-        <svg ref={this.myRef}></svg>
+        {this.renderLineChart()}
       </div>
     );
   }
