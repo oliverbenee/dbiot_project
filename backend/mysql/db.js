@@ -8,44 +8,6 @@ const pool = mysql.createPool({
   database: "buildingiot",
 });
 
-/* FIXME: Why is it necessary to create the tables here?  */
-pool.getConnection((err, connection) => {
-  if (err) throw err
-  connection.query(
-    `CREATE TABLE IF NOT EXISTS parkingZone
-    ( parkingZoneID VARCHAR(50),
-      PRIMARY KEY (parkingZoneID),
-      latitude FLOAT(4,2),
-      longitude FLOAT(4,2),
-      totalCapacity INT(4),
-      freeSlots INT(4))`, (err) => {
-        if (err) throw err
-    })
-  connection.query(
-    `CREATE TABLE IF NOT EXISTS parkingSlot
-    ( slotID INT(10),
-      isOccupied BOOLEAN,
-      parkingZoneID VARCHAR(50),
-      FOREIGN KEY (parkingZoneID) REFERENCES parkingZone(parkingZoneID),
-      PRIMARY KEY(slotID, parkingZoneID))`, (err) => {
-        if(err) throw err;
-    })
-  connection.query(
-    `CREATE TABLE IF NOT EXISTS historical
-    ( parkingZoneID VARCHAR(50),
-      time timestamp default current_timestamp,
-      freeSlots INT(4),
-      totalCapacity INT(4))`, (err) => {
-        if(err) throw err
-      }
-    )
-  // Sample spots and zones.
-  connection.query(`INSERT INTO parkingZone VALUES ("KALKVAERKSVEJ", 56.149456595160515, 10.211865426037953, 210, 44)`, (err) => {if(err) throw err})
-  connection.query(`INSERT INTO parkingSlot VALUES (1, true, "KALKVAERKSVEJ")`, (err) => {if(err) throw err})
-  connection.query(`INSERT INTO parkingSlot VALUES (2, false, "KALKVAERKSVEJ")`, (err) => {if(err) throw err})    
-  connection.release()
-})
-
 class Database {
   // get data
   static getDataParkingSlots(parkingZoneID, callback) {
@@ -94,7 +56,7 @@ class Database {
 
   // update parking slot
   static updateParkingSlot(tah) {
-    console.log("UPDATING MOTHERFUCKER")
+    console.log("UPDATING MOTHERFUCKER");
     pool.getConnection((err, connection) => {
       if (err) throw err;
       const sql =
