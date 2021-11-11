@@ -44,7 +44,7 @@ try {
 //  }, 1000);
 } catch (error) {
   console.log("Error in ultrasonic");
-  latestDistance = null;
+  latestDistance = -1;
 }
 
 
