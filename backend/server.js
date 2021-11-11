@@ -75,8 +75,7 @@ client.on("message", function (topic, message, packet) {
     }
   }
   console.log("___________________________"); //UNCOMMENT THIS LINE FOR DEBUG
-  console.log("Now testing that the spot is updated.")
-  Database.getDataParkingSlots("KALKVAERKSVEJ", result => {console.log(result)})
+  // DEBUG: goto localhost:5000/parkingslots/KALKVAERKSVEJ for checking
 });
 
 //publish function
