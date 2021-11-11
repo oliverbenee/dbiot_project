@@ -7,7 +7,9 @@ export default class ParkingZoneLineChart extends Component {
     super(props);
     this.myRef = React.createRef();
     this.state = {
-      pKALKVAERKSVEJ: this.props.data,
+      pKALKVAERKSVEJ: this.props.KALKVAERKSVEJ,
+      pNewBusgadehuset: this.props.NewBusgadehuset,
+      pSALLING: this.props.Salling,
     };
   }
   componentDidUpdate() {
@@ -32,10 +34,7 @@ export default class ParkingZoneLineChart extends Component {
       .style("overflow", "visible");
 
     // setting the scaling
-    const xScale = d3
-      .scaleLinear()
-      .domain([0, this.props.data.length - 1])
-      .range([0, w]);
+    const xScale = d3.scaleLinear().domain([0, 6]).range([0, w]);
 
     const yScale = d3.scaleLinear().domain([0, h]).range([h, 0]);
 
@@ -53,7 +52,7 @@ export default class ParkingZoneLineChart extends Component {
     // setting axes
     const xAxis = d3
       .axisBottom(xScale)
-      .ticks(this.props.data.length)
+      .ticks(7)
       .tickFormat((i) => i + 1);
 
     const yAxis = d3.axisLeft(yScale).ticks(5);
@@ -63,11 +62,27 @@ export default class ParkingZoneLineChart extends Component {
     //setting up the data
     svg
       .selectAll(".line")
-      .data([this.props.data])
+      .data([this.props.KALKVAERKSVEJ])
       .join("path")
       .attr("d", (d) => generatedScaledLine(d))
       .attr("fill", "none")
       .attr("stroke", "blue");
+
+    svg
+      .selectAll(".line")
+      .data([this.props.NewBusgadehuset])
+      .join("path")
+      .attr("d", (d) => generatedScaledLine(d))
+      .attr("fill", "none")
+      .attr("stroke", "red");
+
+    svg
+      .selectAll(".line")
+      .data([this.props.Salling])
+      .join("path")
+      .attr("d", (d) => generatedScaledLine(d))
+      .attr("fill", "none")
+      .attr("stroke", "green");
   }
 
   /** render component */

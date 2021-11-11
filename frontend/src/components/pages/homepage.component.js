@@ -17,6 +17,8 @@ export default class Homepage extends Component {
     this.state = {
       garages: [],
       pKALKVAERKSVEJ: [],
+      pNewBusgadehuset: [],
+      pSALLING: [],
     };
   }
 
@@ -24,6 +26,8 @@ export default class Homepage extends Component {
     this.getOpenData();
     this.interval = setInterval(() => this.getOpenData(), 60000);
     this.getHistory("KALKVAERKSVEJ");
+    this.getHistory("NewBusgadehuset");
+    this.getHistory("SALLING");
   }
   componentWillUnmount() {
     clearInterval(this.interval);
@@ -39,7 +43,6 @@ export default class Homepage extends Component {
 
   getHistory(zone) {
     Promise.all([
-      fetch("http://localhost:5000/history/" + zone + "/1"),
       fetch("http://localhost:5000/history/" + zone + "/1"),
       fetch("http://localhost:5000/history/" + zone + "/2"),
       fetch("http://localhost:5000/history/" + zone + "/3"),
@@ -63,7 +66,22 @@ export default class Homepage extends Component {
         return array;
       })
       .then((array) => {
-        this.setState({ pKALKVAERKSVEJ: array });
+        switch (zone) {
+          case "KALKVAERKSVEJ":
+            this.setState({ pKALKVAERKSVEJ: array });
+            break;
+
+          case "NewBusgadehuset":
+            this.setState({ pNewBusgadehuset: array });
+            break;
+
+          case "SALLING":
+            this.setState({ pSALLING: array });
+            break;
+
+          default:
+            break;
+        }
       });
   }
 
@@ -95,7 +113,11 @@ export default class Homepage extends Component {
             {this.garageList()}
           </table>
         </body>
-        <ParkingZoneLineChart data={this.state.pKALKVAERKSVEJ} />
+        <ParkingZoneLineChart
+          KALKVAERKSVEJ={this.state.pKALKVAERKSVEJ}
+          NewBusgadehuset={this.state.pNewBusgadehuset}
+          Salling={this.state.pSALLING}
+        />
       </div>
     );
   }
