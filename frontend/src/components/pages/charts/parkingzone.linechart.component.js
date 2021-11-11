@@ -2,12 +2,6 @@ import React, { Component } from "react";
 import "../homepage.css";
 import * as d3 from "d3";
 
-/**
- * Main Component to display an overview of all parking garages in aarhus
- */
-
-const API_URL_OPENDATA_PARKING_GARAGES = "http://localhost:5000/opendata";
-
 export default class ParkingZoneLineChart extends Component {
   constructor(props) {
     super(props);
