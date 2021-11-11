@@ -14,7 +14,6 @@ export default class Homepage extends Component {
   constructor(props) {
     super(props);
     this.getHistory = this.getHistory.bind(this);
-    this.myRef = React.createRef();
     this.state = {
       garages: [],
       pKALKVAERKSVEJ: [],
@@ -22,11 +21,20 @@ export default class Homepage extends Component {
   }
 
   componentDidMount() {
+    this.getOpenData();
+    this.interval = setInterval(() => this.getOpenData(), 60000);
+    this.getHistory("KALKVAERKSVEJ");
+  }
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+
+  getOpenData() {
+    console.log("update");
     fetch(API_URL_OPENDATA_PARKING_GARAGES)
       .then((response) => response.json())
       .then((data) => this.setState({ garages: data }))
       .catch(console.error());
-    this.getHistory("KALKVAERKSVEJ");
   }
 
   getHistory(zone) {
@@ -50,16 +58,13 @@ export default class Homepage extends Component {
       .then((data) => {
         var array = [];
         data.forEach((element) => {
-          console.log(element[0].average);
           array.push(element[0].average);
         });
         return array;
       })
       .then((array) => {
-        console.log(array);
         this.setState({ pKALKVAERKSVEJ: array });
-      })
-      .then(() => this.renderLineChart());
+      });
   }
 
   garageList() {
@@ -72,10 +77,6 @@ export default class Homepage extends Component {
         />
       );
     });
-  }
-
-  renderLineChart() {
-    return <ParkingZoneLineChart pKALKVAERKSVEJ={this.state.pKALKVAERKSVEJ} />;
   }
 
   /** render component */
@@ -94,7 +95,7 @@ export default class Homepage extends Component {
             {this.garageList()}
           </table>
         </body>
-        {this.renderLineChart()}
+        <ParkingZoneLineChart data={this.state.pKALKVAERKSVEJ} />
       </div>
     );
   }

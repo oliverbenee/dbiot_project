@@ -7,16 +7,18 @@ export default class ParkingZoneLineChart extends Component {
     super(props);
     this.myRef = React.createRef();
     this.state = {
-      pKALKVAERKSVEJ: this.props.pKALKVAERKSVEJ,
+      pKALKVAERKSVEJ: this.props.data,
     };
   }
-
   componentDidUpdate() {
+    // if data changed redraw chart
     this.drawLineChart();
   }
 
+  componentDidMount() {
+    this.drawLineChart();
+  }
   drawLineChart() {
-    console.log("zone: ", this.state.pKALKVAERKSVEJ);
     // setting up svg
     const w = 600;
     const h = 300;
@@ -32,7 +34,7 @@ export default class ParkingZoneLineChart extends Component {
     // setting the scaling
     const xScale = d3
       .scaleLinear()
-      .domain([0, this.state.pKALKVAERKSVEJ.length - 1])
+      .domain([0, this.props.data.length - 1])
       .range([0, w]);
 
     const yScale = d3.scaleLinear().domain([0, h]).range([h, 0]);
@@ -51,7 +53,7 @@ export default class ParkingZoneLineChart extends Component {
     // setting axes
     const xAxis = d3
       .axisBottom(xScale)
-      .ticks(this.state.pKALKVAERKSVEJ.length)
+      .ticks(this.props.data.length)
       .tickFormat((i) => i + 1);
 
     const yAxis = d3.axisLeft(yScale).ticks(5);
@@ -61,7 +63,7 @@ export default class ParkingZoneLineChart extends Component {
     //setting up the data
     svg
       .selectAll(".line")
-      .data([this.state.pKALKVAERKSVEJ])
+      .data([this.props.data])
       .join("path")
       .attr("d", (d) => generatedScaledLine(d))
       .attr("fill", "none")
