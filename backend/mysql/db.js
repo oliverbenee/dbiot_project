@@ -85,7 +85,7 @@ class Database {
       console.log("------------------------")
       console.log(JSON.stringify(element, null, 4))
     });
-    tah = tah.filter(item => item.totalSpaces == 0 && item.vehicleCount == 0)
+    tah = tah.filter(item => item.totalSpaces != 0 && item.vehicleCount != 0)
     // TODO: REMOVE SECOND PRINT.
     tah.forEach(element => {
       console.log("--------------------------------")
