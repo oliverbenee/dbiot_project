@@ -104,8 +104,8 @@ class Database {
           //console.log("Open Data inserted!")
         })
       })
+      connection.release();
     })
-    connection.release();
   }
 }
 
