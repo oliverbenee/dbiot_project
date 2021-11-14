@@ -74,38 +74,36 @@ class Database {
     });
   }
 
-  // insert into the historical table.
+  /* Insert open data. Filters elements with 0 spaces and vehicles automatically. 
+  
+  */
   static insertOpenData(tah){
-    /* Iterate through all elements in the open data set:
-    - Print the first set.  
-    - Remove elemnts with 0 total spaces and vehicles.
-    - Print them all again.
+    /*
+      Useful for debugging API data. 
+      tah.forEach(element => {
+        console.log("------------------------")
+        console.log(JSON.stringify(element, null, 4))
+      });
     */
-    tah.forEach(element => {
-      console.log("------------------------")
-      console.log(JSON.stringify(element, null, 4))
-    });
     tah = tah.filter(item => item.totalSpaces != 0 && item.vehicleCount != 0)
     // TODO: REMOVE SECOND PRINT.
     tah.forEach(element => {
       console.log("--------------------------------")
       console.log("INSERTING: ")
       console.log(JSON.stringify(element, null, 4));
-      console.log(element.totalSpaces)
     })
     console.log("Inserting open data")
     pool.getConnection((err, connection) => {
-      const tah = {
-        parkingZoneID: "KALKVAERKSVEJ",
-        freeSlots: 2,
-        totalCapacity: 10
-      }
       if(err) throw err;
-      const sql = "INSERT INTO historical(parkingZoneID, freeSlots, totalCapacity) VALUES (?, ?, ?)";
-      connection.query(sql, [tah.parkingZoneID, tah.freeSlots, tah.totalCapacity], (err, results, fields) => {
-        if(err) throw err;
-        console.log("opendata inserted");
-        connection.release();
+      tah.forEach(element => {
+        const sql = "INSERT INTO historical(parkingZoneID, freeSlots, totalCapacity) VALUES (?, ?, ?)"
+        var freeSlots = element.totalSpaces - element.vehicleCount;
+        connection.query(sql, [element.garageCode, freeSlots, element.totalSpaces], (err, results, fields) => {
+          console.log("Inserting: " + element.garageCode + ", " + freeSlots + ", " + element.totalSpaces)
+          if(err) throw err;
+          //console.log("Open Data inserted!")
+          connection.release();
+        })
       })
     })
   }
