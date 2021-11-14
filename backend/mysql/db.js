@@ -88,7 +88,7 @@ class Database {
       if(err) throw err;
       // TODO: fetch data using GET in routes.js
       // TODO: Write sql code. 
-      const sql = "INSERT INTO history(parkingZoneID freeSlots, totalCapacity) VALUES (?, ?, ?, ?)";
+      const sql = "INSERT INTO history(parkingZoneID freeSlots, totalCapacity) VALUES (?, ?, ?)";
       connection.query(sql,[tah.parkingZoneID, tah.freeSlots, tah.totalCapacity], (err, results, fields) => {
         if(err) throw err;
         console.log("opendata inserted");
