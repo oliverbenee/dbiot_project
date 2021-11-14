@@ -76,12 +76,17 @@ class Database {
 
   // insert into the historical table.
   static insertOpenData(tah){
-    console.log("OPEN DATA OBJECT: " + tah)
+    // Debugging. just prints all contents. Useful for debugging the API. 
     tah.forEach(element => {
       console.log("------------------------")
       console.log(JSON.stringify(element, null, 4))
-      //if(element.vehicleCount == 0){tah.remove(element)}
+      if(element.vehicleCount == 0 && element.totalSpaces == 0){tah.remove(element)} // This line removes weird opendata garages with 0 spaces and vehicles. 
     });
+    // TODO: REMOVE SECOND PRINT.
+    tah.forEach(element => {
+      console.log("--------------------------------")
+      console.log(JSON.stringify(element, null, 4));
+    })
     console.log("Inserting open data")
     pool.getConnection((err, connection) => {
       const tah = {
