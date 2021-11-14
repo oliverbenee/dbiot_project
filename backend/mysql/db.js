@@ -84,7 +84,6 @@ class Database {
     tah.forEach(element => {
       console.log("------------------------")
       console.log(JSON.stringify(element, null, 4))
-      if(element.vehicleCount == 0 && element.totalSpaces == 0){tah.remove(element)} // This line removes weird opendata garages with 0 spaces and vehicles. 
     });
     tah = tah.filter(item => item.totalSpaces == 0 && item.vehicleCount == 0)
     // TODO: REMOVE SECOND PRINT.
