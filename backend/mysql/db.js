@@ -77,6 +77,9 @@ class Database {
   // insert into the historical table.
   static insertOpenData(tah){
     console.log("OPEN DATA OBJECT: " + tah)
+    tah.forEach(element => {
+      console.log("DATA OBJECT: " + element)
+    });
     console.log("Inserting open data")
     pool.getConnection((err, connection) => {
       const tah = {
