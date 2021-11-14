@@ -56,7 +56,7 @@ class Database {
 
   // update parking slot
   static updateParkingSlot(tah) {
-    console.log("UPDATING MOTHERFUCKER");
+    console.log("Updating database value. ");
     pool.getConnection((err, connection) => {
       if (err) throw err;
       const sql =
@@ -75,9 +75,9 @@ class Database {
     });
   }
 
-  // TODO: MAKE THIS WORK. 
   // insert into the historical table.
   static insertOpenData(tah){
+    console.log("OPEN DATA OBJECT: " + tah)
     console.log("Inserting open data")
     pool.getConnection((err, connection) => {
       const tah = {
@@ -86,8 +86,6 @@ class Database {
         totalCapacity: 10
       }
       if(err) throw err;
-      // TODO: fetch data using GET in routes.js
-      // TODO: Write sql code. 
       const sql = "INSERT INTO historical(parkingZoneID, freeSlots, totalCapacity) VALUES (?, ?, ?)";
       connection.query(sql, [tah.parkingZoneID, tah.freeSlots, tah.totalCapacity], (err, results, fields) => {
         if(err) throw err;
@@ -96,7 +94,6 @@ class Database {
       })
     })
   }
-
 }
 
 export { pool, Database };

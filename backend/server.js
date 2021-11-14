@@ -46,8 +46,6 @@ client.on("message", function (topic, message, packet) {
     //console.log("got magsens status: " + values.magsens_status + " and distance: " + values.distance) //UNCOMMENT THIS LINE FOR DEBUG
 
     console.log("___________________________")
-    console.log("Updating database value.")
-
     if (
       values.magsens_status == 1 &&
       values.distance > minDistance &&

@@ -57,7 +57,7 @@ router.route("/opendata").get((req, res) => {
     .catch(console.error());
 });
 
-// FIXME: This fetch. 
+// Fetches data from the open data platform. 
 var opendata;
 // fetch interval
 setInterval(() => {
@@ -65,6 +65,7 @@ setInterval(() => {
   .then((response) => response.json())
   .then((data) => {
     Database.insertOpenData(data.result.records)
+    console.log("router inserting data.")
   })
   .catch(console.error());
 
