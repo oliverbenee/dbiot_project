@@ -93,7 +93,7 @@ class Database {
         const sql = "INSERT INTO historical(parkingZoneID, freeSlots, totalCapacity) VALUES (?, ?, ?)"
         var freeSlots = element.totalSpaces - element.vehicleCount;
         connection.query(sql, [element.garageCode, freeSlots, element.totalSpaces], (err, results, fields) => {
-          console.log("Inserting: " + element.garageCode + ", " + freeSlots + ", " + element.totalSpaces)
+          //console.log("Inserting: " + element.garageCode + ", " + freeSlots + ", " + element.totalSpaces)
           if(err) throw err;
         })
       })
