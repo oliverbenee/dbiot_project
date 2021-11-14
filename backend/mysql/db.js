@@ -86,7 +86,7 @@ class Database {
       });
     */
     tah = tah.filter(item => item.totalSpaces != 0 && item.vehicleCount != 0)
-    console.log("Inserting open data")
+    //console.log("Inserting open data")
     pool.getConnection((err, connection) => {
       if(err) throw err;
       tah.forEach(element => {

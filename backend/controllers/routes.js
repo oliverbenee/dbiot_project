@@ -57,6 +57,7 @@ router.route("/opendata").get((req, res) => {
     .catch(console.error());
 });
 
+// FIXME: There is some really ugly code duplication here, but node-fetch does not accept URL's, so how do we fix this?
 // Fetches data from the open data platform. 
 var opendata;
 // fetch interval
@@ -65,7 +66,7 @@ setInterval(() => {
   .then((response) => response.json())
   .then((data) => {
     Database.insertOpenData(data.result.records)
-    console.log("router inserting data.")
+    //console.log("router inserting data.")
   })
   .catch(console.error());
 
