@@ -1,5 +1,6 @@
 import express from "express";
 import { Database } from "../mysql/db.js";
+import fetch from "node-fetch";
 const router = express.Router();
 
 // get all parking zones
