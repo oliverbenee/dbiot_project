@@ -40,6 +40,7 @@ client.on("message", function (topic, message, packet) {
   console.log("server received new message on topic: " + topic); //UNCOMMENT THIS LINE FOR DEBUG
   if (topic.substring(0, 20) == "home/sensor/distance") {
     var spotNumber = parseInt(topic.substring(21));
+    var parkingZoneID = "KALKVAERKSVEJ";
     var values = JSON.parse(message);
 
     //console.log("got data from sensor no.: " + topic.substring(21)); //UNCOMMENT THIS LINE FOR DEBUG
@@ -57,7 +58,7 @@ client.on("message", function (topic, message, packet) {
       const newState = {
         isOccupied: true,
         slotID: spotNumber,
-        parkingZoneID: "KALKVAERKSVEJ"
+        parkingZoneID: parkingZoneID
       }
       Database.updateParkingSlot(newState)
     } else {
