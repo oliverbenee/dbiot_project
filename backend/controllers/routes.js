@@ -55,4 +55,22 @@ router.route("/opendata").get((req, res) => {
     .then((data) => res.send(data.result.records))
     .catch(console.error());
 });
+
+// FIXME: This fetch. 
+var opendata;
+// fetch interval
+setInterval(() => {
+  fetch('/opendata', {
+    method: 'get',
+    headers: {
+      'Accept': 'application/json'
+    }
+  }).then((response) => {
+    response.json().then((data) => {
+      opendata = data;
+      console.log("OPEN DATA: " + opendata)
+    })
+  })
+}, 10000)
+
 export { router };
