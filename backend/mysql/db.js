@@ -86,12 +86,6 @@ class Database {
       });
     */
     tah = tah.filter(item => item.totalSpaces != 0 && item.vehicleCount != 0)
-    // TODO: REMOVE SECOND PRINT.
-    tah.forEach(element => {
-      console.log("--------------------------------")
-      console.log("INSERTING: ")
-      console.log(JSON.stringify(element, null, 4));
-    })
     console.log("Inserting open data")
     pool.getConnection((err, connection) => {
       if(err) throw err;
@@ -101,9 +95,9 @@ class Database {
         connection.query(sql, [element.garageCode, freeSlots, element.totalSpaces], (err, results, fields) => {
           console.log("Inserting: " + element.garageCode + ", " + freeSlots + ", " + element.totalSpaces)
           if(err) throw err;
-          //console.log("Open Data inserted!")
         })
       })
+      console.log("Open Data inserted!")
       connection.release();
     })
   }
