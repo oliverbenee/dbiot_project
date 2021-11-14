@@ -89,7 +89,7 @@ class Database {
     // TODO: REMOVE SECOND PRINT.
     tah.forEach(element => {
       console.log("--------------------------------")
-      Console.log("INSERTING: ")
+      console.log("INSERTING: ")
       console.log(JSON.stringify(element, null, 4));
       console.log(element.totalSpaces)
     })
