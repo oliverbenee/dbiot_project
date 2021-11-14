@@ -74,6 +74,24 @@ class Database {
       });
     });
   }
+
+  // TODO: MAKE THIS WORK. 
+  // insert into the historical table.
+  static insertOpenData(tah){
+    console.log("Inserting open data")
+    pool.getConnection((err, connection) => {
+      if(err) throw err;
+      // TODO: fetch data using GET in routes.js
+      // TODO: Write sql code. 
+      const sql = "INSERT INTO history(time, parkingZoneID freeSlots, totalCapacity) VALUES (?, ?, ?, ?)";
+      connection.query(sql, (err, results, fields) => {
+        if(err) throw err;
+        console.log("opendata inserted");
+        connection.release();
+      })
+    })
+  }
+
 }
 
 export { pool, Database };

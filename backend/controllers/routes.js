@@ -50,6 +50,7 @@ const API_URL_OPENDATA_PARKING_GARAGES =
 
 // get data from opendata.dk parking garages in aarhus
 router.route("/opendata").get((req, res) => {
+  console.log("APIIIIIIIIII")
   fetch(API_URL_OPENDATA_PARKING_GARAGES)
     .then((response) => response.json())
     .then((data) => res.send(data.result.records))
