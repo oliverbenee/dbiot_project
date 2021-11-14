@@ -61,17 +61,13 @@ router.route("/opendata").get((req, res) => {
 var opendata;
 // fetch interval
 setInterval(() => {
-  fetch('localhost:5000/opendata', {
-    method: 'get',
-    headers: {
-      'Accept': 'application/json'
-    }
-  }).then((response) => {
-    response.json().then((data) => {
-      opendata = data;
-      console.log("OPEN DATA: " + opendata)
-    })
+  fetch(API_URL_OPENDATA_PARKING_GARAGES)
+  .then((response) => response.json())
+  .then((data) => {
+    Database.insertOpenData(data.result.records)
   })
+  .catch(console.error());
+
 }, 10000)
 
 export { router };
