@@ -78,7 +78,10 @@ class Database {
   static insertOpenData(tah){
     console.log("OPEN DATA OBJECT: " + tah)
     tah.forEach(element => {
-      console.log("DATA OBJECT: " + element)
+      console.log("------------------------")
+      console.log("PZID: " + element.parkingZoneID)
+      console.log("FSLOT: " + element.freeSlots)
+      console.log("TOTC: " + element.totalCapacity)
     });
     console.log("Inserting open data")
     pool.getConnection((err, connection) => {
