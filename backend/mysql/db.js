@@ -80,6 +80,11 @@ class Database {
   static insertOpenData(tah){
     console.log("Inserting open data")
     pool.getConnection((err, connection) => {
+      const tah = {
+        parkingZoneID: "HELLO",
+        freeSlots: 2,
+        totalCapacity: 10
+      }
       if(err) throw err;
       // TODO: fetch data using GET in routes.js
       // TODO: Write sql code. 
