@@ -90,6 +90,7 @@ class Database {
     tah.forEach(element => {
       console.log("--------------------------------")
       console.log(JSON.stringify(element, null, 4));
+      console.log(element.totalSpaces)
     })
     console.log("Inserting open data")
     pool.getConnection((err, connection) => {
