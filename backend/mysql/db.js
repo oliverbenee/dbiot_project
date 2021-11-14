@@ -102,10 +102,10 @@ class Database {
           console.log("Inserting: " + element.garageCode + ", " + freeSlots + ", " + element.totalSpaces)
           if(err) throw err;
           //console.log("Open Data inserted!")
-          connection.release();
         })
       })
     })
+    connection.release();
   }
 }
 
