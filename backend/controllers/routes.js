@@ -61,7 +61,7 @@ router.route("/opendata").get((req, res) => {
 var opendata;
 // fetch interval
 setInterval(() => {
-  fetch('/opendata', {
+  fetch('localhost:5000/opendata', {
     method: 'get',
     headers: {
       'Accept': 'application/json'
