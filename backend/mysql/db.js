@@ -56,7 +56,6 @@ class Database {
 
   // update parking slot
   static updateParkingSlot(tah) {
-    console.log("Updating database value. ");
     pool.getConnection((err, connection) => {
       if (err) throw err;
       const sql =
