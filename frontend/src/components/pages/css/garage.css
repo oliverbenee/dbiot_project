@@ -16,45 +16,48 @@ tr {
 
 #parkingArea {
     background-color: #F0F0F0;
-    width: 1000px;
-    height: 700px;
     margin-top: 2%;
     margin-bottom: 5%;
+    border-radius: 10px;
 }
 
 #slot1 {
+    position: relative;
+    top: 10px;
     width: 140px;
     height: 140px;
-    background: #037CA9;
     padding-top: 20px;
     margin-bottom: 2%;
-    margin-left: 2%;
+    margin-left: 7%;
     text-align: center;
+    border-radius: 10px;
 }
 
 #slot2 {
     width: 140px;
     height: 140px;
-    background: #037CA9;
     margin-bottom: 2%;
-    margin-left: 2%;
+    margin-left: 7%;
     text-align: center;
+    border-radius: 10px;
 }
 
 #slot3 {
     width: 140px;
     height: 140px;
-    background: #037CA9;
     text-align: center;
     margin-bottom: 2%;
-    margin-left: 2%;
+    margin-left: 7%;
+    border-radius: 10px;
 }
 
 #slot4 {
+    position: relative;
+    bottom: 10px;
     width: 140px;
     height: 140px;
-    background: #037CA9;
     text-align: center;
     margin-bottom: 2%;
-    margin-left: 2%;
+    margin-left: 7%;
+    border-radius: 10px;
 }
