@@ -2,10 +2,9 @@ import "./App.css";
 import Homepage from "./components/pages/homepage.component";
 import Header from "./components/layouts/Header";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import History from "./components/pages/history.component";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
-import GarageDetails from "./components/pages/garage.detail.component";
 import Title from "./components/layouts/Title";
+import Garage from "./components/pages/garage.component";
 
 function App() {
   return (
@@ -15,8 +14,7 @@ function App() {
       <div className="container">
         <Switch>
           <Route exact path="/" component={Homepage} />
-          <Route exact path="/history" component={History} />
-          <Route exact path="/garage" component={GarageDetails} />
+          <Route exact path="/garage" component={Garage} />
         </Switch>
       </div>
     </BrowserRouter>

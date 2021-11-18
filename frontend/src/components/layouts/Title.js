@@ -6,7 +6,7 @@ export default function Title() {
     <div class="title">
       <div
         class="animate__animated animate__fadeInDown unselectable"
-        class="nav-title"
+        class="header-title"
       >
         <div id="title">PARKING</div>
         <div id="subtitle">AARHUS</div>

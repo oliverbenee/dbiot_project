@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import Garage from "./garage.component";
-import "./homepage.css";
-import * as d3 from "d3";
+import GarageTable from "./garage.table.component";
+import "./css/homepage.css";
 import ParkingZoneLineChart from "./charts/parkingzone.linechart.component";
+import { Table } from "react-bootstrap";
+import Garage from "./garage.component";
 
 /**
  * Main Component to display an overview of all parking garages in aarhus
@@ -105,7 +106,7 @@ export default class Homepage extends Component {
   garageList() {
     return this.state.garages.map((garage) => {
       return (
-        <Garage
+        <GarageTable
           garageCode={garage.garageCode}
           totalSpaces={garage.totalSpaces}
           vehicleCount={garage.vehicleCount}
@@ -119,13 +120,14 @@ export default class Homepage extends Component {
     return (
       <div id="homepage-component" class="container">
         <body>
-          <table>
+          <Table id="GarageTable" striped bordered hover>
             <thead>
-              <th>Garage </th>
-              <th>Capacity </th>
+              <th>Garage</th>
+              <th>Vehicle Count</th>
+              <th>Capacity</th>
             </thead>
-            {this.garageList()}
-          </table>
+            <tbody>{this.garageList()}</tbody>
+          </Table>
         </body>
         <ParkingZoneLineChart
           KALKVAERKSVEJ={this.state.pKALKVAERKSVEJ}

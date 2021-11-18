@@ -16,7 +16,7 @@ export default function Header() {
             <Nav.Link href="/">Home</Nav.Link>
             <NavDropdown title="Parking Zone" id="basic-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">BRUUNS</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.1">
+              <NavDropdown.Item href="/garage">
                 KALKVAERKSVEJ
               </NavDropdown.Item>
               <NavDropdown.Item href="#action/3.1">

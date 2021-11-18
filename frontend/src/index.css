@@ -11,14 +11,14 @@ code {
 
 .title {
     padding: 2rem 0 5rem 0;
-    font-family: 'Alfa Slab One', cursive;
+    font-family: 'Ubuntu', cursive;
     width: 100%;
     display: flex;
     justify-content: center;
     transition: all 1s;
 }
 
-.nav-title {
+.header-title {
     display: grid;
     grid-auto-columns: max-content;
 }
