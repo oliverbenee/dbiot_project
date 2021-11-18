@@ -3,7 +3,6 @@ import GarageTable from "./garage.table.component";
 import "./css/homepage.css";
 import ParkingZoneLineChart from "./charts/parkingzone.linechart.component";
 import { Table } from "react-bootstrap";
-import Garage from "./garage.component";
 
 /**
  * Main Component to display an overview of all parking garages in aarhus
