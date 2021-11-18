@@ -28,7 +28,7 @@ export default class ParkingZoneLineChart extends Component {
       .select(this.myRef.current)
       .attr("width", w)
       .attr("height", h)
-      .style("background", "#d3d3d3")
+      .style("background", "#FFFFFF")
       .style("margin-left", "100")
       .style("margin-bottom", "30")
       .style("overflow", "visible");

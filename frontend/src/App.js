@@ -5,10 +5,12 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import History from "./components/pages/history.component";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import GarageDetails from "./components/pages/garage.detail.component";
+import Title from "./components/layouts/Title";
 
 function App() {
   return (
     <BrowserRouter>
+      <Title />
       <Header />
       <div className="container">
         <Switch>

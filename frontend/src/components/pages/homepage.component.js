@@ -117,10 +117,7 @@ export default class Homepage extends Component {
   /** render component */
   render() {
     return (
-      <div class="container">
-        <header class="jumbotron my-4">
-          <h3 class="display-3">Parking Aarhus</h3>
-        </header>
+      <div id="homepage-component" class="container">
         <body>
           <table>
             <thead>
