@@ -1,14 +1,14 @@
 version: "3.8"
 services:
-  # broker:
-  #   build:
-  #     context: ./mqtt-broker
-  #   stdin_open: true
-  #   tty: true
-  #   ports:
-  #     - "1883:1883"
-  #     - "8883:8883"
-  #   restart: on-failure
+  broker:
+    build:
+      context: ./mqtt-broker
+    stdin_open: true
+    tty: true
+    ports:
+      - "1883:1883"
+      - "8883:8883"
+    restart: on-failure
   mysql_db:
     build:
       context: ./database

@@ -2,15 +2,11 @@ import express from "express";
 const app = express();
 import cors from "cors";
 import { router } from "./controllers/routes.js";
-
-/*
-
-// mqtt
-var mqtt = require("mqtt");
+import mqtt from "mqtt";
 
 // setup mqtt
-var mqttBroker = "mqtt:broker:1883";
-var mqtt_options = {f
+var mqttBroker = "ws://localhost:8883";
+var mqtt_options = {
   username: "client",
   password: "secret",
 };
@@ -50,15 +46,20 @@ client.on("message", function (topic, message, packet) {
 });
 
 //publish function
-exports.publish = (topic, msg) => {
+function publish(topic, msg) {
   if (client.connected == true) {
     client.publish(topic, msg, () => {
       console.log("publishing", msg);
     });
   }
-};
+}
 
-*/
+function publishTestMessage() {
+  console.log("publish test message websockets");
+  publish("data/react", "test test test");
+}
+
+setInterval(publishTestMessage, 5000);
 
 console.log(`Routes ${router}`);
 // parse json data
