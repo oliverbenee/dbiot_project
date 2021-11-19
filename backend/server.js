@@ -54,12 +54,30 @@ function publish(topic, msg) {
   }
 }
 
-function publishTestMessage() {
+// test case
+function publishTest1() {
+  const data = {
+    parkingSlotID: 1,
+    isOccupied: true,
+  };
+
   console.log("publish test message websockets");
-  publish("data/react", "test test test");
+  publish("/parkingslot/actuator", JSON.stringify(data));
 }
 
-setInterval(publishTestMessage, 5000);
+// test case
+function publishTest2() {
+  const data = {
+    parkingSlotID: 1,
+    isOccupied: false,
+  };
+
+  console.log("publish test message websockets");
+  publish("/parkingslot/actuator", JSON.stringify(data));
+}
+
+setInterval(publishTest1, 6000);
+setInterval(publishTest2, 10000);
 
 console.log(`Routes ${router}`);
 // parse json data

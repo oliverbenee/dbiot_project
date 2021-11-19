@@ -30,22 +30,31 @@ export default class Garage extends Component {
   componentDidMount() {
     client.on("connect", () => {
       console.log("client connected: ", client.connected);
-      client.subscribe("data/react");
+      client.subscribe("/parkingslot/actuator");
     });
 
     client.on("message", (topic, message) => {
-      console.log("frontend received message: ", message.toString());
+      const value = JSON.parse(message);
+      console.log("frontend received message: ", value);
+
+      switch (value.parkingSlotID) {
+        case 1:
+          if (value.isOccupied == true) this.setState({ colorSlot1: "red" });
+          else if (value.isOccupied == false)
+            this.setState({ colorSlot1: "green" });
+          break;
+        default:
+          break;
+      }
     });
 
     // only for testing
     this.interval = setInterval(() => {
-      this.setState({ colorSlot1: "red" });
       this.setState({ colorSlot3: "red" });
       this.setState({ colorSlot4: "red" });
     }, 6000);
 
     this.interval = setInterval(() => {
-      this.setState({ colorSlot1: "green" });
       this.setState({ colorSlot3: "green" });
       this.setState({ colorSlot4: "green" });
     }, 10000);
