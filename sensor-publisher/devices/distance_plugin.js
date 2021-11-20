@@ -59,7 +59,7 @@ try {
 ///// const echo = new PigPio(24, {mode: PigPio.INPUT, alert: true});
 ///// trigger.digitalWrite(0); // Make sure trigger is low
 
-//var dist = 0; // store distance value.  TODO: UNCOMMENT THIS LINE FOR DEBUGGING.
+//var dist = 0; // store distance value.  UNCOMMENT THIS LINE FOR DEBUGGING.
 ///// function watchHCSR04(){
 /////     let startTick;
 /////     echo.on('alert', (level, tick) => {
@@ -78,7 +78,7 @@ try {
 /////     trigger.trigger(10, 1); // Set trigger high for 10 microseconds
 ///// }, 3000);
 
-//setInterval(() => { //TODO: UNCOMMENT THIS FUNCTION FOR DEBUGGING.
+//setInterval(() => { // UNCOMMENT THIS FUNCTION FOR DEBUGGING.
 //  latestDistance += 1.1
 //}, 1000)
 

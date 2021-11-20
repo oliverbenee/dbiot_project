@@ -58,7 +58,7 @@ var topic = "home/sensor/distance/" + spotNumber;
 //publish function
 function publish(topic, msg) {
   if (client.connected == true && clientCloud.connected == false) {
-    // TODO: RE-enable for debugging
+    // Re-enable for debugging
     //console.log("local mqtt status=  " + client.connected);
     //console.log("cloud mqtt status=  " + clientCloud.connected);
 
@@ -80,7 +80,7 @@ function publish(topic, msg) {
 */
 function read() {
   var magsens_status = getOccupied();
-  var distance = latestDistance // TODO: FIXXX. 
+  var distance = latestDistance
 
   // Activate LED based on magSens value
   // setLedState(magsens_status)
@@ -97,7 +97,7 @@ function read() {
   // Setting LED state if:
   // - magnetic sensor is triggered,
   // - and car is 10-20 cm away from the wall.
-  // TODO: Should this toggle the LED? No right?
+  // Should this toggle the LED? No right?
 //if(magsens_status == 1 && distance > 10 && distance < 20) {
 //  setLedState(1)
 //} else {
