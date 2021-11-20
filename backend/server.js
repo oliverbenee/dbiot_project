@@ -14,6 +14,13 @@ var mqtt_options = {
   password: "secret",
 };
 var client = mqtt.connect(mqttBroker, mqtt_options);
+
+// TOPIC FORMAT: overpark/parkingzone/spotnumber/devicetype
+// We want to subscribe to all devices for each parkingzone. 
+// subscribe here to overpark/#
+
+// each sensor subscribes to overpark/parkingzone/spotnumber/devicetype
+
 var topic = ["home/sensor/distance/#", "home/sensor/led/#"];
 
 // succesfull connected
@@ -38,11 +45,15 @@ client.on("message", function (topic, message, packet) {
   console.log("___________________________"); //UNCOMMENT THIS LINE FOR DEBUG
   console.log("server received new message on topic: " + topic); //UNCOMMENT THIS LINE FOR DEBUG
   if (topic.substring(0, 20) == "home/sensor/distance") {
-    var spotNumber = parseInt(topic.substring(21));
-    var parkingZoneID = "KALKVAERKSVEJ";
+    // These shenanigans split the topic up into an array, seperated by the "/".
+    // The last element MUST BE the spot number.
+    // The second to last element MUST be the parkingZoneID.
+    var topiclist = topic.split("/");
+    var spotNumber = parseInt(topiclist.pop());
+    var parkingZoneID = topiclist.pop();
+
     var values = JSON.parse(message);
 
-    //console.log("got data from sensor no.: " + topic.substring(21)); //UNCOMMENT THIS LINE FOR DEBUG
     //console.log("got magsens status: " + values.magsens_status + " and distance: " + values.distance) //UNCOMMENT THIS LINE FOR DEBUG
 
     var newState = {
