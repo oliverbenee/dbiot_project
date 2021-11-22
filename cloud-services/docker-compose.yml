@@ -37,5 +37,7 @@ services:
    restart: on-failure
    ports:
      - "3000:3000"
+   links:
+     - "backend"   
    depends_on:
      - "backend"

@@ -1,16 +1,4 @@
-DROP DATABASE IF EXISTS buildingiot;
-DROP TABLE IF EXISTS parkingSlot;
-DROP TABLE IF EXISTS parkingZone;
-DROP TABLE IF EXISTS historical;
-
 SET GLOBAL sql_mode = '';
-
-# FIXME: this should not be needed.
-# This fixes NO_SUCH_TABLE errors from mysql where the table doesnt exist.
-CREATE DATABASE buildingiot;
-
-# FIXME: Use buildingiot database.
-USE buildingiot;
 
 # Overview of latest data from all tables. 
 CREATE TABLE parkingZone
@@ -29,6 +17,14 @@ CREATE TABLE parkingSlot
       parkingZoneID VARCHAR(50),
       FOREIGN KEY (parkingZoneID) REFERENCES parkingZone(parkingZoneID),
       PRIMARY KEY(slotID, parkingZoneID)
+);
+
+# Historical data from opendata.dk
+CREATE TABLE historical
+  (time timestamp default current_timestamp,
+  parkingZoneID VARCHAR(50),
+  freeSlots INT(4),
+  totalCapacity INT(4)
 );
 
 # Sample parking spots and zones.
@@ -79,13 +75,7 @@ SELECT * FROM parkingSlot;
 # Fetch all data from a single parking zone. 
 SELECT * FROM parkingSlot WHERE parkingZoneID="KALKVAERKSVEJ";
 
-# Historical data from opendata.dk
-CREATE TABLE historical
-  (time timestamp default current_timestamp,
-  parkingZoneID VARCHAR(50),
-  freeSlots INT(4),
-  totalCapacity INT(4)
-);
+
 
 -- # Sample historical data. 
 -- INSERT INTO historical(parkingZoneID, freeSlots, totalCapacity) VALUES ("KALKVAERKSVEJ", 5, 10);

@@ -7,9 +7,6 @@ import mqtt from "mqtt";
 // setup mqtt
 import { Database } from "./mysql/db.js";
 
-// mqtt
-import mqtt from "mqtt";
-
 // setup mqtt
 var mqttBroker = "ws:broker:8883";
 var mqtt_options = {
@@ -100,6 +97,9 @@ function publish(topic, msg) {
     });
   }
 }
+
+const API_URL_OPENDATA_PARKING_GARAGES =
+  "https://admin.opendata.dk/api/3/action/datastore_search?resource_id=2a82a145-0195-4081-a13c-b0e587e9b89c";
 
 // Fetches data from the open data platform.
 // fetch interval
