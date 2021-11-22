@@ -1,108 +1,112 @@
 import React, { Component } from "react";
-import Garage from "./garage.component";
-import "./homepage.css";
-import * as d3 from "d3";
+import GarageTable from "./garage.table.component";
+import "./css/homepage.css";
+import ParkingZoneLineChart from "./charts/parkingzone.linechart.component";
+import { Table } from "react-bootstrap";
 
 /**
  * Main Component to display an overview of all parking garages in aarhus
  */
 
 const API_URL_OPENDATA_PARKING_GARAGES = "http://localhost:5000/opendata";
+const parkingZones = ["KALKVAERKSVEJ", "NewBusgadehuset", "SALLING"];
 
 export default class Homepage extends Component {
   constructor(props) {
     super(props);
-    this.myRef = React.createRef();
+    this.getHistory = this.getHistory.bind(this);
     this.state = {
       garages: [],
-      array1: [25, 50, 35, 15, 94, 10, 40],
-      array2: [45, 60, 15, 45, 74, 5, 30],
-      array3: [34, 64, 20, 10, 10, 35, 60],
+      pKALKVAERKSVEJ: [],
+      pNewBusgadehuset: [],
+      pSALLING: [],
     };
   }
 
   componentDidMount() {
-    fetch(API_URL_OPENDATA_PARKING_GARAGES)
-      .then((response) => response.json())
-      .then((data) => this.setState({ garages: data.result.records }))
-      .catch(console.error());
-
-    this.drawLineChart();
+    this.getOpenData();
+    this.interval = setInterval(() => this.getOpenData(), 60000);
+    // todo refresh historical data for chart
+    this.getAllHistoricalData();
+  }
+  componentWillUnmount() {
+    clearInterval(this.interval);
   }
 
-  drawLineChart() {
-    // setting up svg
-    const w = 600;
-    const h = 300;
-    const svg = d3
-      .select(this.myRef.current)
-      .attr("width", w)
-      .attr("height", h)
-      .style("background", "#d3d3d3")
-      .style("margin-left", "100")
-      .style("margin-bottom", "30")
-      .style("overflow", "visible");
+  // get historical data from opendata.dk for all registered parking garages
+  getAllHistoricalData() {
+    parkingZones.forEach((element) => this.getHistory(element));
+  }
 
-    // setting the scaling
+  getOpenData() {
+    console.log("update");
+    fetch(API_URL_OPENDATA_PARKING_GARAGES)
+      .then((response) => response.json())
+      .then((data) => this.setState({ garages: data }))
+      .catch(console.error());
+  }
 
-    const xScale = d3
-      .scaleLinear()
-      .domain([0, this.state.array1.length - 1])
-      .range([0, w]);
+  // get historical data from opendata.dk for one specific parking garage
+  getHistory(zone) {
+    Promise.all([
+      fetch("http://localhost:5000/history/" + zone + "/1"),
+      fetch("http://localhost:5000/history/" + zone + "/2"),
+      fetch("http://localhost:5000/history/" + zone + "/3"),
+      fetch("http://localhost:5000/history/" + zone + "/4"),
+      fetch("http://localhost:5000/history/" + zone + "/5"),
+      fetch("http://localhost:5000/history/" + zone + "/6"),
+      fetch("http://localhost:5000/history/" + zone + "/7"),
+    ])
+      .then((responses) => {
+        return Promise.all(
+          responses.map(function (response) {
+            return response.json();
+          })
+        );
+      })
+      .then((data) => {
+        var array = [];
 
-    const yScale = d3.scaleLinear().domain([0, h]).range([h, 0]);
+        // sort array by time
+        data.sort((a, b) => {
+          let da = new Date(a.time);
+          let db = new Date(b.time);
 
-    const generatedScaledLine = d3
-      .line()
-      .x((d, i) => xScale(i))
-      .y(yScale)
-      .curve(d3.curveCardinal);
+          return da - db;
+        });
 
-    const generatedScaledLine1 = d3
-      .line()
-      .x((d, i) => xScale(i))
-      .y(yScale)
-      .curve(d3.curveCardinal);
-    // setting axes
-    const xAxis = d3
-      .axisBottom(xScale)
-      .ticks(this.state.array1.length)
-      .tickFormat((i) => i + 1);
+        data.forEach((element) => {
+          array.push(element[0].average);
+        });
+        return array;
+      })
+      .then((array) => {
+        switch (zone) {
+          case "KALKVAERKSVEJ":
+            console.log("KALKVAERKSVEJ", array);
+            this.setState({ pKALKVAERKSVEJ: array });
+            break;
 
-    const yAxis = d3.axisLeft(yScale).ticks(5);
+          case "NewBusgadehuset":
+            console.log("NewBusgadehuset", array);
+            this.setState({ pNewBusgadehuset: array });
+            break;
 
-    svg.append("g").call(xAxis).attr("transform", `translate(0, ${h})`);
-    svg.append("g").call(yAxis);
-    //setting up the data
-    svg
-      .selectAll(".line")
-      .data([this.state.array1])
-      .join("path")
-      .attr("d", (d) => generatedScaledLine(d))
-      .attr("fill", "none")
-      .attr("stroke", "blue");
+          case "SALLING":
+            console.log("SALLING", array);
+            this.setState({ pSALLING: array });
+            break;
 
-    svg
-      .selectAll(".line")
-      .data([this.state.array2])
-      .join("path")
-      .attr("d", (d) => generatedScaledLine1(d))
-      .attr("fill", "none")
-      .attr("stroke", "red");
-
-    svg
-      .selectAll(".line")
-      .data([this.state.array3])
-      .join("path")
-      .attr("d", (d) => generatedScaledLine1(d))
-      .attr("fill", "none")
-      .attr("stroke", "orange");
+          default:
+            break;
+        }
+      });
   }
 
   garageList() {
     return this.state.garages.map((garage) => {
       return (
-        <Garage
+        <GarageTable
           garageCode={garage.garageCode}
           totalSpaces={garage.totalSpaces}
           vehicleCount={garage.vehicleCount}
@@ -114,20 +118,22 @@ export default class Homepage extends Component {
   /** render component */
   render() {
     return (
-      <div class="container">
-        <header class="jumbotron my-4">
-          <h3 class="display-3">Parking Aarhus</h3>
-        </header>
+      <div id="homepage-component" class="container">
         <body>
-          <table>
+          <Table id="GarageTable" striped bordered hover>
             <thead>
-              <th>Garage </th>
-              <th>Capacity </th>
+              <th>Garage</th>
+              <th>Vehicle Count</th>
+              <th>Capacity</th>
             </thead>
-            {this.garageList()}
-          </table>
+            <tbody>{this.garageList()}</tbody>
+          </Table>
         </body>
-        <svg ref={this.myRef}></svg>
+        <ParkingZoneLineChart
+          KALKVAERKSVEJ={this.state.pKALKVAERKSVEJ}
+          NewBusgadehuset={this.state.pNewBusgadehuset}
+          Salling={this.state.pSALLING}
+        />
       </div>
     );
   }

@@ -29,7 +29,7 @@ class Database {
     pool.getConnection((err, connection) => {
       if (err) throw err;
       connection.query(
-        "SELECT * FROM historical WHERE parkingZoneID='" +
+        "SELECT time, AVG(freeSlots) AS average FROM historical WHERE parkingZoneID='" +
           parkingZone +
           "' AND dayofweek(time) = " +
           day,

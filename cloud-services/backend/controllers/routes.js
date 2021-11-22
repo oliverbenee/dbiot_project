@@ -13,14 +13,16 @@ router.route("/parkingzone").get((req, res) => {
   });
 });
 
-// get all parking spots for one parking zone
-router.route("/parkingslots/:parkingZoneID/:day").get((req, res) => {
+// get average history data for free spots for one specific parking zone at a specific week day
+router.route("/history/:parkingZoneID/:day").get((req, res) => {
   Database.getHistory(
     req.params.parkingZoneID,
     req.params.day,
     function (err, result) {
       if (!err) {
         res.send(result);
+      } else {
+        console.log("error: ", err);
       }
     }
   );
@@ -56,20 +58,5 @@ router.route("/opendata").get((req, res) => {
     .then((data) => res.send(data.result.records))
     .catch(console.error());
 });
-
-// FIXME: There is some really ugly code duplication here, but node-fetch does not accept URL's, so how do we fix this?
-// Fetches data from the open data platform. 
-var opendata;
-// fetch interval
-setInterval(() => {
-  fetch(API_URL_OPENDATA_PARKING_GARAGES)
-  .then((response) => response.json())
-  .then((data) => {
-    Database.insertOpenData(data.result.records)
-    //console.log("router inserting data.")
-  })
-  .catch(console.error());
-
-}, 10000)
 
 export { router };
