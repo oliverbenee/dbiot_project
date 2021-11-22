@@ -11,12 +11,13 @@ printDistProof(); // Prove dist sensor is running.
 
 import mqtt from "mqtt";
 
-var mqttBroker = "mqtt://broker:1883";
+var mqttBroker = "ws://broker:8883";
 var mqtt_options = {
   username: "client",
   password: "secret",
 };
-var mqttBrokerCloud = "mqtt://40.88.197.102:1883";
+// TODO change to DNS iot-chickenkiller
+var mqttBrokerCloud = "ws://40.88.197.102:8883";
 var client = mqtt.connect(mqttBroker, mqtt_options);
 var clientCloud = mqtt.connect(mqttBrokerCloud);
 
