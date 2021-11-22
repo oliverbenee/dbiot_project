@@ -21,12 +21,22 @@ tr {
     border-radius: 10px;
 }
 
+#row1 {
+    float: left;
+    margin-top: 2%;
+    margin-bottom: 5%;
+}
+
+#row2 {
+    float: left;
+    margin-top: 2%;
+    margin-bottom: 5%;
+}
+
 #slot1 {
     position: relative;
-    top: 10px;
     width: 140px;
     height: 140px;
-    padding-top: 20px;
     margin-bottom: 2%;
     margin-left: 7%;
     text-align: center;
@@ -57,7 +67,52 @@ tr {
     width: 140px;
     height: 140px;
     text-align: center;
+    margin-top: 10%;
     margin-bottom: 2%;
     margin-left: 7%;
+    border-radius: 10px;
+}
+
+#slot5 {
+    position: relative;
+    bottom: 10px;
+    width: 140px;
+    height: 140px;
+    text-align: center;
+    margin-bottom: 2%;
+    margin-left: 30%;
+    border-radius: 10px;
+}
+
+#slot6 {
+    position: relative;
+    bottom: 10px;
+    width: 140px;
+    height: 140px;
+    text-align: center;
+    margin-bottom: 2%;
+    margin-left: 30%;
+    border-radius: 10px;
+}
+
+#slot7 {
+    position: relative;
+    bottom: 10px;
+    width: 140px;
+    height: 140px;
+    text-align: center;
+    margin-bottom: 2%;
+    margin-left: 30%;
+    border-radius: 10px;
+}
+
+#slot8 {
+    position: relative;
+    bottom: 10px;
+    width: 140px;
+    height: 140px;
+    text-align: center;
+    margin-bottom: 2%;
+    margin-left: 30%;
     border-radius: 10px;
 }
