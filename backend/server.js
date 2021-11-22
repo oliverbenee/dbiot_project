@@ -8,7 +8,7 @@ import { Database } from "./mysql/db.js";
 import mqtt from "mqtt";
 
 // setup mqtt
-var mqttBroker = "mqtt:broker:1883";
+var mqttBroker = "ws:broker:8883";
 var mqtt_options = {
   username: "client",
   password: "secret",
@@ -70,6 +70,7 @@ client.on("message", function (topic, message, packet) {
     }
     publish("home/sensor/led/" + spotNumber.toString(), publishstate);
     console.log("Spot number: " + spotNumber + " occupation is now: " + publishstate);
+    // TODO publish to frontent
     Database.updateParkingSlot(newState);
   }
   // console.log("___________________________"); //UNCOMMENT THIS LINE FOR DEBUG
