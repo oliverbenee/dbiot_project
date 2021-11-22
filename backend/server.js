@@ -2,6 +2,9 @@ import express from "express";
 const app = express();
 import cors from "cors";
 import { router } from "./controllers/routes.js";
+import mqtt from "mqtt";
+
+// setup mqtt
 import { Database } from "./mysql/db.js";
 
 // mqtt
@@ -85,6 +88,31 @@ function publish(topic, msg) {
     });
   }
 }
+
+// test case
+// function publishTest1() {
+//   const data = {
+//     parkingSlotID: 1,
+//     isOccupied: true,
+//   };
+
+//   console.log("publish test message websockets");
+//   publish("/parkingslot/actuator", JSON.stringify(data));
+// }
+
+// // test case
+// function publishTest2() {
+//   const data = {
+//     parkingSlotID: 1,
+//     isOccupied: false,
+//   };
+
+//   console.log("publish test message websockets");
+//   publish("/parkingslot/actuator", JSON.stringify(data));
+// }
+
+// setInterval(publishTest1, 6000);
+// setInterval(publishTest2, 10000);
 
 console.log(`Routes ${router}`);
 // parse json data

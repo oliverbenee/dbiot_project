@@ -13,6 +13,7 @@ services:
     build:
       context: ./database
     restart: on-failure
+    command: mysqld --sql_mode=""
     environment:
       MYSQL_USER: pi
       MYSQL_PASSWORD: foobar

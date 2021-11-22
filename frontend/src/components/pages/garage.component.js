@@ -1,64 +1,86 @@
 import React, { Component } from "react";
-import "./garage.css";
-import GarageDetails from "./garage.detail.component";
+import "./css/garage.css";
+import mqtt from "mqtt";
 
 /**
  * Component to display the parking garage
  *
  */
 
+const mqttBroker = "ws://localhost:8883";
+const mqtt_options = {
+  username: "client",
+  password: "secret",
+};
+const client = mqtt.connect(mqttBroker, mqtt_options);
+
 export default class Garage extends Component {
   constructor(props) {
     super(props);
-    this.handleClick = this.handleClick.bind(this);
 
     // use props to set state
     this.state = {
-      garageCode: this.props.garageCode,
-      totalSpaces: this.props.totalSpaces,
-      vehicleCount: this.props.vehicleCount,
-      time: this.props.time,
-      color: "",
+      colorSlot1: "green",
+      colorSlot2: "green",
+      colorSlot3: "green",
+      colorSlot4: "green",
     };
   }
 
   componentDidMount() {
-    if (!this.state.totalSpaces == 0) {
-      var capacity = (this.state.vehicleCount / this.state.totalSpaces) * 100;
+    client.on("connect", () => {
+      console.log("client connected: ", client.connected);
+      client.subscribe("/parkingslot/actuator");
+    });
 
-      if (capacity > 75) {
-        this.setState({ color: "orange" });
-      } else if (capacity == 100) {
-        this.setState({ color: "red" });
-      } else {
-        this.setState({ color: "green" });
+    client.on("message", (topic, message) => {
+      const value = JSON.parse(message);
+      console.log("frontend received message: ", value);
+
+      switch (value.parkingSlotID) {
+        case 1:
+          if (value.isOccupied == true) this.setState({ colorSlot1: "red" });
+          else if (value.isOccupied == false)
+            this.setState({ colorSlot1: "green" });
+          break;
+        default:
+          break;
       }
-    } else {
-      this.setState({ color: "red" });
-    }
+    });
+
+    // only for testing
+    this.interval = setInterval(() => {
+      this.setState({ colorSlot3: "red" });
+      this.setState({ colorSlot4: "red" });
+    }, 6000);
+
+    this.interval = setInterval(() => {
+      this.setState({ colorSlot3: "green" });
+      this.setState({ colorSlot4: "green" });
+    }, 10000);
   }
 
-  handleClick() {
-    console.log("Click garage item: " + this.state.garageCode);
-    return (
-      <GarageDetails
-        garageCode={this.state.garageCode}
-        totalSpaces={this.state.totalSpaces}
-        vehicleCount={this.state.vehicleCount}
-        color={this.state.color}
-      />
-    );
+  componentWillUnmount() {
+    clearInterval(this.interval);
   }
 
   /** render component */
   render() {
     return (
-      <tr className={this.state.color} onClick={this.handleClick}>
-        <td scope="row">{this.state.garageCode}</td>
-        <td scope="row">
-          {this.state.vehicleCount} / {this.state.totalSpaces}
-        </td>
-      </tr>
+      <div id="parkingArea">
+        <div id="slot1" className={this.state.colorSlot1}>
+          <h3>P1</h3>
+        </div>
+        <div id="slot2" className={this.state.colorSlot2}>
+          <h3>P2</h3>
+        </div>
+        <div id="slot3" className={this.state.colorSlot3}>
+          <h3>P3</h3>
+        </div>
+        <div id="slot4" className={this.state.colorSlot4}>
+          <h3>P4</h3>
+        </div>
+      </div>
     );
   }
 }

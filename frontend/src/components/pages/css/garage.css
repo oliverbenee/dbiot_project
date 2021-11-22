@@ -1,0 +1,63 @@
+tr {
+    background: yellow;
+}
+
+.green {
+    background: greenyellow;
+}
+
+.red {
+    background: red;
+}
+
+.orange {
+    background: orange;
+}
+
+#parkingArea {
+    background-color: #F0F0F0;
+    margin-top: 2%;
+    margin-bottom: 5%;
+    border-radius: 10px;
+}
+
+#slot1 {
+    position: relative;
+    top: 10px;
+    width: 140px;
+    height: 140px;
+    padding-top: 20px;
+    margin-bottom: 2%;
+    margin-left: 7%;
+    text-align: center;
+    border-radius: 10px;
+}
+
+#slot2 {
+    width: 140px;
+    height: 140px;
+    margin-bottom: 2%;
+    margin-left: 7%;
+    text-align: center;
+    border-radius: 10px;
+}
+
+#slot3 {
+    width: 140px;
+    height: 140px;
+    text-align: center;
+    margin-bottom: 2%;
+    margin-left: 7%;
+    border-radius: 10px;
+}
+
+#slot4 {
+    position: relative;
+    bottom: 10px;
+    width: 140px;
+    height: 140px;
+    text-align: center;
+    margin-bottom: 2%;
+    margin-left: 7%;
+    border-radius: 10px;
+}
