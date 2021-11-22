@@ -98,11 +98,34 @@ function publish(topic, msg) {
     });
   }
 }
+
+/** Test case for websockets */
+function publishTest1() {
+  const data = {
+    parkingSlotID: 1,
+    isOccupied: true,
+  };
+  console.log("publish test message websockets");
+  publish("/home/parkingslot/", JSON.stringify(data));
+}
+function publishTest2() {
+  const data = {
+    parkingSlotID: 1,
+    isOccupied: false,
+  };
+
+  console.log("publish test message websockets");
+  publish("/parkingslot/actuator", JSON.stringify(data));
+}
+
+setInterval(publishTest1, 6000);
+setInterval(publishTest2, 10000);
+
+
+
+/**fetch data from opendata.dk --> Interval 5 min */
 const API_URL_OPENDATA_PARKING_GARAGES =
   "https://admin.opendata.dk/api/3/action/datastore_search?resource_id=2a82a145-0195-4081-a13c-b0e587e9b89c";
-
-// Fetches data from the open data platform.
-// fetch interval
 setInterval(() => {
   fetch(API_URL_OPENDATA_PARKING_GARAGES)
     .then((response) => response.json())
