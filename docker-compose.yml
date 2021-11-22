@@ -21,28 +21,28 @@ services:
       MYSQL_DATABASE: buildingiot
     ports:
       - "3306:3306"
-  # backend:
-  #   build:
-  #     context: ./backend
-  #   restart: on-failure
-  #   ports:
-  #     - "5000:5000"
-  #   # links:
-  #   #   - broker
-  #   depends_on:
-  #     - "mysql_db"
-  # frontend:
-  #   build:
-  #     context: ./frontend
-  #   restart: on-failure
-  #   ports:
-  #     - "3000:3000"
-  #   depends_on:
-  #     - "backend"
-  # publisher:
-  #   build:
-  #     context: ./sensor-publisher
-  #   restart: on-failure
-  #   privileged: true
-  #   links:
-  #     - broker
+  backend:
+    build:
+      context: ./backend
+    restart: on-failure
+    ports:
+      - "5000:5000"
+    links:
+      - broker
+    depends_on:
+      - "mysql_db"
+#  frontend:
+#    build:
+#      context: ./frontend
+#    restart: on-failure
+#    ports:
+#      - "3000:3000"
+#    depends_on:
+#      - "backend"
+  publisher:
+    build:
+      context: ./sensor-publisher
+    restart: on-failure
+    privileged: true
+    links:
+      - broker

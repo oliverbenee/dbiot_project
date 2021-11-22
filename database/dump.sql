@@ -1,8 +1,16 @@
+DROP DATABASE IF EXISTS buildingiot;
 DROP TABLE IF EXISTS parkingSlot;
 DROP TABLE IF EXISTS parkingZone;
 DROP TABLE IF EXISTS historical;
 
 SET GLOBAL sql_mode = '';
+
+# FIXME: this should not be needed.
+# This fixes NO_SUCH_TABLE errors from mysql where the table doesnt exist.
+CREATE DATABASE buildingiot;
+
+# FIXME: Use buildingiot database.
+USE buildingiot;
 
 # Overview of latest data from all tables. 
 CREATE TABLE parkingZone

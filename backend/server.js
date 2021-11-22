@@ -5,13 +5,27 @@ import { router } from "./controllers/routes.js";
 import mqtt from "mqtt";
 
 // setup mqtt
-var mqttBroker = "ws://localhost:8883";
+import { Database } from "./mysql/db.js";
+
+// mqtt
+import mqtt from "mqtt";
+
+// setup mqtt
+// var mqttBroker = "ws://localhost:8883";
+var mqttBroker = "mqtt:broker:1883";
 var mqtt_options = {
   username: "client",
   password: "secret",
 };
 var client = mqtt.connect(mqttBroker, mqtt_options);
-var topic = ["home/sensor/distance", "home/sensor/led"];
+
+// TOPIC FORMAT: overpark/parkingzone/spotnumber/devicetype
+// We want to subscribe to all devices for each parkingzone. 
+// subscribe here to overpark/#
+
+// each sensor subscribes to overpark/parkingzone/spotnumber/devicetype
+
+var topic = ["home/sensor/distance/#", "home/sensor/led/#"];
 
 // succesfull connected
 client.on("connect", function () {
@@ -27,57 +41,78 @@ client.on("error", function (error) {
   process.exit(1);
 });
 
+var minDistance = 10;
+var maxDistance = 20;
+
 // receive messages
 client.on("message", function (topic, message, packet) {
-  console.log("___________________________");
-  console.log("server received new message");
-  if (topic == "home/sensor/distance") {
-    // receiving message and checking values
-    // publishing via websockets to change color of parking slot
-    // activate or deactivate the led
-    console.log("message is " + message);
-    Database.insert(JSON.parse(message));
-    console.log("topic is " + topic);
-  } else if (topic == "home/sensor/led") {
-    console.log("message is " + message);
-    console.log("topic is " + topic);
+  console.log("___________________________"); //UNCOMMENT THIS LINE FOR DEBUG
+  console.log("server received new message on topic: " + topic); //UNCOMMENT THIS LINE FOR DEBUG
+  if (topic.substring(0, 20) == "home/sensor/distance") {
+    // These shenanigans split the topic up into an array, seperated by the "/".
+    // The last element MUST BE the spot number.
+    // The second to last element MUST be the parkingZoneID.
+    var topiclist = topic.split("/");
+    var spotNumber = parseInt(topiclist.pop());
+    var parkingZoneID = topiclist.pop();
+
+    var values = JSON.parse(message);
+
+    //console.log("got magsens status: " + values.magsens_status + " and distance: " + values.distance) //UNCOMMENT THIS LINE FOR DEBUG
+
+    var newState = {
+      isOccupied: false,
+      slotID: spotNumber,
+      parkingZoneID: parkingZoneID
+    }
+    var publishstate = "off";
+
+    var isOccupied = values.magsens_status == 1 && values.distance > minDistance && values.distance < maxDistance
+    if (isOccupied) {
+      publishstate = "on";
+      newState.isOccupied = true;
+    }
+    publish("home/sensor/led/" + spotNumber.toString(), publishstate);
+    console.log("Spot number: " + spotNumber + " occupation is now: " + publishstate);
+    Database.updateParkingSlot(newState);
   }
-  console.log("___________________________");
+  // console.log("___________________________"); //UNCOMMENT THIS LINE FOR DEBUG
+  // DEBUG: goto localhost:5000/parkingslots/KALKVAERKSVEJ for checking
 });
 
 //publish function
 function publish(topic, msg) {
   if (client.connected == true) {
     client.publish(topic, msg, () => {
-      console.log("publishing", msg);
+      //console.log("server publishing: " + msg + " to: '" + topic + "'"); UNCOMMENT THIS LINE FOR DEBUG
     });
   }
 }
 
 // test case
-function publishTest1() {
-  const data = {
-    parkingSlotID: 1,
-    isOccupied: true,
-  };
+// function publishTest1() {
+//   const data = {
+//     parkingSlotID: 1,
+//     isOccupied: true,
+//   };
 
-  console.log("publish test message websockets");
-  publish("/parkingslot/actuator", JSON.stringify(data));
-}
+//   console.log("publish test message websockets");
+//   publish("/parkingslot/actuator", JSON.stringify(data));
+// }
 
-// test case
-function publishTest2() {
-  const data = {
-    parkingSlotID: 1,
-    isOccupied: false,
-  };
+// // test case
+// function publishTest2() {
+//   const data = {
+//     parkingSlotID: 1,
+//     isOccupied: false,
+//   };
 
-  console.log("publish test message websockets");
-  publish("/parkingslot/actuator", JSON.stringify(data));
-}
+//   console.log("publish test message websockets");
+//   publish("/parkingslot/actuator", JSON.stringify(data));
+// }
 
-setInterval(publishTest1, 6000);
-setInterval(publishTest2, 10000);
+// setInterval(publishTest1, 6000);
+// setInterval(publishTest2, 10000);
 
 console.log(`Routes ${router}`);
 // parse json data
