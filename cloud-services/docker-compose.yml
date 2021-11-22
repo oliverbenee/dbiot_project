@@ -18,6 +18,7 @@ services:
       MYSQL_PASSWORD: foobar
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: buildingiot
+    command: mysqld --sql_mode=""  
     ports:
       - "3306:3306"
   backend:
