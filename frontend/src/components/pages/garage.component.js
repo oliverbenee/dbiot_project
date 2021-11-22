@@ -7,7 +7,7 @@ import mqtt from "mqtt";
  *
  */
 
-const mqttBroker = "ws://localhost:8883";
+const mqttBroker = "ws://broker:8883";
 const mqtt_options = {
   username: "client",
   password: "secret",
@@ -30,7 +30,7 @@ export default class Garage extends Component {
   componentDidMount() {
     client.on("connect", () => {
       console.log("client connected: ", client.connected);
-      client.subscribe("/parkingslot/actuator");
+      client.subscribe("/home/parkingslot/");
     });
 
     client.on("message", (topic, message) => {

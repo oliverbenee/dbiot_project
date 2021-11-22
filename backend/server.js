@@ -19,7 +19,7 @@ var mqtt_options = {
 var client = mqtt.connect(mqttBroker, mqtt_options);
 
 // TOPIC FORMAT: overpark/parkingzone/spotnumber/devicetype
-// We want to subscribe to all devices for each parkingzone. 
+// We want to subscribe to all devices for each parkingzone.
 // subscribe here to overpark/#
 
 // each sensor subscribes to overpark/parkingzone/spotnumber/devicetype
@@ -43,6 +43,8 @@ client.on("error", function (error) {
 var minDistance = 10;
 var maxDistance = 20;
 
+// TODO Only publish if newState!
+
 // receive messages
 client.on("message", function (topic, message, packet) {
   console.log("___________________________"); //UNCOMMENT THIS LINE FOR DEBUG
@@ -62,18 +64,28 @@ client.on("message", function (topic, message, packet) {
     var newState = {
       isOccupied: false,
       slotID: spotNumber,
-      parkingZoneID: parkingZoneID
-    }
+      parkingZoneID: parkingZoneID,
+    };
     var publishstate = "off";
 
-    var isOccupied = values.magsens_status == 1 && values.distance > minDistance && values.distance < maxDistance
+    var isOccupied =
+      values.magsens_status == 1 &&
+      values.distance > minDistance &&
+      values.distance < maxDistance;
     if (isOccupied) {
       publishstate = "on";
       newState.isOccupied = true;
     }
     publish("home/sensor/led/" + spotNumber.toString(), publishstate);
-    console.log("Spot number: " + spotNumber + " occupation is now: " + publishstate);
-    // TODO publish to frontent
+    console.log(
+      "Spot number: " + spotNumber + " occupation is now: " + publishstate
+    );
+    // publish to frontent
+    const data = {
+      parkingSlotID: spotNumber,
+      isOccupied: isOccupied,
+    };
+    publish("home/parkingspot/", JSON.stringify(data));
     Database.updateParkingSlot(newState);
   }
   // console.log("___________________________"); //UNCOMMENT THIS LINE FOR DEBUG
@@ -89,30 +101,17 @@ function publish(topic, msg) {
   }
 }
 
-// test case
-// function publishTest1() {
-//   const data = {
-//     parkingSlotID: 1,
-//     isOccupied: true,
-//   };
-
-//   console.log("publish test message websockets");
-//   publish("/parkingslot/actuator", JSON.stringify(data));
-// }
-
-// // test case
-// function publishTest2() {
-//   const data = {
-//     parkingSlotID: 1,
-//     isOccupied: false,
-//   };
-
-//   console.log("publish test message websockets");
-//   publish("/parkingslot/actuator", JSON.stringify(data));
-// }
-
-// setInterval(publishTest1, 6000);
-// setInterval(publishTest2, 10000);
+// Fetches data from the open data platform.
+// fetch interval
+setInterval(() => {
+  fetch(API_URL_OPENDATA_PARKING_GARAGES)
+    .then((response) => response.json())
+    .then((data) => {
+      Database.insertOpenData(data.result.records);
+      //console.log("router inserting data.")
+    })
+    .catch(console.error());
+}, 10000);
 
 console.log(`Routes ${router}`);
 // parse json data
