@@ -123,4 +123,4 @@ function test(){
 }
 test();
 
-module.exports = {get, changeState, setState, getNearestAvailableSlot}
+export {get, changeState, setState, getNearestAvailableSlot}
