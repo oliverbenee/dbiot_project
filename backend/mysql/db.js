@@ -63,9 +63,8 @@ class Database {
         tah.isOccupied +
         " WHERE slotID =" +
         tah.slotID +
-        " AND parkingZoneID='" +
-        tah.parkingZoneID +
-        "'";
+        " AND parkingZoneID=" +
+        tah.parkingZoneID;
       connection.query(sql, (err, results, fields) => {
         if (err) throw err;
         console.log("Parking slot data updated");
