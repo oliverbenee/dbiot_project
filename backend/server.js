@@ -63,6 +63,8 @@ client.on("message", function (topic, message, packet) {
       slotID: spotNumber,
       parkingZoneID: parkingZoneID,
     };
+    console.log("YAAAAAAAAH: " + newState.parkingZoneID)
+
     var publishstate = "off";
 
     var isOccupied =
