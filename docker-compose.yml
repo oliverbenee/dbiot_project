@@ -21,8 +21,6 @@ services:
       MYSQL_DATABASE: buildingiot
     ports:
       - "3306:3306"
-    volumes:
-      - ./database/dump.sql:/docker-entrypoint-initdb.d/dump.sql
   backend:
     build:
       context: ./backend
