@@ -3,6 +3,7 @@ const app = express();
 import cors from "cors";
 import { router } from "./controllers/routes.js";
 import mqtt from "mqtt";
+import fetch from "node-fetch";
 
 // setup mqtt
 import { Database } from "./mysql/db.js";
