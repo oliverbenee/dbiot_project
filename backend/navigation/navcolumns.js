@@ -14,6 +14,10 @@ function changeState(slotId){
   parkingslots[slotId-1] = !state
 }
 
+function setState(slotId, state){
+  parkingslots[slotId-1] = state
+}
+
 // determines the order of which slot is the "nearest" one.
 var order = [4,8,3,7,2,6,1,5]
 
@@ -108,5 +112,15 @@ function test(){
   changeState(4);
   console.log("Find next-nearest (should be 4)")
   console.log(getNearestAvailableSlot());
+
+  // Force set state. 
+  console.log("--------------------------------")
+  console.log("Forcing state change")
+  console.log("current state: " + get(4))
+  var state = get(4);
+  console.log("changing state...")
+  setState(4, !state);
 }
 test();
+
+module.exports = {get, changeState, setState, getNearestAvailableSlot}
