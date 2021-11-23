@@ -2,7 +2,7 @@ import express from "express";
 const app = express();
 import cors from "cors";
 import { router } from "./controllers/routes.js";
-import * as navigation from "../navigation/navcolumns.js"
+import * as navigation from "./navigation/navcolumns.js"
 
 // setup mqtt
 import { Database } from "./mysql/db.js";
