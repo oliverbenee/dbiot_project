@@ -7,7 +7,7 @@ const pool = mysql.createPool({
   password: "foobar",
   database: "buildingiot",
 });
-
+ 
 // notes: 
 // - without this code. error: Table buildingiot.parkingSlot does not exist.
 // - with this code for creating the table: TABLE_EXISTS_ERROR.
