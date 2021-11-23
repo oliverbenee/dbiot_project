@@ -8,6 +8,42 @@ const pool = mysql.createPool({
   database: "buildingiot",
 });
 
+// FIXME: delete. Should use dump.sql. Breaks again on my machine and i don't know how to fix it. 
+pool.getConnection((err, connection) => {
+  if (err) throw err
+  connection.query(
+    `CREATE TABLE parkingZone
+    ( parkingZoneID VARCHAR(50),
+      PRIMARY KEY (parkingZoneID),
+      latitude FLOAT(4,2),
+      longitude FLOAT(4,2),
+      totalCapacity INT(4),
+      freeSlots INT(4)
+)`, (err) => {
+      if (err) throw err
+    })
+  connection.query(
+    `CREATE TABLE parkingSlot
+    ( slotID INT(10),
+      isOccupied BOOLEAN,
+      parkingZoneID VARCHAR(50),
+      FOREIGN KEY (parkingZoneID) REFERENCES parkingZone(parkingZoneID),
+      PRIMARY KEY(slotID, parkingZoneID)
+)`, (err) => {
+      if (err) throw err
+    })
+  connection.query(
+    `CREATE TABLE historical
+    (time timestamp default current_timestamp,
+    parkingZoneID VARCHAR(50),
+    freeSlots INT(4),
+    totalCapacity INT(4)
+  )`, (err) => {
+      if (err) throw err
+    })
+  connection.release()
+})
+
 class Database {
   // get data
   static getDataParkingSlots(parkingZoneID, callback) {
