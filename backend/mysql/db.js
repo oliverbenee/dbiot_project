@@ -58,15 +58,8 @@ class Database {
   static updateParkingSlot(tah) {
     pool.getConnection((err, connection) => {
       if (err) throw err;
-      const sql =
-        "UPDATE parkingSlot SET isOccupied =" +
-        tah.isOccupied +
-        " WHERE slotID =" +
-        tah.slotID +
-        " AND parkingZoneID='" +
-        tah.parkingZoneID +
-        "'";
-      connection.query(sql, (err, results, fields) => {
+      const sql = "UPDATE parkingSlot SET isOccupied = ? WHERE slotID = ? AND parkingSlotID = ?"
+      connection.query(sql,[tah.isOccupied, tah.slotID, tah.parkingZoneID], (err, results, fields) => {
         if (err) throw err;
         console.log("Parking slot data updated");
         connection.release();
