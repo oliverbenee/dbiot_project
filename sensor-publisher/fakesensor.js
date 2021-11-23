@@ -48,7 +48,12 @@ client.on("message", function (topic, message, packet) {
   if (topic == "home/sensor/led/" + spotNumber) {
     if(message == "on"){setLedState(1)}
     if(message == "off"){setLedState(0)}
-  } else {
+  } else if(topic == "home/navigation/available"){
+    if(message == spotNumber){
+      printLedProof();
+    }
+  }
+   else {
     console.log("MESSG: '" + message + "' - TOPC: '" + topic +"'")
   }
 });

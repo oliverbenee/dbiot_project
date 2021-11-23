@@ -2,7 +2,7 @@ import express from "express";
 const app = express();
 import cors from "cors";
 import { router } from "./controllers/routes.js";
-import mqtt from "mqtt";
+import * as navigation from "./navigation/navcolumns"
 
 // setup mqtt
 import { Database } from "./mysql/db.js";
@@ -25,7 +25,7 @@ var client = mqtt.connect(mqttBroker, mqtt_options);
 
 // each sensor subscribes to overpark/parkingzone/spotnumber/devicetype
 
-var topic = ["home/sensor/distance/#", "home/sensor/led/#"];
+var topic = ["home/sensor/distance/#", "home/sensor/led/#", "home/navigation/available"];
 
 // succesfull connected
 client.on("connect", function () {
@@ -75,6 +75,7 @@ client.on("message", function (topic, message, packet) {
     publish("home/sensor/led/" + spotNumber.toString(), publishstate);
     console.log("Spot number: " + spotNumber + " occupation is now: " + publishstate);
     Database.updateParkingSlot(newState);
+    navigation.changeState(spotNumber);
   }
   // console.log("___________________________"); //UNCOMMENT THIS LINE FOR DEBUG
   // DEBUG: goto localhost:5000/parkingslots/KALKVAERKSVEJ for checking
@@ -87,6 +88,11 @@ function publish(topic, msg) {
       //console.log("server publishing: " + msg + " to: '" + topic + "'"); UNCOMMENT THIS LINE FOR DEBUG
     });
   }
+}
+
+function publishAvailableParkingSlot(){
+  var nearest = navigation.getNearestAvailableSlot();
+  publish("home/navigation/available", JSON.stringify(nearest))
 }
 
 // test case
