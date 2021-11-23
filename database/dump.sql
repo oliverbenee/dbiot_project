@@ -1,5 +1,8 @@
 SET GLOBAL sql_mode = '';
 
+CREATE DATABASE buildingiot;
+USE buildingiot;
+
 # Overview of latest data from all tables. 
 CREATE TABLE parkingZone
     ( parkingZoneID VARCHAR(50),
