@@ -33,7 +33,7 @@ RUN npm install -g npm
 RUN npm install
 RUN npm rebuild
 COPY . .
-CMD ["node", "fakesensor.js"]
+CMD ["node", "sensor.js"]
 
 ## OLD VERSION:
 # FROM node:14

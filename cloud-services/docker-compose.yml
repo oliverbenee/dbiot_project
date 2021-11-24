@@ -13,16 +13,14 @@ services:
     build:
       context: ./database
     restart: on-failure
-    command: mysqld --sql_mode=""
     environment:
       MYSQL_USER: pi
       MYSQL_PASSWORD: foobar
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: buildingiot  
+      MYSQL_DATABASE: buildingiot
+    command: mysqld --sql_mode=""  
     ports:
       - "3306:3306"
-    volumes:
-      - ./database/dump.sql:/docker-entrypoint-initdb.d/dump.sql  
   backend:
     build:
       context: ./backend
@@ -33,18 +31,13 @@ services:
       - broker
     depends_on:
       - "mysql_db"
-  frontend:
-   build:
-     context: ./frontend
-   restart: on-failure
-   ports:
-     - "3000:3000"
-   depends_on:
-     - "backend"
-  publisher:
-    build:
-      context: ./sensor-publisher
-    restart: on-failure
-    privileged: true
-    links:
-      - broker
+  # frontend:
+  #  build:
+  #    context: ./frontend
+  #  restart: on-failure
+  #  ports:
+  #    - "3000:3000"
+  #  links:
+  #    - "backend"   
+  #  depends_on:
+  #    - "backend"
