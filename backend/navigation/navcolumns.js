@@ -12,11 +12,11 @@ function get(slotId){
 function changeState(slotId){
   var state = get(slotId);
   parkingslots[slotId-1] = !state
-  console.log("Navigation has now slot: " + slotId + " as: " + !state)
 }
 
 function setState(slotId, state){
   parkingslots[slotId-1] = state
+  console.log("Navigation has now slot: " + slotId + " as: " + !state)
 }
 
 // determines the order of which slot is the "nearest" one.
