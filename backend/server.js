@@ -86,6 +86,7 @@ client.on("message", function (topic, message, packet) {
       isOccupied: isOccupied,
     };
     publish("home/parkingspot/", JSON.stringify(data));
+    console.log("PUBLUSHHHH TO FRONTEND", JSON.stringify(data))
     Database.updateParkingSlot(newState);
   }
   // console.log("___________________________"); //UNCOMMENT THIS LINE FOR DEBUG
