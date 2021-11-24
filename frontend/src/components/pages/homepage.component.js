@@ -25,7 +25,10 @@ export default class Homepage extends Component {
 
   componentDidMount() {
     this.getOpenData();
-    this.interval = setInterval(() => this.getOpenData(), 60000);
+    this.interval = setInterval(() => {
+      this.getOpenData();
+      this.getAllHistoricalData();
+    }, 60000);
     // todo refresh historical data for chart
     this.getAllHistoricalData();
   }
