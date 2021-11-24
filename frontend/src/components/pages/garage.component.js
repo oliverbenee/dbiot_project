@@ -7,7 +7,7 @@ import mqtt from "mqtt";
  *
  */
 
-const mqttBroker = "ws://localost:8883";
+const mqttBroker = "ws://localhost:8883";
 const mqtt_options = {
   username: "client",
   password: "secret",
