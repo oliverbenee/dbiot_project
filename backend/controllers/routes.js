@@ -48,6 +48,9 @@ router.post("/update/parkingslot", (req, res) => {
 });
 
 
+const API_URL_OPENDATA_PARKING_GARAGES =
+  "https://admin.opendata.dk/api/3/action/datastore_search?resource_id=2a82a145-0195-4081-a13c-b0e587e9b89c";
+
 // get data from opendata.dk parking garages in aarhus
 router.route("/opendata").get((req, res) => {
   console.log("APIIIIIIIIII")
