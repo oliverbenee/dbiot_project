@@ -1,3 +1,5 @@
+USE buildingiot;
+
 SET GLOBAL sql_mode = '';
 
 # Overview of latest data from all tables. 
