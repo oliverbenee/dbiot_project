@@ -89,7 +89,7 @@ client.on("message", function (topic, message, packet) {
     publish("/home/parkingslot/", JSON.stringify(data));
     console.log("PUBLUSHHHH TO FRONTEND", JSON.stringify(data))
     Database.updateParkingSlot(newState);
-    navigation.changeState(spotNumber);
+    navigation.setState(spotNumber, isOccupied);
   }
   // console.log("___________________________"); //UNCOMMENT THIS LINE FOR DEBUG
   // DEBUG: goto localhost:5000/parkingslots/KALKVAERKSVEJ for checking
