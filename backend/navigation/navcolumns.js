@@ -122,6 +122,6 @@ function test(){
   console.log("changing state...")
   setState(4, !state);
 }
-test();
+//test();
 
 export {get, changeState, setState, getNearestAvailableSlot}

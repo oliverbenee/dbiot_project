@@ -30,7 +30,7 @@ process.on("SIGINT", () => {
 })
 
 export function printLedProof() {
-    console.log("led go BRRRRRRRRR")
+    //console.log("led go BRRRRRRRRR")
     setTimeout(() => {toggleLed()}, 500);
     setTimeout(() => {toggleLed()}, 1000);
     setTimeout(() => {toggleLed()}, 1500);

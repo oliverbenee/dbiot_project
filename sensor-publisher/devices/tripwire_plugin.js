@@ -12,10 +12,13 @@ var client = mqtt.connect(mqttBroker, mqtt_options);
 var clientCloud = mqtt.connect(mqttBrokerCloud);
 
 client.on("connect", function () {
-  console.log("connected to local broker: " + client.connected);
-  console.log("connected to cloud broker: " + clientCloud.connected);
-
   client.subscribe("home/sensor/tripwire")
+  console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+  console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+  console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+  console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+  console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+  console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
   console.log("sensor subscribed to: home/sensor/tripwire")
 });
 
