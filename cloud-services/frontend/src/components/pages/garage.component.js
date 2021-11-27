@@ -72,7 +72,6 @@ export default class Garage extends Component {
   render() {
     return (
       <div id="parkingArea">
-        <div id="row1">
           <div id="slot1" className={this.state.colorSlot1}>
             <h3>P1</h3>
           </div>
@@ -85,21 +84,6 @@ export default class Garage extends Component {
           <div id="slot4" className={this.state.colorSlot4}>
             <h3>P4</h3>
           </div>
-        </div>
-        <div id="row2">
-          <div id="slot5" className={this.state.colorSlot5}>
-            <h3>P5</h3>
-          </div>
-          <div id="slot6" className={this.state.colorSlot6}>
-            <h3>P6</h3>
-          </div>
-          <div id="slot7" className={this.state.colorSlot7}>
-            <h3>P7</h3>
-          </div>
-          <div id="slot8" className={this.state.colorSlot8}>
-            <h3>P8</h3>
-          </div>
-        </div>
       </div>
     );
   }
