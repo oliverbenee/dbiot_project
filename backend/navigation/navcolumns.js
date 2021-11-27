@@ -9,7 +9,7 @@ parkingslots.forEach(function(value){
 
 function get(slotId){
   if(slotId < 1) return null;
-  if(slotId > 8) {console.log("slotId: " + slotId)} 123123123;
+  if(slotId > 8) {console.log("slotId: " + slotId); return null} ;
   return parkingslots[slotId-1];
 }
 
