@@ -48,7 +48,7 @@ client.on("error", function (error) {
 
 // receive messages
 client.on("message", function (topic, message, packet) {
-  console.log("sensor received a new message on topic: '" + topic + "', and message: '" + message + "'");
+  //console.log("sensor received a new message on topic: '" + topic + "', and message: '" + message + "'");
   if (topic == "home/sensor/led/" + spotNumber) {
     if(message == "on"){setLedState(1)}
     if(message == "off"){setLedState(0)}

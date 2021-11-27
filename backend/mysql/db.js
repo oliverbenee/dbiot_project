@@ -146,7 +146,7 @@ class Database {
         "'";
       connection.query(sql, (err, results, fields) => {
         if (err) throw err;
-        console.log("Parking slot data updated");
+        //console.log("Parking slot data updated");
         connection.release();
       });
     });

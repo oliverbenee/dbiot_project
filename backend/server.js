@@ -109,6 +109,7 @@ function publish(topic, msg) {
 
 function publishAvailableParkingSlot(){
   var nearest = navigation.getNearestAvailableSlot();
+  console.log("Nearest available slot: " + nearest)
   publish("home/navigation/available", JSON.stringify(nearest))
 }
 
