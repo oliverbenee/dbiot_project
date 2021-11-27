@@ -47,6 +47,7 @@ function getNearestAvailableSlot(){
       console.log("P2: " + get(2) + " P6: " + get(6))
       console.log("P3: " + get(3) + " P7: " + get(7))
       console.log("P4: " + get(4) + " P8: " + get(8))
+      console.log("P9: " + get(9))
       //console.log("getval: " + get(value) + " and changed: " + changed) 
       res = value
       changed = true
