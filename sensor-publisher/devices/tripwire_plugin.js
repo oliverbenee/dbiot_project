@@ -60,5 +60,5 @@ process.on('SIGINT', () => {
 });
 
 export function printTripProof() {
-  console.log("Sensor merger and magnetic sensor plugin has connection.")
+  console.log("Sensor merger and tripwire plugin has connection.")
 }
