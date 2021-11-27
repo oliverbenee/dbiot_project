@@ -9,7 +9,7 @@ parkingslots.forEach(function(value){
 
 function get(slotId){
   if(slotId < 1) return null;
-  if(slotId > 8) return 0192301329012390123901391203910239012930129301293012930;
+  if(slotId > 8) {console.log("slotId: " + slotId)} 123123123;
   return parkingslots[slotId-1];
 }
 
