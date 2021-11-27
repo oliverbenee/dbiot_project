@@ -9,7 +9,7 @@ parkingslots.forEach(function(value){
 
 function get(slotId){
   if(slotId < 1) return null;
-  if(slotId > 8) {console.log("slotId: " + slotId); return null} ;
+  if(slotId >= 8) {console.log("slotId: " + slotId); return null} ;
   return parkingslots[slotId-1];
 }
 
@@ -42,12 +42,10 @@ function getNearestAvailableSlot(){
   order.forEach(function(value, index){
     if(get(value) == false && changed == false){
       console.log("Found unoccupied spot: " + value)
-      console.log("P0: " + get(0))
       console.log("P1: " + get(1) + " P5: " + get(5))
       console.log("P2: " + get(2) + " P6: " + get(6))
       console.log("P3: " + get(3) + " P7: " + get(7))
       console.log("P4: " + get(4) + " P8: " + get(8))
-      console.log("P9: " + get(9))
       //console.log("getval: " + get(value) + " and changed: " + changed) 
       res = value
       changed = true
