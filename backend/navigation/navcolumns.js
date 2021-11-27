@@ -1,5 +1,5 @@
 var parkingslots = []
-for (var i = 0; i < parkingslots.length; i++) {
+for (var i = 0; i < 7; i++) {
   parkingslots[i] = false;
 }
 
