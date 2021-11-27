@@ -3,6 +3,10 @@ for (var i = 0; i < 7; i++) {
   parkingslots[i] = false;
 }
 
+parkingslots.forEach(function(value){
+  console.log(value)
+})
+
 function get(slotId){
   if(slotId < 1) return null;
   if(slotId > 8) return null;
