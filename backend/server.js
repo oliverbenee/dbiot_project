@@ -23,7 +23,7 @@ var client = mqtt.connect(mqttBroker, mqtt_options);
 
 // each sensor subscribes to overpark/parkingzone/spotnumber/devicetype
 
-var topic = ["home/sensor/distance/#", "home/sensor/led/#", "home/navigation/available"];
+var topic = ["home/sensor/distance/#", "home/sensor/led/#", "home/navigation/available", "home/sensor/tripwire"];
 
 // succesfull connected
 client.on("connect", function () {
@@ -65,7 +65,7 @@ client.on("message", function (topic, message, packet) {
       slotID: spotNumber,
       parkingZoneID: parkingZoneID,
     };
-    console.log("YAAAAAAAAH: " + newState.parkingZoneID)
+    //console.log("YAAAAAAAAH: " + newState.parkingZoneID)
 
     var publishstate = "off";
 
@@ -90,6 +90,9 @@ client.on("message", function (topic, message, packet) {
     console.log("PUBLUSHHHH TO FRONTEND", JSON.stringify(data))
     Database.updateParkingSlot(newState);
     navigation.setState(spotNumber, isOccupied);
+  }
+  if (topic == "home/sensor/tripwire") {
+    publishAvailableParkingSlot();
   }
   // console.log("___________________________"); //UNCOMMENT THIS LINE FOR DEBUG
   // DEBUG: goto localhost:5000/parkingslots/KALKVAERKSVEJ for checking

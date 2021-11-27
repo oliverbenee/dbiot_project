@@ -4,7 +4,7 @@ import { setLedState, printLedProof } from "./devices/led_plugin.js"
 import { getOccupied, printMagProof } from "./devices/magsens_plugin.js"
 
 // Run the tripwire plugin
-import * from "./devices/tripwire_plugin.js"
+import "./devices/tripwire_plugin.js"
 
 // This is printing code used to prove that the magnetic sensor and distance sensor are running in the sensor plugin.
 printMagProof() // Prove magSensor is running.
