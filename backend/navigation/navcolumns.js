@@ -7,6 +7,12 @@ parkingslots.forEach(function(value, index){
   console.log("P" + index + ": " + value)
 })
 
+console.log("getters:")
+console.log("P1: " + get(1) + " P5: " + get(5))
+console.log("P2: " + get(2) + " P6: " + get(6))
+console.log("P3: " + get(3) + " P7: " + get(7))
+console.log("P4: " + get(4) + " P8: " + get(8))
+
 function get(slotId){
   if(slotId < 1) return null;
   return parkingslots[slotId-1];
