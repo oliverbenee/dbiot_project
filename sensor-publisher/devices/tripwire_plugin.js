@@ -58,3 +58,7 @@ process.on('SIGINT', () => {
   console.log('Closing program. Returning to console.')
   process.exit()
 });
+
+export function printTripProof() {
+  console.log("Sensor merger and magnetic sensor plugin has connection.")
+}
