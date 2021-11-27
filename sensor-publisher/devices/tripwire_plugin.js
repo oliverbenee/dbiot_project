@@ -46,7 +46,7 @@ function publish(topic, msg) {
   }
 }
 
-const tripWire = new Gpio('17', 'in', 'both')
+const tripWire = new Gpio('17', 'in', 'rising')
 
 tripWire.watch((err, value) => {
   if(err) throw err
