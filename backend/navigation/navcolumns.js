@@ -38,6 +38,7 @@ function getNearestAvailableSlot(){
   order.forEach(function(value, index){
     if(get(value) == false && changed == false){
       console.log("Found unoccupied spot: " + value)
+      console.log("And 8 is: " + get(8))
       //console.log("getval: " + get(value) + " and changed: " + changed) 
       res = value
       changed = true
