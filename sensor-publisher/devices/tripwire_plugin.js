@@ -51,7 +51,7 @@ const tripWire = new Gpio('17', 'in', 'both')
 tripWire.watch((err, value) => {
   if(err) throw err
   // TripWire triggered.
-  //publish("home/sensor/tripwire", "trigger")
+  publish("home/sensor/tripwire", "trigger")
   console.log("tripwire did thing.");
 })
 
