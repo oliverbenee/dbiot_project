@@ -24,7 +24,7 @@ var mqttBrokerCloud = "ws://40.88.197.102:8883";
 var client = mqtt.connect(mqttBroker, mqtt_options);
 var clientCloud = mqtt.connect(mqttBrokerCloud);
 
-var spotNumber = 1; // <<---------------------------------------------------------------- THIS NUMBER SETS THE SPOT NUMBER YOU WANT
+var spotNumber = 4; // <<---------------------------------------------------------------- THIS NUMBER SETS THE SPOT NUMBER YOU WANT
 spotNumber = spotNumber.toString();
 
 // succesfull connected
