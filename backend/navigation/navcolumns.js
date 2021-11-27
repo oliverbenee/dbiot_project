@@ -3,8 +3,8 @@ for (var i = 0; i < 7; i++) {
   parkingslots[i] = false;
 }
 
-parkingslots.forEach(function(index, value){
-  console.log(index + ": " + value)
+parkingslots.forEach(function(value, index){
+  console.log("P" + index + ": " + value)
 })
 
 function get(slotId){
