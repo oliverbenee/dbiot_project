@@ -16,6 +16,7 @@ function changeState(slotId){
 function setState(slotId, state){
   parkingslots[slotId-1] = state
   //console.log("Navigation has now slot: " + slotId + " as: " + !state)
+  printSlots();
 }
 
 // determines the order of which slot is the "nearest" one.
