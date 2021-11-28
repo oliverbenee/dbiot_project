@@ -39,10 +39,10 @@ export default class Garage extends Component {
       console.log("frontend received message: ", value);
       if(topic == "home/parkingslot/"){
         switch (value.parkingSlotID) {
-          case 1:
-            if (value.isOccupied == true) this.setState({ colorSlot1: "red" });
+          case 5:
+            if (value.isOccupied == true) this.setState({ colorSlot5: "red" });
             else if (value.isOccupied == false)
-              this.setState({ colorSlot1: "green" });
+              this.setState({ colorSlot5: "green" });
             break;
           default:
             break;
@@ -52,16 +52,16 @@ export default class Garage extends Component {
 
     });
 
-    // only for testing
-    this.interval = setInterval(() => {
-      this.setState({ colorSlot3: "red" });
-      this.setState({ colorSlot4: "red" });
-    }, 6000);
+    // // only for testing
+    // this.interval = setInterval(() => {
+    //   this.setState({ colorSlot3: "red" });
+    //   this.setState({ colorSlot4: "red" });
+    // }, 6000);
 
-    this.interval = setInterval(() => {
-      this.setState({ colorSlot3: "green" });
-      this.setState({ colorSlot4: "green" });
-    }, 10000);
+    // this.interval = setInterval(() => {
+    //   this.setState({ colorSlot3: "green" });
+    //   this.setState({ colorSlot4: "green" });
+    // }, 10000);
   }
 
   componentWillUnmount() {
