@@ -47,6 +47,8 @@ export default class Garage extends Component {
           default:
             break;
         }
+      } else {
+        console.log("topic is: " + topic)
       }
 
 
