@@ -31,21 +31,25 @@ export default class Garage extends Component {
     client.on("connect", () => {
       console.log("client connected: ", client.connected);
       client.subscribe("/home/parkingslot/");
+      client.subscribe("home/navigation/available");
     });
 
     client.on("message", (topic, message) => {
       const value = JSON.parse(message);
       console.log("frontend received message: ", value);
-
-      switch (value.parkingSlotID) {
-        case 1:
-          if (value.isOccupied == true) this.setState({ colorSlot1: "red" });
-          else if (value.isOccupied == false)
-            this.setState({ colorSlot1: "green" });
-          break;
-        default:
-          break;
+      if(topic == "home/parkingslot/"){
+        switch (value.parkingSlotID) {
+          case 1:
+            if (value.isOccupied == true) this.setState({ colorSlot1: "red" });
+            else if (value.isOccupied == false)
+              this.setState({ colorSlot1: "green" });
+            break;
+          default:
+            break;
+        }
       }
+
+
     });
 
     // only for testing
