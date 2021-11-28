@@ -3,16 +3,6 @@ for (var i = 0; i < 8; i++) {
   parkingslots[i] = false;
 }
 
-parkingslots.forEach(function(value, index){
-  console.log("P" + index + ": " + value)
-})
-
-console.log("getters:")
-console.log("P1: " + get(1) + " P5: " + get(5))
-console.log("P2: " + get(2) + " P6: " + get(6))
-console.log("P3: " + get(3) + " P7: " + get(7))
-console.log("P4: " + get(4) + " P8: " + get(8))
-
 function get(slotId){
   if(slotId < 1) return null;
   return parkingslots[slotId-1];
@@ -126,15 +116,21 @@ function test(){
   changeState(4);
   console.log("Find next-nearest (should be 4)")
   console.log(getNearestAvailableSlot());
-
-  // Force set state. 
-  console.log("--------------------------------")
-  console.log("Forcing state change")
-  console.log("current state: " + get(4))
-  var state = get(4);
-  console.log("changing state...")
-  setState(4, !state);
 }
 //test();
+
+//parkingslots.forEach(function(value, index){
+//  console.log("P" + index + ": " + value)
+//})
+
+setState(4, true)
+setState(8, true)
+setState(3, true)
+
+console.log("getters:")
+console.log("P1: " + get(1) + " P5: " + get(5))
+console.log("P2: " + get(2) + " P6: " + get(6))
+console.log("P3: " + get(3) + " P7: " + get(7))
+console.log("P4: " + get(4) + " P8: " + get(8))
 
 export {get, changeState, setState, getNearestAvailableSlot}
