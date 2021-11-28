@@ -100,22 +100,29 @@ function test(){
   // changeState(6); console.log("back: " + get(6));
 
   // Get nearest available slot. (OK)
-  console.log("--------------------------------")
-  var nearest = getNearestAvailableSlot();
-  console.log("Nearest free slot should be 4, and is: " + nearest + ". Is it occupied? " + get(nearest));
-  console.log("--------------------------------")
+  // console.log("--------------------------------")
+  // var nearest = getNearestAvailableSlot();
+  // console.log("Nearest free slot should be 4, and is: " + nearest + ". Is it occupied? " + get(nearest));
+  // console.log("--------------------------------")
   
-  // Try to change it and see which is the next nearest is. (OK)
-  console.log("Now somebody parks there... ")
-  changeState(nearest)
-  console.log("New state of "+ nearest + " is: " + get(nearest));
-  nearest = getNearestAvailableSlot();
-  console.log("Find next nearest (should be 7): " + nearest);
-  console.log("--------------------------------")
-  console.log("Now four leaves...")
-  changeState(4);
-  console.log("Find next-nearest (should be 4)")
-  console.log(getNearestAvailableSlot());
+  // // Try to change it and see which is the next nearest is. (OK)
+  // console.log("Now somebody parks there... ")
+  // changeState(nearest)
+  // console.log("New state of "+ nearest + " is: " + get(nearest));
+  // nearest = getNearestAvailableSlot();
+  // console.log("Find next nearest (should be 7): " + nearest);
+  // console.log("--------------------------------")
+  // console.log("Now four leaves...")
+  // changeState(4);
+  // console.log("Find next-nearest (should be 4)")
+  // console.log(getNearestAvailableSlot());
+
+  // Testing printSlots.
+  setState(4, true)
+  setState(8, true)
+  setState(3, true)
+
+  printSlots();
 }
 //test();
 
@@ -123,14 +130,11 @@ function test(){
 //  console.log("P" + index + ": " + value)
 //})
 
-setState(4, true)
-setState(8, true)
-setState(3, true)
-
-console.log("getters:")
-console.log("P1: " + get(1) + " P5: " + get(5))
-console.log("P2: " + get(2) + " P6: " + get(6))
-console.log("P3: " + get(3) + " P7: " + get(7))
-console.log("P4: " + get(4) + " P8: " + get(8))
+function printSlots(){
+  console.log("P1: " + get(1) + " P5: " + get(5))
+  console.log("P2: " + get(2) + " P6: " + get(6))
+  console.log("P3: " + get(3) + " P7: " + get(7))
+  console.log("P4: " + get(4) + " P8: " + get(8))
+}
 
 export {get, changeState, setState, getNearestAvailableSlot}
