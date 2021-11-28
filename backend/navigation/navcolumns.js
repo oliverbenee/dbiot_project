@@ -136,5 +136,6 @@ function printSlots(){
   console.log("P3: " + get(3) + " P7: " + get(7))
   console.log("P4: " + get(4) + " P8: " + get(8))
 }
+printSlots();
 
 export {get, changeState, setState, getNearestAvailableSlot}
