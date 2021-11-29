@@ -18,7 +18,7 @@ export default class Garage extends Component {
   constructor(props) {
     super(props);
 
-    this.setNavigation = this.setNavigation.bind(this)
+    this.setNavigation = this.setNavigation.bind(this);
 
     // use props to set state
     this.state = {
@@ -67,11 +67,12 @@ export default class Garage extends Component {
     }, 10000);
   }
 
+  /**trigger and clear navigation animation */
   setNavigation() {
-    this.interval = setInterval(() => {
-      this.setState({ colorSlot2: "green" });
-    }, 10000);
+    // TODO add param to apply animation to parking slot
+    console.log("set navigation");
     this.setState({ colorSlot2: "navigation-effect" });
+    setTimeout(() =>  this.setState({ colorSlot2: "green" }), 5000);
   }
 
   componentWillUnmount() {
