@@ -28,6 +28,7 @@ export default class Garage extends Component {
       colorSlot6: "green",
       colorSlot7: "green",
       colorSlot8: "green",
+      navigation: "false"
     };
   }
 
@@ -64,6 +65,13 @@ export default class Garage extends Component {
     }, 10000);
   }
 
+  setNavigation(){
+
+
+
+
+  }
+
   componentWillUnmount() {
     clearInterval(this.interval);
   }
@@ -72,18 +80,32 @@ export default class Garage extends Component {
   render() {
     return (
       <div id="parkingArea">
-          <div id="slot1" className={this.state.colorSlot1}>
-            <h3>P1</h3>
-          </div>
-          <div id="slot2" className={this.state.colorSlot2}>
-            <h3>P2</h3>
-          </div>
-          <div id="slot3" className={this.state.colorSlot3}>
-            <h3>P3</h3>
-          </div>
-          <div id="slot4" className={this.state.colorSlot4}>
-            <h3>P4</h3>
-          </div>
+
+        <div id="slot1" className={this.state.colorSlot1}>
+          <h3>P1</h3>
+        </div>
+        <div id="slot2" className={this.state.colorSlot2}>
+          <h3>P2</h3>
+        </div>
+        <div id="slot3" className={this.state.colorSlot3}>
+          <h3>P3</h3>
+        </div>
+        <div id="slot4" className={this.state.colorSlot4}>
+          <h3>P4</h3>
+        </div>
+        <div id="slot5" className={this.state.colorSlot5}>
+          <h3>P5</h3>
+        </div>
+        <div id="slot6" className={this.state.colorSlot6}>
+          <h3>P6</h3>
+        </div>
+        <div id="slot7" className={this.state.colorSlot7}>
+          <h3>P7</h3>
+        </div>
+        <div id="slot8" className={this.state.colorSlot8}>
+          <h3>P8</h3>
+        </div>
+        <button onClick={this.setNavigation}>Show Free Slots</button>
       </div>
     );
   }
