@@ -13,6 +13,8 @@ const mqtt_options = {
   password: "secret",
 };
 const client = mqtt.connect(mqttBroker, mqtt_options);
+const tParkingslot = "/home/parkingslot/";
+const tNavigation = "/home/navigation";
 
 export default class Garage extends Component {
   constructor(props) {
@@ -43,50 +45,55 @@ export default class Garage extends Component {
     client.on("message", (topic, message) => {
       const value = JSON.parse(message);
       console.log("frontend received message: ", value);
+      console.log(topic);
 
-      switch (value.parkingSlotID) {
-        case 1:
-          if (value.isOccupied == true) this.setState({ colorSlot1: "red" });
-          else if (value.isOccupied == false)
-            this.setState({ colorSlot1: "green" });
-          break;
-        case 2:
-          if (value.isOccupied == true) this.setState({ colorSlot2: "red" });
-          else if (value.isOccupied == false)
-            this.setState({ colorSlot2: "green" });
-          break;
-        case 3:
-          if (value.isOccupied == true) this.setState({ colorSlot3: "red" });
-          else if (value.isOccupied == false)
-            this.setState({ colorSlot3: "green" });
-          break;
-        case 4:
-          if (value.isOccupied == true) this.setState({ colorSlot4: "red" });
-          else if (value.isOccupied == false)
-            this.setState({ colorSlot4: "green" });
-          break;
-        case 5:
-          if (value.isOccupied == true) this.setState({ colorSlot5: "red" });
-          else if (value.isOccupied == false)
-            this.setState({ colorSlot5: "green" });
-          break;
-        case 6:
-          if (value.isOccupied == true) this.setState({ colorSlot6: "red" });
-          else if (value.isOccupied == false)
-            this.setState({ colorSlot6: "green" });
-          break;
-        case 7:
-          if (value.isOccupied == true) this.setState({ colorSlot7: "red" });
-          else if (value.isOccupied == false)
-            this.setState({ colorSlot7: "green" });
-          break;
-        case 8:
-          if (value.isOccupied == true) this.setState({ colorSlot8: "red" });
-          else if (value.isOccupied == false)
-            this.setState({ colorSlot8: "green" });
-          break;
-        default:
-          break;
+      if (topic == tParkingslot) {
+        switch (value.parkingSlotID) {
+          case 1:
+            if (value.isOccupied == true) this.setState({ colorSlot1: "red" });
+            else if (value.isOccupied == false)
+              this.setState({ colorSlot1: "green" });
+            break;
+          case 2:
+            if (value.isOccupied == true) this.setState({ colorSlot2: "red" });
+            else if (value.isOccupied == false)
+              this.setState({ colorSlot2: "green" });
+            break;
+          case 3:
+            if (value.isOccupied == true) this.setState({ colorSlot3: "red" });
+            else if (value.isOccupied == false)
+              this.setState({ colorSlot3: "green" });
+            break;
+          case 4:
+            if (value.isOccupied == true) this.setState({ colorSlot4: "red" });
+            else if (value.isOccupied == false)
+              this.setState({ colorSlot4: "green" });
+            break;
+          case 5:
+            if (value.isOccupied == true) this.setState({ colorSlot5: "red" });
+            else if (value.isOccupied == false)
+              this.setState({ colorSlot5: "green" });
+            break;
+          case 6:
+            if (value.isOccupied == true) this.setState({ colorSlot6: "red" });
+            else if (value.isOccupied == false)
+              this.setState({ colorSlot6: "green" });
+            break;
+          case 7:
+            if (value.isOccupied == true) this.setState({ colorSlot7: "red" });
+            else if (value.isOccupied == false)
+              this.setState({ colorSlot7: "green" });
+            break;
+          case 8:
+            if (value.isOccupied == true) this.setState({ colorSlot8: "red" });
+            else if (value.isOccupied == false)
+              this.setState({ colorSlot8: "green" });
+            break;
+          default:
+            break;
+        }
+      } else if (topic == tNavigation) {
+        this.setNavigation(value.parkingSlotID);
       }
     });
   }
