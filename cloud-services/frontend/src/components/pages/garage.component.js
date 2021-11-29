@@ -50,33 +50,89 @@ export default class Garage extends Component {
           else if (value.isOccupied == false)
             this.setState({ colorSlot1: "green" });
           break;
+        case 2:
+          if (value.isOccupied == true) this.setState({ colorSlot2: "red" });
+          else if (value.isOccupied == false)
+            this.setState({ colorSlot2: "green" });
+          break;
+        case 3:
+          if (value.isOccupied == true) this.setState({ colorSlot3: "red" });
+          else if (value.isOccupied == false)
+            this.setState({ colorSlot3: "green" });
+          break;
+        case 4:
+          if (value.isOccupied == true) this.setState({ colorSlot4: "red" });
+          else if (value.isOccupied == false)
+            this.setState({ colorSlot4: "green" });
+          break;
+        case 5:
+          if (value.isOccupied == true) this.setState({ colorSlot5: "red" });
+          else if (value.isOccupied == false)
+            this.setState({ colorSlot5: "green" });
+          break;
+        case 6:
+          if (value.isOccupied == true) this.setState({ colorSlot6: "red" });
+          else if (value.isOccupied == false)
+            this.setState({ colorSlot6: "green" });
+          break;
+        case 7:
+          if (value.isOccupied == true) this.setState({ colorSlot7: "red" });
+          else if (value.isOccupied == false)
+            this.setState({ colorSlot7: "green" });
+          break;
+        case 8:
+          if (value.isOccupied == true) this.setState({ colorSlot8: "red" });
+          else if (value.isOccupied == false)
+            this.setState({ colorSlot8: "green" });
+          break;
         default:
           break;
       }
     });
-
-    // only for testing
-    this.interval = setInterval(() => {
-      this.setState({ colorSlot3: "red" });
-      this.setState({ colorSlot4: "red" });
-    }, 6000);
-
-    this.interval = setInterval(() => {
-      this.setState({ colorSlot3: "green" });
-      this.setState({ colorSlot4: "green" });
-    }, 10000);
   }
 
   /**trigger and clear navigation animation */
-  setNavigation() {
-    // TODO add param to apply animation to parking slot
+  setNavigation(slot) {
     console.log("set navigation");
     this.setState({ colorSlot2: "navigation-effect" });
-    setTimeout(() =>  this.setState({ colorSlot2: "green" }), 5000);
-  }
+    setTimeout(() => this.setState({ colorSlot2: "green" }), 5000);
 
-  componentWillUnmount() {
-    clearInterval(this.interval);
+    // switch (slot) {
+    //   case 1:
+    //     this.setState({ colorSlot1: "navigation-effect" });
+    //     setTimeout(() => this.setState({ colorSlot1: "green" }), 5000);
+    //     break;
+    //   case 2:
+    //     this.setState({ colorSlot2: "navigation-effect" });
+    //     setTimeout(() => this.setState({ colorSlot2: "green" }), 5000);
+    //     break;
+    //   case 3:
+    //     this.setState({ colorSlot3: "navigation-effect" });
+    //     setTimeout(() => this.setState({ colorSlot3: "green" }), 5000);
+    //     break;
+    //   case 4:
+    //     this.setState({ colorSlot4: "navigation-effect" });
+    //     setTimeout(() => this.setState({ colorSlot4: "green" }), 5000);
+    //     break;
+    //   case 5:
+    //     this.setState({ colorSlot5: "navigation-effect" });
+    //     setTimeout(() => this.setState({ colorSlot5: "green" }), 5000);
+    //     break;
+    //   case 6:
+    //     this.setState({ colorSlot6: "navigation-effect" });
+    //     setTimeout(() => this.setState({ colorSlot6: "green" }), 5000);
+    //     break;
+    //   case 7:
+    //     this.setState({ colorSlot7: "navigation-effect" });
+    //     setTimeout(() => this.setState({ colorSlot7: "green" }), 5000);
+    //     break;
+    //   case 8:
+    //     this.setState({ colorSlot8: "navigation-effect" });
+    //     setTimeout(() => this.setState({ colorSlot8: "green" }), 5000);
+    //     break;
+    //   default:
+    //     break;
+    // }
   }
 
   /** render component */
