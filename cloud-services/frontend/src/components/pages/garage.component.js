@@ -18,6 +18,8 @@ export default class Garage extends Component {
   constructor(props) {
     super(props);
 
+    this.setNavigation = this.setNavigation.bind(this)
+
     // use props to set state
     this.state = {
       colorSlot1: "green",
@@ -28,7 +30,7 @@ export default class Garage extends Component {
       colorSlot6: "green",
       colorSlot7: "green",
       colorSlot8: "green",
-      navigation: "false"
+      navigation: "false",
     };
   }
 
@@ -65,11 +67,11 @@ export default class Garage extends Component {
     }, 10000);
   }
 
-  setNavigation(){
-
-
-
-
+  setNavigation() {
+    this.interval = setInterval(() => {
+      this.setState({ colorSlot2: "green" });
+    }, 10000);
+    this.setState({ colorSlot2: "navigation-effect" });
   }
 
   componentWillUnmount() {
@@ -80,7 +82,6 @@ export default class Garage extends Component {
   render() {
     return (
       <div id="parkingArea">
-
         <div id="slot1" className={this.state.colorSlot1}>
           <h3>P1</h3>
         </div>
