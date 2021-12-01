@@ -3,6 +3,7 @@ import GarageTable from "./garage.table.component";
 import "./css/homepage.css";
 import ParkingZoneLineChart from "./charts/parkingzone.linechart.component";
 import { Table } from "react-bootstrap";
+import AreaChart from "./charts/areachart.component";
 
 /**
  * Main Component to display an overview of all parking garages in aarhus
@@ -132,11 +133,13 @@ export default class Homepage extends Component {
             <tbody>{this.garageList()}</tbody>
           </Table>
         </body>
-        <ParkingZoneLineChart
+        {/* <ParkingZoneLineChart
           KALKVAERKSVEJ={this.state.pKALKVAERKSVEJ}
           NewBusgadehuset={this.state.pNewBusgadehuset}
           Salling={this.state.pSALLING}
-        />
+        /> */}
+
+        <AreaChart data={this.state.pKALKVAERKSVEJ} />
       </div>
     );
   }
