@@ -3,3 +3,7 @@
     text-align: center;
     float: left;
 }
+
+td:hover {
+    cursor: pointer;
+}

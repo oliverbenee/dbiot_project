@@ -21,9 +21,12 @@ export default class ParkingZoneLineChart extends Component {
     this.drawLineChart();
   }
   drawLineChart() {
+
+    // TODO update line chart
+    //document.getElementById("#vis1").innerHTML = "";
     // setting up svg
     const w = 600;
-    const h = 300;
+    const h = 600;
     const svg = d3
       .select(this.myRef.current)
       .attr("width", w)
@@ -87,6 +90,6 @@ export default class ParkingZoneLineChart extends Component {
 
   /** render component */
   render() {
-    return <svg ref={this.myRef}></svg>;
+    return <svg id="vis1" ref={this.myRef}></svg>;
   }
 }
