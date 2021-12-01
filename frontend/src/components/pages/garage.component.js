@@ -14,7 +14,7 @@ const mqtt_options = {
 };
 const client = mqtt.connect(mqttBroker, mqtt_options);
 const tParkingslot = "/home/parkingslot/";
-const tNavigation = "/home/navigation";
+const tNavigation = "home/navigation/available";
 
 export default class Garage extends Component {
   constructor(props) {
@@ -94,56 +94,54 @@ export default class Garage extends Component {
             break;
         }
       } else if (topic == tNavigation) {
-        console.log(value)
+        console.log(value);
         this.setNavigation(value);
       }
-
-
     });
   }
 
   /**trigger and clear navigation animation */
   setNavigation(slot) {
     console.log("set navigation");
-    this.setState({ colorSlot2: "navigation-effect" });
-    setTimeout(() => this.setState({ colorSlot2: "green" }), 5000);
+    // this.setState({ colorSlot2: "navigation-effect" });
+    // setTimeout(() => this.setState({ colorSlot2: "green" }), 5000);
 
-    // switch (slot) {
-    //   case 1:
-    //     this.setState({ colorSlot1: "navigation-effect" });
-    //     setTimeout(() => this.setState({ colorSlot1: "green" }), 5000);
-    //     break;
-    //   case 2:
-    //     this.setState({ colorSlot2: "navigation-effect" });
-    //     setTimeout(() => this.setState({ colorSlot2: "green" }), 5000);
-    //     break;
-    //   case 3:
-    //     this.setState({ colorSlot3: "navigation-effect" });
-    //     setTimeout(() => this.setState({ colorSlot3: "green" }), 5000);
-    //     break;
-    //   case 4:
-    //     this.setState({ colorSlot4: "navigation-effect" });
-    //     setTimeout(() => this.setState({ colorSlot4: "green" }), 5000);
-    //     break;
-    //   case 5:
-    //     this.setState({ colorSlot5: "navigation-effect" });
-    //     setTimeout(() => this.setState({ colorSlot5: "green" }), 5000);
-    //     break;
-    //   case 6:
-    //     this.setState({ colorSlot6: "navigation-effect" });
-    //     setTimeout(() => this.setState({ colorSlot6: "green" }), 5000);
-    //     break;
-    //   case 7:
-    //     this.setState({ colorSlot7: "navigation-effect" });
-    //     setTimeout(() => this.setState({ colorSlot7: "green" }), 5000);
-    //     break;
-    //   case 8:
-    //     this.setState({ colorSlot8: "navigation-effect" });
-    //     setTimeout(() => this.setState({ colorSlot8: "green" }), 5000);
-    //     break;
-    //   default:
-    //     break;
-    // }
+    switch (slot) {
+      case 1:
+        this.setState({ colorSlot1: "navigation-effect" });
+        setTimeout(() => this.setState({ colorSlot1: "green" }), 5000);
+        break;
+      case 2:
+        this.setState({ colorSlot2: "navigation-effect" });
+        setTimeout(() => this.setState({ colorSlot2: "green" }), 5000);
+        break;
+      case 3:
+        this.setState({ colorSlot3: "navigation-effect" });
+        setTimeout(() => this.setState({ colorSlot3: "green" }), 5000);
+        break;
+      case 4:
+        this.setState({ colorSlot4: "navigation-effect" });
+        setTimeout(() => this.setState({ colorSlot4: "green" }), 5000);
+        break;
+      case 5:
+        this.setState({ colorSlot5: "navigation-effect" });
+        setTimeout(() => this.setState({ colorSlot5: "green" }), 5000);
+        break;
+      case 6:
+        this.setState({ colorSlot6: "navigation-effect" });
+        setTimeout(() => this.setState({ colorSlot6: "green" }), 5000);
+        break;
+      case 7:
+        this.setState({ colorSlot7: "navigation-effect" });
+        setTimeout(() => this.setState({ colorSlot7: "green" }), 5000);
+        break;
+      case 8:
+        this.setState({ colorSlot8: "navigation-effect" });
+        setTimeout(() => this.setState({ colorSlot8: "green" }), 5000);
+        break;
+      default:
+        break;
+    }
   }
 
   /** render component */
