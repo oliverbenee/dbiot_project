@@ -92,7 +92,7 @@ client.on("message", function (topic, message, packet) {
     navigation.setState(spotNumber, isOccupied);
   }
   if (topic == "home/sensor/tripwire") {
-    publishAvailableParkingSlot();
+    setTimeout(publishAvailableParkingSlot(), 5000)
   }
   // console.log("___________________________"); //UNCOMMENT THIS LINE FOR DEBUG
   // DEBUG: goto localhost:5000/parkingslots/KALKVAERKSVEJ for checking
