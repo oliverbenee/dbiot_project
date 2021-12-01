@@ -93,7 +93,8 @@ export default class Garage extends Component {
             break;
         }
       } else if (topic == tNavigation) {
-        this.setNavigation(value.parkingSlotID);
+        console.log(value)
+        this.setNavigation(value);
       }
     });
   }

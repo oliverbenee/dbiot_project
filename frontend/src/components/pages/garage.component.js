@@ -13,10 +13,14 @@ const mqtt_options = {
   password: "secret",
 };
 const client = mqtt.connect(mqttBroker, mqtt_options);
+const tParkingslot = "/home/parkingslot/";
+const tNavigation = "/home/navigation";
 
 export default class Garage extends Component {
   constructor(props) {
     super(props);
+
+    this.setNavigation = this.setNavigation.bind(this);
 
     // use props to set state
     this.state = {
@@ -24,6 +28,11 @@ export default class Garage extends Component {
       colorSlot2: "green",
       colorSlot3: "green",
       colorSlot4: "green",
+      colorSlot5: "green",
+      colorSlot6: "green",
+      colorSlot7: "green",
+      colorSlot8: "green",
+      navigation: "false",
     };
   }
 
@@ -36,32 +45,102 @@ export default class Garage extends Component {
     client.on("message", (topic, message) => {
       const value = JSON.parse(message);
       console.log("frontend received message: ", value);
+      console.log(topic);
 
-      switch (value.parkingSlotID) {
-        case 1:
-          if (value.isOccupied == true) this.setState({ colorSlot1: "red" });
-          else if (value.isOccupied == false)
-            this.setState({ colorSlot1: "green" });
-          break;
-        default:
-          break;
+      if (topic == tParkingslot) {
+        switch (value.parkingSlotID) {
+          case 1:
+            if (value.isOccupied == true) this.setState({ colorSlot1: "red" });
+            else if (value.isOccupied == false)
+              this.setState({ colorSlot1: "green" });
+            break;
+          case 2:
+            if (value.isOccupied == true) this.setState({ colorSlot2: "red" });
+            else if (value.isOccupied == false)
+              this.setState({ colorSlot2: "green" });
+            break;
+          case 3:
+            if (value.isOccupied == true) this.setState({ colorSlot3: "red" });
+            else if (value.isOccupied == false)
+              this.setState({ colorSlot3: "green" });
+            break;
+          case 4:
+            if (value.isOccupied == true) this.setState({ colorSlot4: "red" });
+            else if (value.isOccupied == false)
+              this.setState({ colorSlot4: "green" });
+            break;
+          case 5:
+            if (value.isOccupied == true) this.setState({ colorSlot5: "red" });
+            else if (value.isOccupied == false)
+              this.setState({ colorSlot5: "green" });
+            break;
+          case 6:
+            if (value.isOccupied == true) this.setState({ colorSlot6: "red" });
+            else if (value.isOccupied == false)
+              this.setState({ colorSlot6: "green" });
+            break;
+          case 7:
+            if (value.isOccupied == true) this.setState({ colorSlot7: "red" });
+            else if (value.isOccupied == false)
+              this.setState({ colorSlot7: "green" });
+            break;
+          case 8:
+            if (value.isOccupied == true) this.setState({ colorSlot8: "red" });
+            else if (value.isOccupied == false)
+              this.setState({ colorSlot8: "green" });
+            break;
+          default:
+            break;
+        }
+      } else if (topic == tNavigation) {
+        console.log(value)
+        this.setNavigation(value);
       }
     });
-
-    // only for testing
-    this.interval = setInterval(() => {
-      this.setState({ colorSlot3: "red" });
-      this.setState({ colorSlot4: "red" });
-    }, 6000);
-
-    this.interval = setInterval(() => {
-      this.setState({ colorSlot3: "green" });
-      this.setState({ colorSlot4: "green" });
-    }, 10000);
   }
 
-  componentWillUnmount() {
-    clearInterval(this.interval);
+  /**trigger and clear navigation animation */
+  setNavigation(slot) {
+    console.log("set navigation");
+    this.setState({ colorSlot2: "navigation-effect" });
+    setTimeout(() => this.setState({ colorSlot2: "green" }), 5000);
+
+    // switch (slot) {
+    //   case 1:
+    //     this.setState({ colorSlot1: "navigation-effect" });
+    //     setTimeout(() => this.setState({ colorSlot1: "green" }), 5000);
+    //     break;
+    //   case 2:
+    //     this.setState({ colorSlot2: "navigation-effect" });
+    //     setTimeout(() => this.setState({ colorSlot2: "green" }), 5000);
+    //     break;
+    //   case 3:
+    //     this.setState({ colorSlot3: "navigation-effect" });
+    //     setTimeout(() => this.setState({ colorSlot3: "green" }), 5000);
+    //     break;
+    //   case 4:
+    //     this.setState({ colorSlot4: "navigation-effect" });
+    //     setTimeout(() => this.setState({ colorSlot4: "green" }), 5000);
+    //     break;
+    //   case 5:
+    //     this.setState({ colorSlot5: "navigation-effect" });
+    //     setTimeout(() => this.setState({ colorSlot5: "green" }), 5000);
+    //     break;
+    //   case 6:
+    //     this.setState({ colorSlot6: "navigation-effect" });
+    //     setTimeout(() => this.setState({ colorSlot6: "green" }), 5000);
+    //     break;
+    //   case 7:
+    //     this.setState({ colorSlot7: "navigation-effect" });
+    //     setTimeout(() => this.setState({ colorSlot7: "green" }), 5000);
+    //     break;
+    //   case 8:
+    //     this.setState({ colorSlot8: "navigation-effect" });
+    //     setTimeout(() => this.setState({ colorSlot8: "green" }), 5000);
+    //     break;
+    //   default:
+    //     break;
+    // }
   }
 
   /** render component */
@@ -80,6 +159,19 @@ export default class Garage extends Component {
         <div id="slot4" className={this.state.colorSlot4}>
           <h3>P4</h3>
         </div>
+        <div id="slot5" className={this.state.colorSlot5}>
+          <h3>P5</h3>
+        </div>
+        <div id="slot6" className={this.state.colorSlot6}>
+          <h3>P6</h3>
+        </div>
+        <div id="slot7" className={this.state.colorSlot7}>
+          <h3>P7</h3>
+        </div>
+        <div id="slot8" className={this.state.colorSlot8}>
+          <h3>P8</h3>
+        </div>
+        <button onClick={this.setNavigation}>Show Free Slots</button>
       </div>
     );
   }
