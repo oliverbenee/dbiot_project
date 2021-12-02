@@ -91,22 +91,22 @@ select * from historical;
 SELECT AVG(freeSlots) FROM historical WHERE parkingZoneID = "KALKVAERKSVEJ" AND dayofweek(time) = 4;
 
 # Insert for every day of the week. KALKVAERKSVEJ
-INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-10-30 23:47:19', "KALKVAERKSVEJ", 50, 200);
-INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-10-31 23:47:19', "KALKVAERKSVEJ", 60, 200);
-INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-1 23:47:19', "KALKVAERKSVEJ", 40, 200);
-INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-2 23:47:19', "KALKVAERKSVEJ", 80, 200);
-INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-3 23:47:19', "KALKVAERKSVEJ", 90, 200);
-INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-4 23:47:19', "KALKVAERKSVEJ", 110, 200);
-INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-5 23:47:19', "KALKVAERKSVEJ", 120, 200);
+INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-10-30 23:47:19', "KALKVAERKSVEJ", 50, 210);
+INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-10-31 23:47:19', "KALKVAERKSVEJ", 60, 210);
+INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-1 23:47:19', "KALKVAERKSVEJ", 40, 210);
+INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-2 23:47:19', "KALKVAERKSVEJ", 80, 210);
+INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-3 23:47:19', "KALKVAERKSVEJ", 90, 210);
+INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-4 23:47:19', "KALKVAERKSVEJ", 110, 210);
+INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-5 23:47:19', "KALKVAERKSVEJ", 120, 210);
 
 # Insert for every day of the week. NewBusgadehuset
-INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-10-30 23:47:19', "NewBusgadehuset", 180, 200);
-INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-10-31 23:47:19', "NewBusgadehuset", 90, 200);
-INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-1 23:47:19', "NewBusgadehuset", 80, 200);
-INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-2 23:47:19', "NewBusgadehuset", 20, 200);
-INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-3 23:47:19', "NewBusgadehuset", 10, 200);
-INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-4 23:47:19', "NewBusgadehuset", 130, 200);
-INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-5 23:47:19', "NewBusgadehuset", 150, 200);
+INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-10-30 23:47:19', "NewBusgadehuset", 80, 105);
+INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-10-31 23:47:19', "NewBusgadehuset", 90, 105);
+INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-1 23:47:19', "NewBusgadehuset", 80, 105);
+INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-2 23:47:19', "NewBusgadehuset", 20, 105);
+INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-3 23:47:19', "NewBusgadehuset", 10, 105);
+INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-4 23:47:19', "NewBusgadehuset", 30, 105);
+INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-5 23:47:19', "NewBusgadehuset", 50, 105);
 
 # Insert for every day of the week. BRUUNS
 INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-10-30 23:47:19', "BRUUNS", 0, 0);
@@ -118,58 +118,58 @@ INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2
 INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-5 23:47:19', "BRUUNS", 0, 0);
 
 # Insert for every day of the week. SALLING
-INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-10-30 23:47:19', "SALLING", 0, 200);
-INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-10-31 23:47:19', "SALLING", 150, 200);
-INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-1 23:47:19', "SALLING", 120, 200);
-INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-2 23:47:19', "SALLING", 30, 200);
-INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-3 23:47:19', "SALLING", 160, 200);
-INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-4 23:47:19', "SALLING", 200, 200);
-INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-5 23:47:19', "SALLING", 200, 200);
+INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-10-30 23:47:19', "SALLING", 0, 700);
+INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-10-31 23:47:19', "SALLING", 150, 700);
+INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-1 23:47:19', "SALLING", 120, 700);
+INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-2 23:47:19', "SALLING", 30, 700);
+INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-3 23:47:19', "SALLING", 160, 700);
+INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-4 23:47:19', "SALLING", 200, 700);
+INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-5 23:47:19', "SALLING", 200, 700);
 
 # Insert for every day of the week. NORREPORT
-INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-10-30 23:47:19', "NORREPORT", 0, 200);
-INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-10-31 23:47:19', "NORREPORT", 150, 200);
-INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-1 23:47:19', "NORREPORT", 120, 200);
-INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-2 23:47:19', "NORREPORT", 30, 200);
-INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-3 23:47:19', "NORREPORT", 160, 200);
-INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-4 23:47:19', "NORREPORT", 200, 200);
-INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-5 23:47:19', "NORREPORT", 200, 200);
+INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-10-30 23:47:19', "NORREPORT", 0, 100);
+INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-10-31 23:47:19', "NORREPORT", 50, 100);
+INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-1 23:47:19', "NORREPORT", 20, 100);
+INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-2 23:47:19', "NORREPORT", 30, 100);
+INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-3 23:47:19', "NORREPORT", 60, 100);
+INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-4 23:47:19', "NORREPORT", 100, 100);
+INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-5 23:47:19', "NORREPORT", 100, 100);
 
 # Insert for every day of the week. Urban Level 1
-INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-10-30 23:47:19', "Urban Level 1", 0, 200);
-INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-10-31 23:47:19', "Urban Level 1", 150, 200);
-INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-1 23:47:19', "Urban Level 1", 120, 200);
-INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-2 23:47:19', "Urban Level 1", 30, 200);
-INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-3 23:47:19', "Urban Level 1", 160, 200);
-INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-4 23:47:19', "Urban Level 1", 200, 200);
-INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-5 23:47:19', "Urban Level 1", 200, 200);
+INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-10-30 23:47:19', "Urban Level 1", 0, 319);
+INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-10-31 23:47:19', "Urban Level 1", 150, 319);
+INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-1 23:47:19', "Urban Level 1", 120, 319);
+INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-2 23:47:19', "Urban Level 1", 30, 319);
+INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-3 23:47:19', "Urban Level 1", 160, 319);
+INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-4 23:47:19', "Urban Level 1", 200, 319);
+INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-5 23:47:19', "Urban Level 1", 200, 319);
 
 # Insert for every day of the week. Urban Level 2+3
-INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-10-30 23:47:19', "Urban Level 2+3", 0, 200);
-INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-10-31 23:47:19', "Urban Level 2+3", 150, 200);
-INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-1 23:47:19', "Urban Level 2+3", 120, 200);
-INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-2 23:47:19', "Urban Level 2+3", 30, 200);
-INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-3 23:47:19', "Urban Level 2+3", 160, 200);
-INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-4 23:47:19', "Urban Level 2+3", 200, 200);
-INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-5 23:47:19', "Urban Level 2+3", 200, 200);
+INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-10-30 23:47:19', "Urban Level 2+3", 0, 654);
+INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-10-31 23:47:19', "Urban Level 2+3", 150, 654);
+INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-1 23:47:19', "Urban Level 2+3", 120, 654);
+INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-2 23:47:19', "Urban Level 2+3", 30, 654);
+INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-3 23:47:19', "Urban Level 2+3", 160, 654);
+INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-4 23:47:19', "Urban Level 2+3", 200, 654);
+INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-5 23:47:19', "Urban Level 2+3", 200, 654);
 
 # Insert for every day of the week. MAGASIN
-INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-10-30 23:47:19', "MAGASIN", 0, 200);
-INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-10-31 23:47:19', "MAGASIN", 150, 200);
-INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-1 23:47:19', "MAGASIN", 120, 200);
-INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-2 23:47:19', "MAGASIN", 30, 200);
-INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-3 23:47:19', "MAGASIN", 160, 200);
-INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-4 23:47:19', "MAGASIN", 200, 200);
-INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-5 23:47:19', "MAGASIN", 200, 200);
+INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-10-30 23:47:19', "MAGASIN", 0, 378);
+INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-10-31 23:47:19', "MAGASIN", 150, 378);
+INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-1 23:47:19', "MAGASIN", 120, 378);
+INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-2 23:47:19', "MAGASIN", 30, 378);
+INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-3 23:47:19', "MAGASIN", 160, 378);
+INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-4 23:47:19', "MAGASIN", 200, 378);
+INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-5 23:47:19', "MAGASIN", 200, 378);
 
 # Insert for every day of the week. SCANDCENTER
-INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-10-30 23:47:19', "SCANDCENTER", 0, 200);
-INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-10-31 23:47:19', "SCANDCENTER", 150, 200);
-INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-1 23:47:19', "SCANDCENTER", 120, 200);
-INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-2 23:47:19', "SCANDCENTER", 30, 200);
-INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-3 23:47:19', "SCANDCENTER", 160, 200);
-INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-4 23:47:19', "SCANDCENTER", 200, 200);
-INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-5 23:47:19', "SCANDCENTER", 200, 200);
+INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-10-30 23:47:19', "SCANDCENTER", 0, 1240);
+INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-10-31 23:47:19', "SCANDCENTER", 150, 1240);
+INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-1 23:47:19', "SCANDCENTER", 120, 1240);
+INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-2 23:47:19', "SCANDCENTER", 30, 1240);
+INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-3 23:47:19', "SCANDCENTER", 160, 1240);
+INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-4 23:47:19', "SCANDCENTER", 200, 1240);
+INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-11-5 23:47:19', "SCANDCENTER", 200, 1240);
 
 # Insert for every day of the week. Navitas
 INSERT INTO historical(time, parkingZoneID, freeSlots, totalCapacity) VALUES ('2021-10-30 23:47:19', "Navitas", 0, 200);

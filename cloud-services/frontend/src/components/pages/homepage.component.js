@@ -124,7 +124,7 @@ export default class Homepage extends Component {
           };
 
           data.push(item);
-          console.log("data:", data);
+          console.log("data: ", data);
           day++;
         }
 
