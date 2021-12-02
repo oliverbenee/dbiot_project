@@ -79,7 +79,11 @@ export default class AreaChart extends Component {
       .append("path")
       .datum(this.props.data)
       .attr("class", "area")
-      .attr("d", area);
+      .attr("d", area)
+      .style("fill", "blue")
+      .on("mouseover", (d) =>{
+        console.log("mousover: ", d)
+      });
 
     svg
       .append("g")
