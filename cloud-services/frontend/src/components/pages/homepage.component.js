@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import GarageTable from "./garage.table.component";
 import "./css/homepage.css";
-import ParkingZoneLineChart from "./charts/parkingzone.linechart.component";
+import LineChart from "./charts/linechart.component";
 import { Table } from "react-bootstrap";
 import AreaChart from "./charts/areachart.component";
 
@@ -145,14 +145,11 @@ export default class Homepage extends Component {
             <tbody>{this.garageList()}</tbody>
           </Table>
         </body>
-        {/* <ParkingZoneLineChart
-          KALKVAERKSVEJ={this.state.pKALKVAERKSVEJ}
-          NewBusgadehuset={this.state.pNewBusgadehuset}
-          Salling={this.state.pSALLING}
-        /> */}
-
         <AreaChart data={this.state.pKALKVAERKSVEJ} title={"KALKVAERKSVEJ"} />
-        <AreaChart data={this.state.pNewBusgadehuset} title={"NewBusgadehuset"} />
+        <AreaChart
+          data={this.state.pNewBusgadehuset}
+          title={"NewBusgadehuset"}
+        />
         <AreaChart data={this.state.pSALLING} title={"SALLING"} />
         <AreaChart data={this.state.pSALLING} title={"SALLING"} />
       </div>

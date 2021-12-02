@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "../css/homepage.css";
 import * as d3 from "d3";
+import "../css/chart.css";
 
 export default class AreaChart extends Component {
   constructor(props) {
@@ -12,7 +13,6 @@ export default class AreaChart extends Component {
   }
 
   componentDidUpdate() {
-    console.log("updating");
     this.draw();
   }
 
@@ -24,11 +24,6 @@ export default class AreaChart extends Component {
   draw() {
     // clear chart
     d3.select(this.myRef.current).selectChildren().remove();
-    console.log(this.myRef.current);
-    d3.select(this.myRef).remove();
-    console.log("draw chart");
-    console.log(this.props.data);
-    console.log(this.state.data);
     var margin = { top: 20, right: 20, bottom: 30, left: 50 },
       width = 575 - margin.left - margin.right,
       height = 350 - margin.top - margin.bottom;
@@ -60,7 +55,6 @@ export default class AreaChart extends Component {
     var area = d3
       .area()
       .x(function (d) {
-        console.log(d);
         return x(d.x);
       })
       .y0(height)
@@ -75,29 +69,55 @@ export default class AreaChart extends Component {
       .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    svg
-      .append("path")
-      .datum(this.props.data)
-      .attr("class", "area")
-      .attr("d", area)
-      .style("fill", "blue")
-      .on("mouseover", (d) =>{
-        console.log("mousover: ", d)
-      });
-
-    svg
+      svg
       .append("g")
       .attr("class", "x axis")
       .attr("transform", "translate(0," + height + ")")
       .call(xAxis);
 
     svg.append("g").attr("class", "y axis").call(yAxis);
+
+    svg
+      .append("path")
+      .datum(this.props.data)
+      .attr("class", "area")
+      .attr("d", area)
+      .style("fill", "blue")
+      .on("mouseover", (d, i) => {
+        // Get bar's xy values, ,then augment for the tooltip
+
+        console.log("value: ", i);
+
+        var xPos = d.pageX;
+        var yPos = d.pageY;
+
+        // Update Tooltip's position and value
+        d3.select("#tooltip")
+          .style("left", xPos + "px")
+          .style("top", yPos + "px")
+          .select("#value")
+          .text(i);
+
+        d3.select("#tooltip").classed("hidden", false);
+
+        console.log("mousover: ", d);
+      });
+
+   
   }
 
   /** render component */
   render() {
     return (
-      <div>
+      <div id="chart-container">
+        <div id="tooltip" className="hidden">
+          <p>
+            <strong>Value</strong>
+          </p>
+          <p>
+            <span id="value">100</span>
+          </p>
+        </div>
         <h4 id="chartTitle">{this.props.title}</h4>
         <svg ref={this.myRef}></svg>
       </div>
