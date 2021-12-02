@@ -2,25 +2,17 @@ import React, { Component } from "react";
 import "../css/homepage.css";
 import * as d3 from "d3";
 
-const data = [
-  { x: 0, y: 10 },
-  { x: 1, y: 15 },
-  { x: 2, y: 35 },
-  { x: 3, y: 20 },
-  { x: 4, y: 20 },
-  { x: 5, y: 20 },
-  { x: 6, y: 20 },
-];
-
 export default class AreaChart extends Component {
   constructor(props) {
     super(props);
     this.myRef = React.createRef();
     this.state = {
-      data: data,
+      data: this.props.data,
     };
   }
+
   componentDidUpdate() {
+    console.log("updating");
     this.draw();
   }
 
@@ -30,7 +22,13 @@ export default class AreaChart extends Component {
 
   /** draw area chart */
   draw() {
+    // clear chart
+    d3.select(this.myRef.current).selectChildren().remove();
+    console.log(this.myRef.current);
+    d3.select(this.myRef).remove();
+    console.log("draw chart");
     console.log(this.props.data);
+    console.log(this.state.data);
     var margin = { top: 20, right: 20, bottom: 30, left: 50 },
       width = 575 - margin.left - margin.right,
       height = 350 - margin.top - margin.bottom;
@@ -38,8 +36,8 @@ export default class AreaChart extends Component {
     var x = d3
       .scaleLinear()
       .domain([
-        0,
-        d3.max(this.state.data, function (d) {
+        1,
+        d3.max(this.props.data, function (d) {
           return d.x;
         }),
       ])
@@ -49,7 +47,7 @@ export default class AreaChart extends Component {
       .scaleLinear()
       .domain([
         0,
-        d3.max(this.state.data, function (d) {
+        d3.max(this.props.data, function (d) {
           return d.y;
         }),
       ])
@@ -79,7 +77,7 @@ export default class AreaChart extends Component {
 
     svg
       .append("path")
-      .datum(this.state.data)
+      .datum(this.props.data)
       .attr("class", "area")
       .attr("d", area);
 
@@ -94,6 +92,11 @@ export default class AreaChart extends Component {
 
   /** render component */
   render() {
-    return <svg id="vis1" ref={this.myRef}></svg>;
+    return (
+      <div>
+        <h4 id="chartTitle">{this.props.title}</h4>
+        <svg ref={this.myRef}></svg>
+      </div>
+    );
   }
 }

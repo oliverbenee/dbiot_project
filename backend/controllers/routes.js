@@ -22,7 +22,7 @@ router.route("/history/:parkingZoneID/:day").get((req, res) => {
       if (!err) {
 
         // convert data into right format
-        var res = [
+        var data = [
           {x: 1, y: result[0]},
           {x: 2, y: result[1]},
           {x: 3, y: result[2]},
@@ -31,7 +31,7 @@ router.route("/history/:parkingZoneID/:day").get((req, res) => {
           {x: 6, y: result[5]},
           {x: 7, y: result[6]}
           ]
-        res.send(result);
+        res.send(data);
       } else {
         console.log("error: ", err);
       }

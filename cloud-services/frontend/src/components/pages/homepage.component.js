@@ -29,7 +29,7 @@ export default class Homepage extends Component {
     this.interval = setInterval(() => {
       this.getOpenData();
       this.getAllHistoricalData();
-    }, 60000);
+    }, 10000);
     // todo refresh historical data for chart
     this.getAllHistoricalData();
   }
@@ -85,20 +85,32 @@ export default class Homepage extends Component {
         return array;
       })
       .then((array) => {
+        var data = [
+          { x: 1, y: array[0] },
+          { x: 2, y: array[1] },
+          { x: 3, y: array[2] },
+          { x: 4, y: array[3] },
+          { x: 5, y: array[4] },
+          { x: 6, y: array[5] },
+          { x: 7, y: array[6] },
+        ];
+        return data;
+      })
+      .then((data) => {
         switch (zone) {
           case "KALKVAERKSVEJ":
-            console.log("KALKVAERKSVEJ", array);
-            this.setState({ pKALKVAERKSVEJ: array });
+            console.log("KALKVAERKSVEJ", data);
+            this.setState({ pKALKVAERKSVEJ: data });
             break;
 
           case "NewBusgadehuset":
-            console.log("NewBusgadehuset", array);
-            this.setState({ pNewBusgadehuset: array });
+            console.log("NewBusgadehuset", data);
+            this.setState({ pNewBusgadehuset: data });
             break;
 
           case "SALLING":
-            console.log("SALLING", array);
-            this.setState({ pSALLING: array });
+            console.log("SALLING", data);
+            this.setState({ pSALLING: data });
             break;
 
           default:
@@ -139,7 +151,10 @@ export default class Homepage extends Component {
           Salling={this.state.pSALLING}
         /> */}
 
-        <AreaChart data={this.state.pKALKVAERKSVEJ} />
+        <AreaChart data={this.state.pKALKVAERKSVEJ} title={"KALKVAERKSVEJ"} />
+        <AreaChart data={this.state.pNewBusgadehuset} title={"NewBusgadehuset"} />
+        <AreaChart data={this.state.pSALLING} title={"SALLING"} />
+        <AreaChart data={this.state.pSALLING} title={"SALLING"} />
       </div>
     );
   }
