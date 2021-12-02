@@ -69,7 +69,7 @@ export default class AreaChart extends Component {
       .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-      svg
+    svg
       .append("g")
       .attr("class", "x axis")
       .attr("transform", "translate(0," + height + ")")
@@ -101,9 +101,10 @@ export default class AreaChart extends Component {
         d3.select("#tooltip").classed("hidden", false);
 
         console.log("mousover: ", d);
+      })
+      .on("mouseout", () => {
+        d3.select("#tooltip").classed("hidden", true);
       });
-
-   
   }
 
   /** render component */
