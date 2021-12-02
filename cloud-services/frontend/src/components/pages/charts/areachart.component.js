@@ -78,12 +78,14 @@ export default class AreaChart extends Component {
 
     svg.append("g").attr("class", "y axis").call(yAxis);
 
-    svg.append("text")
-    .attr("class", "x label")
-    .attr("text-anchor", "end")
-    .attr("x", width)
-    .attr("y", height + 27)
-    .text("weekdays");
+    // added label x axis
+    svg
+      .append("text")
+      .attr("class", "x label")
+      .attr("text-anchor", "end")
+      .attr("x", width)
+      .attr("y", height + 27)
+      .text("weekdays");
 
     svg
       .append("path")
