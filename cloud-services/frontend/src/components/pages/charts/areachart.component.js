@@ -48,7 +48,7 @@ export default class AreaChart extends Component {
       ])
       .range([height, 0]);
 
-    var xAxis = d3.axisBottom(x);
+    var xAxis = d3.axisBottom(x).ticks(5);
 
     var yAxis = d3.axisLeft(y);
 
@@ -73,9 +73,17 @@ export default class AreaChart extends Component {
       .append("g")
       .attr("class", "x axis")
       .attr("transform", "translate(0," + height + ")")
+      .text("weekdays")
       .call(xAxis);
 
     svg.append("g").attr("class", "y axis").call(yAxis);
+
+    svg.append("text")
+    .attr("class", "x label")
+    .attr("text-anchor", "end")
+    .attr("x", width)
+    .attr("y", height + 27)
+    .text("weekdays");
 
     svg
       .append("path")
