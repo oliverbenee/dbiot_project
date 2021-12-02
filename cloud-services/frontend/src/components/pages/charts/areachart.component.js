@@ -89,7 +89,7 @@ export default class AreaChart extends Component {
       .datum(this.props.data)
       .attr("class", "area")
       .attr("d", area)
-      .style("fill", "blue")
+      .style("fill", "LightSteelBlue")
       .on("mouseover", (d, i) => {
         // Get bar's xy values, ,then augment for the tooltip
 

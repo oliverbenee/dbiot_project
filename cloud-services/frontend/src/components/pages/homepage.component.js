@@ -103,18 +103,11 @@ export default class Homepage extends Component {
         return array;
       })
       .then((array) => {
-        // TODO calculate percentage
-
-        console.log("print array: ", array);
-
         var data = [];
 
         var day = 1;
         for (let index = 0; index < array.length; index++) {
           const element = array[index];
-
-          console.log(element.average);
-          console.log(element.totalCapacity);
 
           var value = (element.average / element.totalCapacity) * 100;
 
@@ -122,9 +115,7 @@ export default class Homepage extends Component {
             x: day,
             y: value,
           };
-
           data.push(item);
-          console.log("data: ", data);
           day++;
         }
 
