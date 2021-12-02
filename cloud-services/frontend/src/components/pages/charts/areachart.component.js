@@ -41,10 +41,7 @@ export default class AreaChart extends Component {
     var y = d3
       .scaleLinear()
       .domain([
-        0,
-        d3.max(this.props.data, function (d) {
-          return d.y;
-        }),
+        0,100
       ])
       .range([height, 0]);
 

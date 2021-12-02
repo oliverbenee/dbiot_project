@@ -98,22 +98,36 @@ export default class Homepage extends Component {
         });
 
         data.forEach((element) => {
-          array.push(element[0].average);
+          array.push(element[0]);
         });
         return array;
       })
       .then((array) => {
         // TODO calculate percentage
 
-        var data = [
-          { x: 1, y: array[0] },
-          { x: 2, y: array[1] },
-          { x: 3, y: array[2] },
-          { x: 4, y: array[3] },
-          { x: 5, y: array[4] },
-          { x: 6, y: array[5] },
-          { x: 7, y: array[6] },
-        ];
+        console.log("print array: ", array);
+
+        var data = [];
+
+        var day = 1;
+        for (let index = 0; index < array.length; index++) {
+          const element = array[index];
+
+          console.log(element.average);
+          console.log(element.totalCapacity);
+
+          var value = (element.average / element.totalCapacity) * 100;
+
+          var item = {
+            x: day,
+            y: value,
+          };
+
+          data.push(item);
+          console.log("data:", data);
+          day++;
+        }
+
         return data;
       })
       .then((data) => {
