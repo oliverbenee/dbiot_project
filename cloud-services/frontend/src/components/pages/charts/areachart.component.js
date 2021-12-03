@@ -38,12 +38,7 @@ export default class AreaChart extends Component {
       ])
       .range([0, width]);
 
-    var y = d3
-      .scaleLinear()
-      .domain([
-        0,100
-      ])
-      .range([height, 0]);
+    var y = d3.scaleLinear().domain([0, 100]).range([height, 0]);
 
     var xAxis = d3.axisBottom(x).ticks(5);
 
@@ -52,6 +47,7 @@ export default class AreaChart extends Component {
     var area = d3
       .area()
       .x(function (d) {
+        console.log(d.x)
         return x(d.x);
       })
       .y0(height)
