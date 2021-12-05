@@ -46,14 +46,9 @@ export default class AreaChart extends Component {
 
     var area = d3
       .area()
-      .x(function (d) {
-        console.log(d.x)
-        return x(d.x);
-      })
+      .x((datapoint) => x(datapoint.x))
       .y0(height)
-      .y1(function (d) {
-        return y(d.y);
-      });
+      .y1((datapoint) => y(datapoint.y));
 
     var svg = d3
       .select(this.myRef.current)
@@ -88,22 +83,21 @@ export default class AreaChart extends Component {
       .style("fill", "LightSteelBlue")
       .on("mouseover", (d, i) => {
         // Get bar's xy values, ,then augment for the tooltip
-
-        console.log("value: ", i);
-
         var xPos = d.pageX;
         var yPos = d.pageY;
+
+        const xValue = x.invert(d.layerX);
+        const realValue = d3.bisector((datapoint) => datapoint.x).center;
+        const dataIndex = realValue(i, xValue, 1);
 
         // Update Tooltip's position and value
         d3.select("#tooltip")
           .style("left", xPos + "px")
           .style("top", yPos + "px")
           .select("#value")
-          .text(i);
+          .text(i[dataIndex - 1].y);
 
         d3.select("#tooltip").classed("hidden", false);
-
-        console.log("mousover: ", d);
       })
       .on("mouseout", () => {
         d3.select("#tooltip").classed("hidden", true);
