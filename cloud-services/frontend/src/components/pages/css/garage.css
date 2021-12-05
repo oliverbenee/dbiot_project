@@ -36,6 +36,14 @@ tr {
     animation-iteration-count: 5;
 }
 
+#progress {
+    width: 1250px;
+}
+
+#garage-container {
+    margin-bottom: 5%;
+}
+
 #parkingArea {
     background-color: #F0F0F0;
     margin-top: 2%;
@@ -47,7 +55,7 @@ tr {
 
 #slot1 {
     position: absolute;
-    top: 300px;
+    top: 325px;
     left: 30%;
     width: 140px;
     height: 140px;
@@ -57,7 +65,7 @@ tr {
 
 #slot2 {
     position: absolute;
-    top: 470px;
+    top: 495px;
     left: 30%;
     width: 140px;
     height: 140px;
@@ -67,7 +75,7 @@ tr {
 
 #slot3 {
     position: absolute;
-    top: 640px;
+    top: 665px;
     left: 30%;
     width: 140px;
     height: 140px;
@@ -77,7 +85,7 @@ tr {
 
 #slot4 {
     position: absolute;
-    top: 810px;
+    top: 835px;
     left: 30%;
     width: 140px;
     height: 140px;
@@ -88,7 +96,7 @@ tr {
 #slot5 {
     position: absolute;
     right: 30%;
-    top: 300px;
+    top: 325px;
     width: 140px;
     height: 140px;
     text-align: center;
@@ -98,7 +106,7 @@ tr {
 #slot6 {
     position: absolute;
     right: 30%;
-    top: 470px;
+    top: 495px;
     width: 140px;
     height: 140px;
     text-align: center;
@@ -108,7 +116,7 @@ tr {
 #slot7 {
     position: absolute;
     right: 30%;
-    top: 640px;
+    top: 665px;
     width: 140px;
     height: 140px;
     text-align: center;
@@ -118,7 +126,7 @@ tr {
 #slot8 {
     position: absolute;
     right: 30%;
-    top: 810px;
+    top: 835px;
     width: 140px;
     height: 140px;
     text-align: center;
