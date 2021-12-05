@@ -89,13 +89,16 @@ export default class AreaChart extends Component {
         const xValue = x.invert(d.layerX);
         const realValue = d3.bisector((datapoint) => datapoint.x).center;
         const dataIndex = realValue(i, xValue, 1);
+        const number = i[dataIndex - 1].y
+
+        const percentage = Math.round((number + Number.EPSILON) * 100) / 100;
 
         // Update Tooltip's position and value
         d3.select("#tooltip")
           .style("left", xPos + "px")
           .style("top", yPos + "px")
           .select("#value")
-          .text(i[dataIndex - 1].y);
+          .text(percentage+"% occupied");
 
         d3.select("#tooltip").classed("hidden", false);
       })
@@ -110,7 +113,6 @@ export default class AreaChart extends Component {
       <div id="chart-container">
         <div id="tooltip" className="hidden">
           <p>
-            <strong>Value</strong>
           </p>
           <p>
             <span id="value">100</span>
