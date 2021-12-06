@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "../css/homepage.css";
 import * as d3 from "d3";
 
-export default class ParkingZoneLineChart extends Component {
+export default class LineChart extends Component {
   constructor(props) {
     super(props);
     this.myRef = React.createRef();
@@ -13,18 +13,15 @@ export default class ParkingZoneLineChart extends Component {
     };
   }
   componentDidUpdate() {
-    // if data changed redraw chart
-    this.drawLineChart();
+    this.draw();
   }
 
   componentDidMount() {
-    this.drawLineChart();
+    this.draw();
   }
-  drawLineChart() {
-
-    // TODO update line chart
-    //document.getElementById("#vis1").innerHTML = "";
-    // setting up svg
+  draw() {
+    // clear chart
+    //d3.select(this.myRef.current).selectChildren().remove();
     const w = 600;
     const h = 600;
     const svg = d3
