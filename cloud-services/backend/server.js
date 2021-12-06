@@ -4,6 +4,7 @@ import cors from "cors";
 import { router } from "./controllers/routes.js";
 import mqtt from "mqtt";
 import fetch from "node-fetch";
+import * as navigation from "./navigation/navcolumns.js"
 
 // setup mqtt
 import { Database } from "./mysql/db.js";
@@ -15,12 +16,6 @@ var mqtt_options = {
   password: "secret",
 };
 var client = mqtt.connect(mqttBroker, mqtt_options);
-
-// TOPIC FORMAT: overpark/parkingzone/spotnumber/devicetype
-// We want to subscribe to all devices for each parkingzone.
-// subscribe here to overpark/#
-
-// each sensor subscribes to overpark/parkingzone/spotnumber/devicetype
 
 var topic = ["home/sensor/distance/#", "home/sensor/led/#"];
 
@@ -41,8 +36,6 @@ client.on("error", function (error) {
 var minDistance = 10;
 var maxDistance = 20;
 
-// TODO Only publish if newState!
-
 // receive messages
 client.on("message", function (topic, message, packet) {
   console.log("___________________________"); //UNCOMMENT THIS LINE FOR DEBUG
@@ -53,7 +46,7 @@ client.on("message", function (topic, message, packet) {
     // The second to last element MUST be the parkingZoneID.
     var topiclist = topic.split("/");
     var spotNumber = parseInt(topiclist.pop());
-    var parkingZoneID = topiclist.pop();
+    var parkingZoneID = "INCUBA";
 
     var values = JSON.parse(message);
 
@@ -74,10 +67,6 @@ client.on("message", function (topic, message, packet) {
       publishstate = "on";
       newState.isOccupied = true;
     }
-    publish("home/sensor/led/" + spotNumber.toString(), publishstate);
-    console.log(
-      "Spot number: " + spotNumber + " occupation is now: " + publishstate
-    );
     // publish to frontent
     const data = {
       parkingSlotID: spotNumber,
@@ -86,8 +75,6 @@ client.on("message", function (topic, message, packet) {
     publish("home/parkingspot/", JSON.stringify(data));
     Database.updateParkingSlot(newState);
   }
-  // console.log("___________________________"); //UNCOMMENT THIS LINE FOR DEBUG
-  // DEBUG: goto localhost:5000/parkingslots/KALKVAERKSVEJ for checking
 });
 
 //publish function
@@ -120,6 +107,12 @@ function publishTest2() {
 
 setInterval(publishTest1, 6000);
 setInterval(publishTest2, 10000);
+
+function publishAvailableParkingSlot(){
+  var nearest = navigation.getNearestAvailableSlot();
+  console.log("Nearest available slot: " + nearest)
+  publish("home/navigation/available", JSON.stringify(nearest))
+}
 
 
 

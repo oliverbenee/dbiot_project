@@ -18,7 +18,7 @@ services:
       MYSQL_PASSWORD: foobar
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: buildingiot
-    command: mysqld --sql_mode=""  
+    command: mysqld --sql_mode=""
     ports:
       - "3306:3306"
   backend:
@@ -31,13 +31,13 @@ services:
       - broker
     depends_on:
       - "mysql_db"
-  # frontend:
-  #  build:
-  #    context: ./frontend
-  #  restart: on-failure
-  #  ports:
-  #    - "3000:3000"
-  #  links:
-  #    - "backend"   
-  #  depends_on:
-  #    - "backend"
+  frontend:
+    build:
+      context: ./frontend
+    restart: on-failure
+    ports:
+      - "3000:3000"
+    links:
+      - "backend"
+    depends_on:
+      - "backend"
