@@ -49,6 +49,16 @@ INSERT INTO parkingSlot VALUES (1, true, "New Bruuns Galleri");
 INSERT INTO parkingZone VALUES ("DOKK1", 12.12, 34.34, 1234, 5678);
 INSERT INTO parkingSlot VALUES (1, false, "DOKK1");
 
+INSERT INTO parkingZone VALUES ("INCUBA", 56.149456595160515, 10.211865426037953, 8, 0);
+INSERT INTO parkingSlot VALUES (1, false, "INCUBA");
+INSERT INTO parkingSlot VALUES (2, false, "INCUBA");
+INSERT INTO parkingSlot VALUES (3, false, "INCUBA");
+INSERT INTO parkingSlot VALUES (4, false, "INCUBA");
+INSERT INTO parkingSlot VALUES (5, false, "INCUBA");
+INSERT INTO parkingSlot VALUES (6, false, "INCUBA");
+INSERT INTO parkingSlot VALUES (7, false, "INCUBA");
+INSERT INTO parkingSlot VALUES (8, false, "INCUBA");
+
 # test for updating a single parking slot with a new occupation.
 UPDATE parkingSlot SET isOccupied =false WHERE slotID =11 AND parkingZoneID="KALKVAERKSVEJ";
 

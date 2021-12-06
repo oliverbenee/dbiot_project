@@ -68,7 +68,7 @@ class Database {
         "'";
       connection.query(sql, (err, results, fields) => {
         if (err) throw err;
-        console.log("Parking slot data updated");
+        //console.log("Parking slot data updated");
         connection.release();
       });
     });
@@ -77,7 +77,7 @@ class Database {
   /* Insert open data. Filters elements with 0 spaces and vehicles automatically. 
   
   */
-  static insertOpenData(tah) {
+  static insertOpenData(tah){
     /*
       Useful for debugging API data. 
       tah.forEach(element => {
@@ -85,26 +85,21 @@ class Database {
         console.log(JSON.stringify(element, null, 4))
       });
     */
-    tah = tah.filter((item) => item.totalSpaces != 0 && item.vehicleCount != 0);
+    tah = tah.filter(item => item.totalSpaces != 0 && item.vehicleCount != 0)
     //console.log("Inserting open data")
     pool.getConnection((err, connection) => {
-      if (err) throw err;
-      tah.forEach((element) => {
-        const sql =
-          "INSERT INTO historical(parkingZoneID, freeSlots, totalCapacity) VALUES (?, ?, ?)";
+      if(err) throw err;
+      tah.forEach(element => {
+        const sql = "INSERT INTO historical(parkingZoneID, freeSlots, totalCapacity) VALUES (?, ?, ?)"
         var freeSlots = element.totalSpaces - element.vehicleCount;
-        connection.query(
-          sql,
-          [element.garageCode, freeSlots, element.totalSpaces],
-          (err, results, fields) => {
-            //console.log("Inserting: " + element.garageCode + ", " + freeSlots + ", " + element.totalSpaces)
-            if (err) throw err;
-          }
-        );
-      });
-      console.log("Open Data inserted!");
+        connection.query(sql, [element.garageCode, freeSlots, element.totalSpaces], (err, results, fields) => {
+          //console.log("Inserting: " + element.garageCode + ", " + freeSlots + ", " + element.totalSpaces)
+          if(err) throw err;
+        })
+      })
+      console.log("Open Data inserted!")
       connection.release();
-    });
+    })
   }
 }
 

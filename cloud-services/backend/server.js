@@ -2,6 +2,7 @@ import express from "express";
 const app = express();
 import cors from "cors";
 import { router } from "./controllers/routes.js";
+import * as navigation from "./navigation/navcolumns.js"
 import mqtt from "mqtt";
 import fetch from "node-fetch";
 
@@ -22,7 +23,7 @@ var client = mqtt.connect(mqttBroker, mqtt_options);
 
 // each sensor subscribes to overpark/parkingzone/spotnumber/devicetype
 
-var topic = ["home/sensor/distance/#", "home/sensor/led/#"];
+var topic = ["home/sensor/distance/#", "home/sensor/led/#", "home/navigation/available", "home/sensor/tripwire"];
 
 // succesfull connected
 client.on("connect", function () {
@@ -53,7 +54,7 @@ client.on("message", function (topic, message, packet) {
     // The second to last element MUST be the parkingZoneID.
     var topiclist = topic.split("/");
     var spotNumber = parseInt(topiclist.pop());
-    var parkingZoneID = topiclist.pop();
+    var parkingZoneID = "KALKVAERKSVEJ" //FIXME: This is hardcoded. pop() does not work right now. change!
 
     var values = JSON.parse(message);
 
@@ -74,7 +75,6 @@ client.on("message", function (topic, message, packet) {
       publishstate = "on";
       newState.isOccupied = true;
     }
-    publish("home/sensor/led/" + spotNumber.toString(), publishstate);
     console.log(
       "Spot number: " + spotNumber + " occupation is now: " + publishstate
     );
@@ -83,8 +83,10 @@ client.on("message", function (topic, message, packet) {
       parkingSlotID: spotNumber,
       isOccupied: isOccupied,
     };
-    publish("home/parkingspot/", JSON.stringify(data));
+    publish("/home/parkingslot/", JSON.stringify(data));
+    //console.log("PUBLUSHHHH TO FRONTEND", JSON.stringify(data))
     Database.updateParkingSlot(newState);
+    navigation.setState(spotNumber, isOccupied);
   }
   // console.log("___________________________"); //UNCOMMENT THIS LINE FOR DEBUG
   // DEBUG: goto localhost:5000/parkingslots/KALKVAERKSVEJ for checking
@@ -99,33 +101,17 @@ function publish(topic, msg) {
   }
 }
 
-/** Test case for websockets */
-function publishTest1() {
-  const data = {
-    parkingSlotID: 1,
-    isOccupied: true,
-  };
-  console.log("publish test message websockets");
-  publish("/home/parkingslot/", JSON.stringify(data));
-}
-function publishTest2() {
-  const data = {
-    parkingSlotID: 1,
-    isOccupied: false,
-  };
-
-  console.log("publish test message websockets");
-  publish("/parkingslot/actuator", JSON.stringify(data));
+function publishAvailableParkingSlot(){
+  var nearest = navigation.getNearestAvailableSlot();
+  console.log("Nearest available slot: " + nearest)
+  publish("home/navigation/available", JSON.stringify(nearest))
 }
 
-setInterval(publishTest1, 6000);
-setInterval(publishTest2, 10000);
-
-
-
-/**fetch data from opendata.dk --> Interval 5 min */
 const API_URL_OPENDATA_PARKING_GARAGES =
   "https://admin.opendata.dk/api/3/action/datastore_search?resource_id=2a82a145-0195-4081-a13c-b0e587e9b89c";
+
+// Fetches data from the open data platform.
+// fetch interval
 setInterval(() => {
   fetch(API_URL_OPENDATA_PARKING_GARAGES)
     .then((response) => response.json())
