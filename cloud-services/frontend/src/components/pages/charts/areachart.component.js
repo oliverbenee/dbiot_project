@@ -86,6 +86,7 @@ export default class AreaChart extends Component {
         var xPos = d.pageX;
         var yPos = d.pageY;
 
+        // calculate index in array
         const xValue = x.invert(d.layerX);
         const realValue = d3.bisector((datapoint) => datapoint.x).center;
         const dataIndex = realValue(i, xValue, 1);
