@@ -8,7 +8,7 @@ import AreaChart from "./charts/areachart.component";
  * Main Component to display an overview of all parking garages in aarhus
  */
 
-const API_URL_OPENDATA_PARKING_GARAGES = "http://localhost:5000/opendata";
+const API_URL_OPENDATA_PARKING_GARAGES = "http://20.93.104.183:5000/opendata";
 const parkingZones = [
   "KALKVAERKSVEJ",
   "NewBusgadehuset",
@@ -48,7 +48,7 @@ export default class Homepage extends Component {
     this.interval = setInterval(() => {
       this.getOpenData();
       this.getAllHistoricalData();
-    }, 100000);
+    }, 300000);
     // todo refresh historical data for chart
     this.getAllHistoricalData();
   }
@@ -71,13 +71,13 @@ export default class Homepage extends Component {
   // get historical data from opendata.dk for one specific parking garage
   getHistory(zone) {
     Promise.all([
-      fetch("http://localhost:5000/history/" + zone + "/1"),
-      fetch("http://localhost:5000/history/" + zone + "/2"),
-      fetch("http://localhost:5000/history/" + zone + "/3"),
-      fetch("http://localhost:5000/history/" + zone + "/4"),
-      fetch("http://localhost:5000/history/" + zone + "/5"),
-      fetch("http://localhost:5000/history/" + zone + "/6"),
-      fetch("http://localhost:5000/history/" + zone + "/7"),
+      fetch("http://20.93.104.183:5000/history/" + zone + "/1"),
+      fetch("http://20.93.104.183:5000/history/" + zone + "/2"),
+      fetch("http://20.93.104.183:5000/history/" + zone + "/3"),
+      fetch("http://20.93.104.183:5000/history/" + zone + "/4"),
+      fetch("http://20.93.104.183:5000/history/" + zone + "/5"),
+      fetch("http://20.93.104.183:5000/history/" + zone + "/6"),
+      fetch("http://20.93.104.183:5000/history/" + zone + "/7"),
     ])
       .then((responses) => {
         return Promise.all(

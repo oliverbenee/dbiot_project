@@ -3,41 +3,58 @@ services:
   broker:
     build:
       context: ./mqtt-broker
+    image: iotcontainerregistry007eu.azurecr.io/broker:latest
     stdin_open: true
     tty: true
     ports:
       - "1883:1883"
       - "8883:8883"
     restart: on-failure
-  mysql_db:
+    deploy:
+      resources:
+        limits:
+          cpus: "0.50"
+  mysql:
     build:
       context: ./database
+    image: iotcontainerregistry007eu.azurecr.io/mysql:latest
     restart: on-failure
     environment:
-      MYSQL_USER: pi
-      MYSQL_PASSWORD: foobar
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: foobar
       MYSQL_DATABASE: buildingiot
-    command: mysqld --sql_mode=""
     ports:
       - "3306:3306"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.50"
   backend:
     build:
       context: ./backend
+    image: iotcontainerregistry007eu.azurecr.io/backend:latest
     restart: on-failure
     ports:
       - "5000:5000"
     links:
       - broker
     depends_on:
-      - "mysql_db"
-  frontend:
-    build:
-      context: ./frontend
-    restart: on-failure
-    ports:
-      - "3000:3000"
-    links:
-      - "backend"
-    depends_on:
-      - "backend"
+      - "mysql"
+    deploy:
+      resources:
+        limits:
+          cpus: "1.00"
+  # frontend:
+  #   build:
+  #     context: ./frontend
+  #   image: iotcontainerregistry007eu.azurecr.io/frontend:latest
+  #   restart: on-failure
+  #   ports:
+  #     - "3000:3000"
+  #   links:
+  #     - "backend"
+  #   depends_on:
+  #     - "backend"
+  #   deploy:
+  #     resources:
+  #       limits:
+  #         cpus: "1.00"

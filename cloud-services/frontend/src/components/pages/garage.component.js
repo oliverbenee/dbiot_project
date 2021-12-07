@@ -8,7 +8,7 @@ import { ProgressBar } from "react-bootstrap";
  *
  */
 
-const mqttBroker = "ws://localhost:8883";
+const mqttBroker = "ws://20.93.104.183:8883";
 const mqtt_options = {
   username: "client",
   password: "secret",

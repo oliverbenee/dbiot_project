@@ -10,7 +10,7 @@ import * as navigation from "./navigation/navcolumns.js"
 import { Database } from "./mysql/db.js";
 
 // setup mqtt
-var mqttBroker = "ws://broker:8883";
+var mqttBroker = "ws://localhost:8883";
 var mqtt_options = {
   username: "client",
   password: "secret",

@@ -1,8 +1,8 @@
-import mysql from "mysql";
+import mysql from "mysql2";
 
 const pool = mysql.createPool({
-  user: "pi",
-  host: "mysql_db", // FIXME: localhost or mysql_db. "Real is localhost, but only works on mine if mysql_db"
+  user: "root",
+  host: "localhost", // FIXME: localhost or mysql_db. "Real is localhost, but only works on mine if mysql_db"
   port: "3306",
   password: "foobar",
   database: "buildingiot",
@@ -29,10 +29,11 @@ class Database {
     pool.getConnection((err, connection) => {
       if (err) throw err;
       connection.query(
-        "SELECT time, totalCapacity, AVG(freeSlots) AS average FROM historical WHERE parkingZoneID='" +
+        "SELECT ANY_VALUE(time) AS time, ANY_VALUE(totalCapacity) AS totalCapacity, AVG(freeSlots) AS average FROM historical WHERE parkingZoneID='" +
           parkingZone +
           "' AND dayofweek(time) = " +
-          day,
+          day +
+          " GROUP BY parkingZoneID",
         (err, results, fields) => {
           console.log("Data fetched");
           callback(err, results);
