@@ -50,10 +50,11 @@ export default class Garage extends Component {
     client.on("message", (topic, message) => {
       const value = JSON.parse(message);
       console.log("frontend received message: ", value);
-      console.log(topic);
+      console.log("receive from: ", topic);
 
       if (topic == tParkingslot) {
         var oldState = this.state.parkingGarageState;
+        console.log("set occupied", value)
 
         switch (value.parkingSlotID) {
           case 1:

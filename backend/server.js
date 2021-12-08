@@ -54,7 +54,7 @@ client.on("message", function (topic, message, packet) {
     // The second to last element MUST be the parkingZoneID.
     var topiclist = topic.split("/");
     var spotNumber = parseInt(topiclist.pop());
-    var parkingZoneID = "KALKVAERKSVEJ" //FIXME: This is hardcoded. pop() does not work right now. change!
+    var parkingZoneID = "INCUBA" //FIXME: This is hardcoded. pop() does not work right now. change!
 
     var values = JSON.parse(message);
 

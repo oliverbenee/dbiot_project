@@ -2,12 +2,9 @@ import express from "express";
 const app = express();
 import cors from "cors";
 import { router } from "./controllers/routes.js";
-import * as navigation from "./navigation/navcolumns.js"
+import * as navigation from "./navigation/navcolumns.js";
 import mqtt from "mqtt";
 import fetch from "node-fetch";
-import * as navigation from "./navigation/navcolumns.js"
-
-// setup mqtt
 import { Database } from "./mysql/db.js";
 
 // setup mqtt
@@ -18,7 +15,7 @@ var mqtt_options = {
 };
 var client = mqtt.connect(mqttBroker, mqtt_options);
 
-var topic = ["home/sensor/distance/#", "home/navigation/available"];
+var topic = ["home/sensor/distance/#", "home/navigation/available", "home/sensor/tripwire"];
 
 // succesfull connected
 client.on("connect", function () {
@@ -51,7 +48,7 @@ client.on("message", function (topic, message, packet) {
 
     var values = JSON.parse(message);
 
-    //console.log("got magsens status: " + values.magsens_status + " and distance: " + values.distance) //UNCOMMENT THIS LINE FOR DEBUG
+    console.log("got magsens status: " + values.magsens_status + " and distance: " + values.distance) //UNCOMMENT THIS LINE FOR DEBUG
 
     var newState = {
       isOccupied: false,
@@ -74,7 +71,7 @@ client.on("message", function (topic, message, packet) {
       isOccupied: isOccupied,
     };
     publish("/home/parkingslot/", JSON.stringify(data));
-    //console.log("PUBLUSHHHH TO FRONTEND", JSON.stringify(data))
+    console.log("PUBLUSHHHH TO FRONTEND", JSON.stringify(data))
     Database.updateParkingSlot(newState);
     navigation.setState(spotNumber, isOccupied);
   }
@@ -84,35 +81,29 @@ client.on("message", function (topic, message, packet) {
 function publish(topic, msg) {
   if (client.connected == true) {
     client.publish(topic, msg, () => {
-      //console.log("server publishing: " + msg + " to: '" + topic + "'"); UNCOMMENT THIS LINE FOR DEBUG
+      console.log("server publishing: " + msg + " to: '" + topic + "'");
     });
   }
 }
 
-function publishAvailableParkingSlot(){
+// function publishTest2() {
+//   const data = {
+//     parkingSlotID: 1,
+//     isOccupied: false,
+//   };
+
+//   console.log("publish test message websockets");
+//   publish("/parkingslot/actuator", JSON.stringify(data));
+// }
+
+// setInterval(publishTest1, 6000);
+// setInterval(publishTest2, 10000);
+
+function publishAvailableParkingSlot() {
   var nearest = navigation.getNearestAvailableSlot();
-  console.log("Nearest available slot: " + nearest)
-  publish("home/navigation/available", JSON.stringify(nearest))
+  console.log("Nearest available slot: " + nearest);
+  publish("home/navigation/available", JSON.stringify(nearest));
 }
-function publishTest2() {
-  const data = {
-    parkingSlotID: 1,
-    isOccupied: false,
-  };
-
-  console.log("publish test message websockets");
-  publish("/parkingslot/actuator", JSON.stringify(data));
-}
-
-setInterval(publishTest1, 6000);
-setInterval(publishTest2, 10000);
-
-function publishAvailableParkingSlot(){
-  var nearest = navigation.getNearestAvailableSlot();
-  console.log("Nearest available slot: " + nearest)
-  publish("home/navigation/available", JSON.stringify(nearest))
-}
-
 
 const API_URL_OPENDATA_PARKING_GARAGES =
   "https://admin.opendata.dk/api/3/action/datastore_search?resource_id=2a82a145-0195-4081-a13c-b0e587e9b89c";
