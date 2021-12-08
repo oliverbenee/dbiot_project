@@ -30,7 +30,7 @@ var topic = "home/sensor/tripwire";
 
 //publish function
 function publish(topic, msg) {
-  if (client.connected == true && clientCloud.connected == false) {
+  if (client.connected == true && clientCloud.connected == true) {
     client.publish(topic, msg, () => {
       console.log("publishing" + msg + " on channel: " + topic);
     });
