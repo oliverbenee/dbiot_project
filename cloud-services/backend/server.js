@@ -81,6 +81,16 @@ client.on("message", function (topic, message, packet) {
   }
 });
 
+function testNavigation(){
+  const data = {
+    parkingSlotID: 8,
+    isOccupied: true,
+  };
+  publish("/home/parkingslot/", JSON.stringify(data));
+}
+
+testNavigation();
+
 //publish function
 function publish(topic, msg) {
   if (client.connected == true) {

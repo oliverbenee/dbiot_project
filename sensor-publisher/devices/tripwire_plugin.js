@@ -7,7 +7,7 @@ var mqtt_options = {
   password: "secret",
 };
 // TODO change to DNS iot-chickenkiller
-var mqttBrokerCloud = "ws://20.93.58.177:8883";
+var mqttBrokerCloud = "ws://20.105.114.137:8883";
 var client = mqtt.connect(mqttBroker, mqtt_options);
 var clientCloud = mqtt.connect(mqttBrokerCloud, mqtt_options);
 
