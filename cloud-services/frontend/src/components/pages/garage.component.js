@@ -318,7 +318,7 @@ export default class Garage extends Component {
           <div id="slot8" className={this.state.colorSlot8}>
             <h3>P8</h3>
           </div>
-          <button onClick={this.testNav()}>Test navigation</button>
+          {this.testNav()}
         </div>
       </div>
     );
