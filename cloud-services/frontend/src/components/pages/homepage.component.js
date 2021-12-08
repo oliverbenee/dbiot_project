@@ -8,7 +8,9 @@ import AreaChart from "./charts/areachart.component";
  * Main Component to display an overview of all parking garages in aarhus
  */
 
-const API_URL_OPENDATA_PARKING_GARAGES = "http://20.93.104.183:5000/opendata";
+const host = process.env.REACT_APP_HOST;
+
+const API_URL_OPENDATA_PARKING_GARAGES = "http://" + host + ":5000/opendata";
 const parkingZones = [
   "KALKVAERKSVEJ",
   "NewBusgadehuset",
@@ -71,13 +73,13 @@ export default class Homepage extends Component {
   // get historical data from opendata.dk for one specific parking garage
   getHistory(zone) {
     Promise.all([
-      fetch("http://20.93.104.183:5000/history/" + zone + "/1"),
-      fetch("http://20.93.104.183:5000/history/" + zone + "/2"),
-      fetch("http://20.93.104.183:5000/history/" + zone + "/3"),
-      fetch("http://20.93.104.183:5000/history/" + zone + "/4"),
-      fetch("http://20.93.104.183:5000/history/" + zone + "/5"),
-      fetch("http://20.93.104.183:5000/history/" + zone + "/6"),
-      fetch("http://20.93.104.183:5000/history/" + zone + "/7"),
+      fetch("http://" + host + ":5000/history/" + zone + "/1"),
+      fetch("http://" + host + ":5000/history/" + zone + "/2"),
+      fetch("http://" + host + ":5000/history/" + zone + "/3"),
+      fetch("http://" + host + ":5000/history/" + zone + "/4"),
+      fetch("http://" + host + ":5000/history/" + zone + "/5"),
+      fetch("http://" + host + ":5000/history/" + zone + "/6"),
+      fetch("http://" + host + ":5000/history/" + zone + "/7"),
     ])
       .then((responses) => {
         return Promise.all(

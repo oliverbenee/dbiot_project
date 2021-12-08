@@ -8,7 +8,9 @@ import { ProgressBar } from "react-bootstrap";
  *
  */
 
-const mqttBroker = "ws://20.93.104.183:8883";
+const host = process.env.REACT_APP_HOST;
+
+const mqttBroker = "ws://" + host + ":8883";
 const mqtt_options = {
   username: "client",
   password: "secret",
@@ -224,45 +226,45 @@ export default class Garage extends Component {
   /**trigger and clear navigation animation */
   setNavigation(slot) {
     console.log("set navigation");
-    this.setState({ colorSlot2: "navigation-effect" });
-    setTimeout(() => this.setState({ colorSlot2: "green" }), 5000);
+    // this.setState({ colorSlot2: "navigation-effect" });
+    // setTimeout(() => this.setState({ colorSlot2: "green" }), 5000);
 
-    // switch (slot) {
-    //   case 1:
-    //     this.setState({ colorSlot1: "navigation-effect" });
-    //     setTimeout(() => this.setState({ colorSlot1: "green" }), 5000);
-    //     break;
-    //   case 2:
-    //     this.setState({ colorSlot2: "navigation-effect" });
-    //     setTimeout(() => this.setState({ colorSlot2: "green" }), 5000);
-    //     break;
-    //   case 3:
-    //     this.setState({ colorSlot3: "navigation-effect" });
-    //     setTimeout(() => this.setState({ colorSlot3: "green" }), 5000);
-    //     break;
-    //   case 4:
-    //     this.setState({ colorSlot4: "navigation-effect" });
-    //     setTimeout(() => this.setState({ colorSlot4: "green" }), 5000);
-    //     break;
-    //   case 5:
-    //     this.setState({ colorSlot5: "navigation-effect" });
-    //     setTimeout(() => this.setState({ colorSlot5: "green" }), 5000);
-    //     break;
-    //   case 6:
-    //     this.setState({ colorSlot6: "navigation-effect" });
-    //     setTimeout(() => this.setState({ colorSlot6: "green" }), 5000);
-    //     break;
-    //   case 7:
-    //     this.setState({ colorSlot7: "navigation-effect" });
-    //     setTimeout(() => this.setState({ colorSlot7: "green" }), 5000);
-    //     break;
-    //   case 8:
-    //     this.setState({ colorSlot8: "navigation-effect" });
-    //     setTimeout(() => this.setState({ colorSlot8: "green" }), 5000);
-    //     break;
-    //   default:
-    //     break;
-    // }
+    switch (slot) {
+      case 1:
+        this.setState({ colorSlot1: "navigation-effect" });
+        setTimeout(() => this.setState({ colorSlot1: "green" }), 5000);
+        break;
+      case 2:
+        this.setState({ colorSlot2: "navigation-effect" });
+        setTimeout(() => this.setState({ colorSlot2: "green" }), 5000);
+        break;
+      case 3:
+        this.setState({ colorSlot3: "navigation-effect" });
+        setTimeout(() => this.setState({ colorSlot3: "green" }), 5000);
+        break;
+      case 4:
+        this.setState({ colorSlot4: "navigation-effect" });
+        setTimeout(() => this.setState({ colorSlot4: "green" }), 5000);
+        break;
+      case 5:
+        this.setState({ colorSlot5: "navigation-effect" });
+        setTimeout(() => this.setState({ colorSlot5: "green" }), 5000);
+        break;
+      case 6:
+        this.setState({ colorSlot6: "navigation-effect" });
+        setTimeout(() => this.setState({ colorSlot6: "green" }), 5000);
+        break;
+      case 7:
+        this.setState({ colorSlot7: "navigation-effect" });
+        setTimeout(() => this.setState({ colorSlot7: "green" }), 5000);
+        break;
+      case 8:
+        this.setState({ colorSlot8: "navigation-effect" });
+        setTimeout(() => this.setState({ colorSlot8: "green" }), 5000);
+        break;
+      default:
+        break;
+    }
   }
 
   /** render component */
@@ -300,7 +302,6 @@ export default class Garage extends Component {
           <div id="slot8" className={this.state.colorSlot8}>
             <h3>P8</h3>
           </div>
-          <button onClick={this.setNavigation}>Show Free Slots</button>
         </div>
       </div>
     );
