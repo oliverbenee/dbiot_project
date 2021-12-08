@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import "./css/garage.css";
 import mqtt from "mqtt";
 import { ProgressBar } from "react-bootstrap";
-import { thresholdSturges } from "d3-array";
 
 /**
  * Component to display the parking garage
@@ -227,7 +226,7 @@ export default class Garage extends Component {
   }
 
   testNav() {
-    var spotNumbers = [3, 8, 7, 2,6];
+    var spotNumbers = [3,8];
 
     spotNumbers.forEach((element) => {
       var topic = "home/sensor/distance/" + element;

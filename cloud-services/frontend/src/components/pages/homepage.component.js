@@ -91,6 +91,8 @@ export default class Homepage extends Component {
       .then((data) => {
         var array = [];
 
+        console.log(data)
+
         // sort array by time
         data.sort((a, b) => {
           let da = new Date(a.time);
