@@ -20,18 +20,7 @@ router.route("/history/:parkingZoneID/:day").get((req, res) => {
     req.params.day,
     function (err, result) {
       if (!err) {
-
-        // convert data into right format
-        var data = [
-          {x: 1, y: result[0]},
-          {x: 2, y: result[1]},
-          {x: 3, y: result[2]},
-          {x: 4, y: result[3]},
-          {x: 5, y: result[4]},
-          {x: 6, y: result[5]},
-          {x: 7, y: result[6]}
-          ]
-        res.send(data);
+        res.send(result);
       } else {
         console.log("error: ", err);
       }
@@ -63,7 +52,7 @@ const API_URL_OPENDATA_PARKING_GARAGES =
 
 // get data from opendata.dk parking garages in aarhus
 router.route("/opendata").get((req, res) => {
-  console.log("APIIIIIIIIII")
+  console.log("APIIIIIIIIII");
   fetch(API_URL_OPENDATA_PARKING_GARAGES)
     .then((response) => response.json())
     .then((data) => res.send(data.result.records))
