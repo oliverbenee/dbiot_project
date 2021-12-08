@@ -17,7 +17,7 @@ const mqtt_options = {
 };
 const client = mqtt.connect(mqttBroker, mqtt_options);
 const tParkingslot = "/home/parkingslot/";
-const tNavigation = "/home/navigation";
+const tNavigation = "home/navigation/available";
 
 export default class Garage extends Component {
   constructor(props) {
@@ -45,6 +45,7 @@ export default class Garage extends Component {
     client.on("connect", () => {
       console.log("client connected: ", client.connected);
       client.subscribe("/home/parkingslot/");
+      client.subscribe("home/navigation/available");
     });
 
     client.on("message", (topic, message) => {
