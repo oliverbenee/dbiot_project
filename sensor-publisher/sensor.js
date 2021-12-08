@@ -105,7 +105,7 @@ function read() {
     distance: distance,
   };
 
-  //console.log("magsens: " + magsens_status + " | distance: " + distance)
+  console.log("magsens: " + magsens_status + " | distance: " + distance)
 
   // Toggle LED to indicate occupation (just as a sample)
 
