@@ -74,6 +74,10 @@ client.on("message", function (topic, message, packet) {
     console.log("PUBLUSHHHH TO FRONTEND", JSON.stringify(data))
     Database.updateParkingSlot(newState);
     navigation.setState(spotNumber, isOccupied);
+   
+  }
+  if (topic == "home/sensor/tripwire") {
+    publishAvailableParkingSlot()
   }
 });
 
