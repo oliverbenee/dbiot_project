@@ -1,16 +1,16 @@
 // Import submodules.
-import { latestDistance, printDistProof } from "./devices/distance_plugin.js"
-import { setLedState, printLedProof } from "./devices/led_plugin.js"
-import { getOccupied, printMagProof } from "./devices/magsens_plugin.js"
+import { latestDistance, printDistProof } from "./devices/distance_plugin.js";
+import { setLedState, printLedProof } from "./devices/led_plugin.js";
+import { getOccupied, printMagProof } from "./devices/magsens_plugin.js";
 
 // Run the tripwire plugin
-import { printTripProof } from "./devices/tripwire_plugin.js"
+import { printTripProof } from "./devices/tripwire_plugin.js";
 
 // This is printing code used to prove that the magnetic sensor and distance sensor are running in the sensor plugin.
-printMagProof() // Prove magSensor is running.
+printMagProof(); // Prove magSensor is running.
 printLedProof(); // Prove LED is running.
 printDistProof(); // Prove dist sensor is running.
-printTripProof() // Prove that the tripwire is running.
+printTripProof(); // Prove that the tripwire is running.
 
 import mqtt from "mqtt";
 
@@ -33,12 +33,13 @@ client.on("connect", function () {
   console.log("connected to cloud broker: " + clientCloud.connected);
 
   client.subscribe("home/sensor/led/" + spotNumber);
-  console.log("sensor subscribed to: home/sensor/led/" + spotNumber)
+  console.log("sensor subscribed to: home/sensor/led/" + spotNumber);
 
-  client.subscribe("home/navigation/available")
+  client.subscribe("home/navigation/available");
 });
 
 clientCloud.on("error", function (error) {
+  console.log("host: " + mqttBrokerCloud);
   console.log("Error: " + error);
 });
 
@@ -52,15 +53,18 @@ client.on("error", function (error) {
 client.on("message", function (topic, message, packet) {
   //console.log("sensor received a new message on topic: '" + topic + "', and message: '" + message + "'");
   if (topic == "home/sensor/led/" + spotNumber) {
-    if(message == "on"){setLedState(1)}
-    if(message == "off"){setLedState(0)}
-  } else if(topic == "home/navigation/available"){
-    if(message == spotNumber){
+    if (message == "on") {
+      setLedState(1);
+    }
+    if (message == "off") {
+      setLedState(0);
+    }
+  } else if (topic == "home/navigation/available") {
+    if (message == spotNumber) {
       printLedProof();
     }
-  }
-   else {
-    console.log("MESSG: '" + message + "' - TOPC: '" + topic +"'")
+  } else {
+    console.log("MESSG: '" + message + "' - TOPC: '" + topic + "'");
   }
 });
 
@@ -91,15 +95,15 @@ function publish(topic, msg) {
 */
 function read() {
   var magsens_status = getOccupied();
-  var distance = latestDistance
+  var distance = latestDistance;
 
   // Activate LED based on magSens value
   // setLedState(magsens_status)
 
   const data = {
     magsens_status: magsens_status,
-    distance: distance
-  }
+    distance: distance,
+  };
 
   //console.log("magsens: " + magsens_status + " | distance: " + distance)
 
@@ -109,17 +113,19 @@ function read() {
   // - magnetic sensor is triggered,
   // - and car is 10-20 cm away from the wall.
   // Should this toggle the LED? No right?
-//if(magsens_status == 1 && distance > 10 && distance < 20) {
-//  setLedState(1)
-//} else {
-//  setLedState(0)
-//}
+  //if(magsens_status == 1 && distance > 10 && distance < 20) {
+  //  setLedState(1)
+  //} else {
+  //  setLedState(0)
+  //}
 
   publish(topic, JSON.stringify(data));
   return data;
-};
+}
 
-setInterval(() => {read()}, 3000)
+setInterval(() => {
+  read();
+}, 3000);
 
 // Listen to the event triggered on CTRL+C, if it get triggered, Cleanly close the GPIO pin before exiting
 process.on("SIGINT", () => {
