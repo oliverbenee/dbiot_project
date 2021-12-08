@@ -81,15 +81,6 @@ client.on("message", function (topic, message, packet) {
   }
 });
 
-function testNavigation(){
-  const data = {
-    parkingSlotID: 8,
-    isOccupied: true,
-  };
-  publish("/home/parkingslot/", JSON.stringify(data));
-}
-
-testNavigation();
 
 //publish function
 function publish(topic, msg) {
@@ -99,19 +90,6 @@ function publish(topic, msg) {
     });
   }
 }
-
-// function publishTest2() {
-//   const data = {
-//     parkingSlotID: 1,
-//     isOccupied: false,
-//   };
-
-//   console.log("publish test message websockets");
-//   publish("/parkingslot/actuator", JSON.stringify(data));
-// }
-
-// setInterval(publishTest1, 6000);
-// setInterval(publishTest2, 10000);
 
 function publishAvailableParkingSlot() {
   var nearest = navigation.getNearestAvailableSlot();

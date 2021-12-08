@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./css/garage.css";
 import mqtt from "mqtt";
 import { ProgressBar } from "react-bootstrap";
+import { thresholdSturges } from "d3-array";
 
 /**
  * Component to display the parking garage
@@ -55,7 +56,7 @@ export default class Garage extends Component {
 
       if (topic == tParkingslot) {
         var oldState = this.state.parkingGarageState;
-        console.log("set occupied", value)
+        console.log("set occupied", value);
 
         switch (value.parkingSlotID) {
           case 1:
@@ -225,6 +226,20 @@ export default class Garage extends Component {
     });
   }
 
+  testNav() {
+    var spotNumbers = [3, 8, 7, 2,6];
+
+    spotNumbers.forEach((element) => {
+      var topic = "home/sensor/distance/" + element;
+      var data = {
+        magsens_status: 1,
+        distance: 19.1,
+      };
+      var message = JSON.stringify(data);
+      client.publish(topic, message);
+    });
+  }
+
   /**trigger and clear navigation animation */
   setNavigation(slot) {
     console.log("set navigation");
@@ -304,6 +319,7 @@ export default class Garage extends Component {
           <div id="slot8" className={this.state.colorSlot8}>
             <h3>P8</h3>
           </div>
+          <button onClick={this.testNav()}>Test navigation</button>
         </div>
       </div>
     );
