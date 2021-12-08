@@ -9,7 +9,7 @@ var mqtt_options = {
 // TODO change to DNS iot-chickenkiller
 var mqttBrokerCloud = "ws://20.93.58.177:8883";
 var client = mqtt.connect(mqttBroker, mqtt_options);
-var clientCloud = mqtt.connect(mqttBrokerCloud);
+var clientCloud = mqtt.connect(mqttBrokerCloud, mqtt_options);
 
 client.on("connect", function () {
   client.subscribe("home/sensor/tripwire")
