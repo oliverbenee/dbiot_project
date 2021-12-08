@@ -72,7 +72,7 @@ var topic = "home/sensor/distance/" + spotNumber;
 
 //publish function
 function publish(topic, msg) {
-  if (client.connected == true && clientCloud.connected == false) {
+  if (client.connected == true && clientCloud.connected == true) {
     // Re-enable for debugging
     //console.log("local mqtt status=  " + client.connected);
     //console.log("cloud mqtt status=  " + clientCloud.connected);
