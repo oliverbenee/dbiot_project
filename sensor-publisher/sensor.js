@@ -22,7 +22,7 @@ var mqtt_options = {
 // TODO change to DNS iot-chickenkiller
 var mqttBrokerCloud = "ws://20.107.161.208:8883";
 var client = mqtt.connect(mqttBroker, mqtt_options);
-var clientCloud = mqtt.connect(mqttBrokerCloud);
+var clientCloud = mqtt.connect(mqttBrokerCloud, mqtt_options);
 
 var spotNumber = 4; // <<---------------------------------------------------------------- THIS NUMBER SETS THE SPOT NUMBER YOU WANT
 spotNumber = spotNumber.toString();
