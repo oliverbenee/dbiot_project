@@ -7,84 +7,6 @@ const pool = mysql.createPool({
   password: "foobar",
   database: "buildingiot",
 });
- 
-// notes: 
-// - without this code. error: Table buildingiot.parkingSlot does not exist.
-// - with this code for creating the table: TABLE_EXISTS_ERROR.
-// FIXME: delete. Should use dump.sql. Breaks again on my machine and i don't know how to fix it. 
-// pool.getConnection((err, connection) => {
-//   if (err) throw err
-//   connection.query(
-//     `CREATE TABLE IF NOT EXISTS parkingZone
-//     ( parkingZoneID VARCHAR(50),
-//       PRIMARY KEY (parkingZoneID),
-//       latitude FLOAT(4,2),
-//       longitude FLOAT(4,2),
-//       totalCapacity INT(4),
-//       freeSlots INT(4)
-// )`, (err) => {
-//       if (err) throw err
-//     })
-//   connection.query(
-//     `CREATE TABLE IF NOT EXISTS parkingSlot
-//     ( slotID INT(10),
-//       isOccupied BOOLEAN,
-//       parkingZoneID VARCHAR(50),
-//       FOREIGN KEY (parkingZoneID) REFERENCES parkingZone(parkingZoneID),
-//       PRIMARY KEY(slotID, parkingZoneID)
-// )`, (err) => {
-//       if (err) throw err
-//     })
-//   connection.query(
-//     `CREATE TABLE IF NOT EXISTS historical
-//     (time timestamp default current_timestamp,
-//     parkingZoneID VARCHAR(50),
-//     freeSlots INT(4),
-//     totalCapacity INT(4)
-//   )`, (err) => {
-//       if (err) throw err
-//     })
-//   connection.release()
-// })
-
-// notes: 
-// - without this code. error: Table buildingiot.parkingSlot does not exist.
-// - with this code for creating the table: TABLE_EXISTS_ERROR.
-// FIXME: delete. Should use dump.sql. Breaks again on my machine and i don't know how to fix it. 
-// pool.getConnection((err, connection) => {
-//   if (err) throw err
-//   connection.query(
-//     `CREATE TABLE IF NOT EXISTS parkingZone
-//     ( parkingZoneID VARCHAR(50),
-//       PRIMARY KEY (parkingZoneID),
-//       latitude FLOAT(4,2),
-//       longitude FLOAT(4,2),
-//       totalCapacity INT(4),
-//       freeSlots INT(4)
-// )`, (err) => {
-//       if (err) throw err
-//     })
-//   connection.query(
-//     `CREATE TABLE IF NOT EXISTS parkingSlot
-//     ( slotID INT(10),
-//       isOccupied BOOLEAN,
-//       parkingZoneID VARCHAR(50),
-//       FOREIGN KEY (parkingZoneID) REFERENCES parkingZone(parkingZoneID),
-//       PRIMARY KEY(slotID, parkingZoneID)
-// )`, (err) => {
-//       if (err) throw err
-//     })
-//   connection.query(
-//     `CREATE TABLE IF NOT EXISTS historical
-//     (time timestamp default current_timestamp,
-//     parkingZoneID VARCHAR(50),
-//     freeSlots INT(4),
-//     totalCapacity INT(4)
-//   )`, (err) => {
-//       if (err) throw err
-//     })
-//   connection.release()
-// })
 
 class Database {
   // get data
@@ -107,7 +29,7 @@ class Database {
     pool.getConnection((err, connection) => {
       if (err) throw err;
       connection.query(
-        "SELECT time, AVG(freeSlots) AS average FROM historical WHERE parkingZoneID='" +
+        "SELECT time, totalCapacity, AVG(freeSlots) AS average FROM historical WHERE parkingZoneID='" +
           parkingZone +
           "' AND dayofweek(time) = " +
           day,

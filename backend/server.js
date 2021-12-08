@@ -65,8 +65,6 @@ client.on("message", function (topic, message, packet) {
       slotID: spotNumber,
       parkingZoneID: parkingZoneID,
     };
-    //console.log("YAAAAAAAAH: " + newState.parkingZoneID)
-
     var publishstate = "off";
 
     var isOccupied =
@@ -113,30 +111,6 @@ function publishAvailableParkingSlot(){
   publish("home/navigation/available", JSON.stringify(nearest))
 }
 
-// test case
-// function publishTest1() {
-//   const data = {
-//     parkingSlotID: 1,
-//     isOccupied: true,
-//   };
-
-//   console.log("publish test message websockets");
-//   publish("/parkingslot/actuator", JSON.stringify(data));
-// }
-
-// // test case
-// function publishTest2() {
-//   const data = {
-//     parkingSlotID: 1,
-//     isOccupied: false,
-//   };
-
-//   console.log("publish test message websockets");
-//   publish("/parkingslot/actuator", JSON.stringify(data));
-// }
-
-// setInterval(publishTest1, 6000);
-// setInterval(publishTest2, 10000);
 const API_URL_OPENDATA_PARKING_GARAGES =
   "https://admin.opendata.dk/api/3/action/datastore_search?resource_id=2a82a145-0195-4081-a13c-b0e587e9b89c";
 
@@ -150,7 +124,7 @@ setInterval(() => {
       //console.log("router inserting data.")
     })
     .catch(console.error());
-}, 10000);
+}, 300000);
 
 console.log(`Routes ${router}`);
 // parse json data

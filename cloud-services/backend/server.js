@@ -2,6 +2,7 @@ import express from "express";
 const app = express();
 import cors from "cors";
 import { router } from "./controllers/routes.js";
+import * as navigation from "./navigation/navcolumns.js"
 import mqtt from "mqtt";
 import fetch from "node-fetch";
 import * as navigation from "./navigation/navcolumns.js"
@@ -17,7 +18,7 @@ var mqtt_options = {
 };
 var client = mqtt.connect(mqttBroker, mqtt_options);
 
-var topic = ["home/sensor/distance/#", "home/sensor/led/#"];
+var topic = ["home/sensor/distance/#", "home/navigation/available"];
 
 // succesfull connected
 client.on("connect", function () {
@@ -72,8 +73,10 @@ client.on("message", function (topic, message, packet) {
       parkingSlotID: spotNumber,
       isOccupied: isOccupied,
     };
-    publish("home/parkingspot/", JSON.stringify(data));
+    publish("/home/parkingslot/", JSON.stringify(data));
+    //console.log("PUBLUSHHHH TO FRONTEND", JSON.stringify(data))
     Database.updateParkingSlot(newState);
+    navigation.setState(spotNumber, isOccupied);
   }
 });
 
@@ -86,14 +89,10 @@ function publish(topic, msg) {
   }
 }
 
-/** Test case for websockets */
-function publishTest1() {
-  const data = {
-    parkingSlotID: 1,
-    isOccupied: true,
-  };
-  console.log("publish test message websockets");
-  publish("/home/parkingslot/", JSON.stringify(data));
+function publishAvailableParkingSlot(){
+  var nearest = navigation.getNearestAvailableSlot();
+  console.log("Nearest available slot: " + nearest)
+  publish("home/navigation/available", JSON.stringify(nearest))
 }
 function publishTest2() {
   const data = {
@@ -115,10 +114,11 @@ function publishAvailableParkingSlot(){
 }
 
 
-
-/**fetch data from opendata.dk --> Interval 5 min */
 const API_URL_OPENDATA_PARKING_GARAGES =
   "https://admin.opendata.dk/api/3/action/datastore_search?resource_id=2a82a145-0195-4081-a13c-b0e587e9b89c";
+
+// Fetches data from the open data platform.
+// fetch interval
 setInterval(() => {
   fetch(API_URL_OPENDATA_PARKING_GARAGES)
     .then((response) => response.json())
