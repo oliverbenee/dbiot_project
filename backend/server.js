@@ -57,6 +57,7 @@ client.on("message", function (topic, message, packet) {
 
   if (topic == "/home/test/delay") {
     
+    console.log("receive TIMMMEE",JSON.parse(message).timestamp)
       const d2 =  new Date()
       const d1 = JSON.parse(message).timestamp
       var delay = d2 - d1
