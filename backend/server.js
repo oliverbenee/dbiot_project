@@ -2,7 +2,7 @@ import express from "express";
 const app = express();
 import cors from "cors";
 import { router } from "./controllers/routes.js";
-import * as navigation from "./navigation/navcolumns.js"
+import * as navigation from "./navigation/navcolumns.js";
 import mqtt from "mqtt";
 import fetch from "node-fetch";
 
@@ -23,7 +23,13 @@ var client = mqtt.connect(mqttBroker, mqtt_options);
 
 // each sensor subscribes to overpark/parkingzone/spotnumber/devicetype
 
-var topic = ["home/sensor/distance/#", "home/sensor/led/#", "home/navigation/available", "home/sensor/tripwire"];
+var topic = [
+  "home/sensor/distance/#",
+  "home/sensor/led/#",
+  "home/navigation/available",
+  "home/sensor/tripwire",
+  "/home/test/delay"
+];
 
 // succesfull connected
 client.on("connect", function () {
@@ -48,13 +54,25 @@ var maxDistance = 5;
 client.on("message", function (topic, message, packet) {
   console.log("___________________________"); //UNCOMMENT THIS LINE FOR DEBUG
   console.log("server received new message on topic: " + topic); //UNCOMMENT THIS LINE FOR DEBUG
+
+  if (topic == "/home/test/delay") {
+    
+      const d2 =  new Date()
+      const d1 = JSON.parse(message).timestamp
+      var delay = d2 - d1
+
+      console.log("DELAYYY______=", delay)
+    
+
+  }
+
   if (topic.substring(0, 20) == "home/sensor/distance") {
     // These shenanigans split the topic up into an array, seperated by the "/".
     // The last element MUST BE the spot number.
     // The second to last element MUST be the parkingZoneID.
     var topiclist = topic.split("/");
     var spotNumber = parseInt(topiclist.pop());
-    var parkingZoneID = "INCUBA" //FIXME: This is hardcoded. pop() does not work right now. change!
+    var parkingZoneID = "INCUBA"; //FIXME: This is hardcoded. pop() does not work right now. change!
 
     var values = JSON.parse(message);
 
@@ -88,9 +106,11 @@ client.on("message", function (topic, message, packet) {
     //console.log("PUBLUSHHHH TO FRONTEND", JSON.stringify(data))
     Database.updateParkingSlot(newState);
     navigation.setState(spotNumber, isOccupied);
+
+    var time = new Date();
   }
   if (topic == "home/sensor/tripwire") {
-    publishAvailableParkingSlot()
+    publishAvailableParkingSlot();
   }
   // console.log("___________________________"); //UNCOMMENT THIS LINE FOR DEBUG
   // DEBUG: goto localhost:5000/parkingslots/KALKVAERKSVEJ for checking
@@ -105,10 +125,10 @@ function publish(topic, msg) {
   }
 }
 
-function publishAvailableParkingSlot(){
+function publishAvailableParkingSlot() {
   var nearest = navigation.getNearestAvailableSlot();
-  console.log("Nearest available slot: " + nearest)
-  publish("home/navigation/available", JSON.stringify(nearest))
+  console.log("Nearest available slot: " + nearest);
+  publish("home/navigation/available", JSON.stringify(nearest));
 }
 
 const API_URL_OPENDATA_PARKING_GARAGES =

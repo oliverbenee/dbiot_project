@@ -129,6 +129,10 @@ function read() {
   //  setLedState(0)
   //}
 
+
+  var timestamp = new Date()
+  publish("/home/test/delay",JSON.stringify(timestamp))
+
   publish(topic, JSON.stringify(data));
   return data;
 }
