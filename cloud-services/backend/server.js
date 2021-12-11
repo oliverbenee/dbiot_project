@@ -15,7 +15,7 @@ var mqtt_options = {
 };
 var client = mqtt.connect(mqttBroker, mqtt_options);
 
-var topic = ["home/sensor/distance/#", "home/navigation/available", "home/sensor/tripwire"];
+var topic = ["home/sensor/distance/#", "home/navigation/available", "home/sensor/tripwire", "/home/test/delay"];
 
 // succesfull connected
 client.on("connect", function () {
@@ -38,6 +38,22 @@ var maxDistance = 5;
 client.on("message", function (topic, message, packet) {
   console.log("___________________________"); //UNCOMMENT THIS LINE FOR DEBUG
   console.log("server received new message on topic: " + topic); //UNCOMMENT THIS LINE FOR DEBUG
+
+
+  if (topic == "/home/test/delay") {
+    
+    console.log("receive TIMMMEE",JSON.parse(message))
+      const d2 =  new Date()
+      const d1 = new Date(JSON.parse(message))
+      var delay = d2 - d1
+
+      console.log("DELAYYY______=", delay)
+    
+
+  }
+
+
+
   if (topic.substring(0, 20) == "home/sensor/distance") {
     // These shenanigans split the topic up into an array, seperated by the "/".
     // The last element MUST BE the spot number.
