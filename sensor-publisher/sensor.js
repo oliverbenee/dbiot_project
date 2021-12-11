@@ -52,9 +52,11 @@ client.on("error", function (error) {
 // receive messages
 client.on("message", function (topic, message, packet) {
   //console.log("sensor received a new message on topic: '" + topic + "', and message: '" + message + "'");
+  const timestamp = new Date()
   if (topic == "home/sensor/led/" + spotNumber) {
     if (message == "on") {
       setLedState(1);
+      console.log("timestamp LED:", timestamp)
     }
     if (message == "off") {
       setLedState(0);
@@ -79,12 +81,18 @@ function publish(topic, msg) {
     //console.log("local mqtt status=  " + client.connected);
     //console.log("cloud mqtt status=  " + clientCloud.connected);
 
+    var timestamp = new Date();
+
     client.publish(topic, msg, () => {
-      console.log("publishing" + msg + " on channel: " + topic);
+      console.log(
+        "publishing" + msg + " on channel: " + topic + "timestamp: " + timestamp
+      );
     });
 
     clientCloud.publish(topic, msg, () => {
-      console.log("publishing to cloud ", msg);
+      console.log(
+        "publishing to cloud" + msg + " on channel: " + topic + "timestamp: " + timestamp
+      );
     });
   }
 }

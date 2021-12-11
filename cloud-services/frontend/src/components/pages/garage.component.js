@@ -232,7 +232,7 @@ export default class Garage extends Component {
       var topic = "home/sensor/distance/" + element;
       var data = {
         magsens_status: 1,
-        distance: 19.1,
+        distance: 4.9,
       };
       var message = JSON.stringify(data);
       client.publish(topic, message);
