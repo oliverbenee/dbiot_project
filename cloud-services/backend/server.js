@@ -31,8 +31,8 @@ client.on("error", function (error) {
   process.exit(1);
 });
 
-var minDistance = 10;
-var maxDistance = 20;
+var minDistance = 0;
+var maxDistance = 5;
 
 // receive messages
 client.on("message", function (topic, message, packet) {

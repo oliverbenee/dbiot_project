@@ -226,7 +226,7 @@ export default class Garage extends Component {
   }
 
   testNav() {
-    var spotNumbers = [3,8];
+    var spotNumbers = [7,8];
 
     spotNumbers.forEach((element) => {
       var topic = "home/sensor/distance/" + element;
