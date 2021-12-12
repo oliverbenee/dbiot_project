@@ -19,8 +19,8 @@ Cloud-Backend:
 Cloud-Frontend:
 
 1. navigate to cloud-services/frontend
-2. run docker build -t frontend .
-3. run docker run -p 80:80 frontend
+2. run "docker build -t frontend ."
+3. run "docker run -p 80:80 frontend"
 
 
 
