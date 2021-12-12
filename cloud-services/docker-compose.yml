@@ -43,18 +43,3 @@ services:
       resources:
         limits:
           cpus: "1.00"
-  # frontend:
-  #   build:
-  #     context: ./frontend
-  #   image: iotcontainerregistry007eu.azurecr.io/frontend:latest
-  #   restart: on-failure
-  #   ports:
-  #     - "3000:3000"
-  #   links:
-  #     - "backend"
-  #   depends_on:
-  #     - "backend"
-  #   deploy:
-  #     resources:
-  #       limits:
-  #         cpus: "1.00"
