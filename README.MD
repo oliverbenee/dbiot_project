@@ -4,6 +4,8 @@ Backend and Frontend are deployed to MS Azure:
 
 Backend(Port: 5000) including database(Port: 3306) and message-broker(Port: 8883) = 20.105.82.246
 
+React-Frontend is running on 20.107.128.2
+
 Local:
 
 1. navigate to project directory
