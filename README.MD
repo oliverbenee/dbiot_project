@@ -7,9 +7,9 @@ Backend(Port: 5000) including database(Port: 3306) and message-broker(Port: 8883
 React-Frontend is running on 20.107.128.2
 
 Local:
-
-1. navigate to project directory
-2. run "docker-compose up" to start the local services for the pi
+1. Clone repository on Raspberry PI
+2. navigate to project directory "project-iot"
+3. run "docker-compose up" to start the local services for the pi
 
 Cloud-Backend:
 
